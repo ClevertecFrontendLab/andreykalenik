@@ -20,7 +20,7 @@ body{
     display:grid;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: min-content min-content;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
     position: relative;
     height: clamp( 132px, 168px, 194px );
@@ -43,16 +43,17 @@ body{
 }
 
 .headerActions{
-    margin: 0;
     grid-row: 2/3 ;
     grid-column: 3/4;
     align-self: self-start;
-    line-height: 18px;
 }
 
 
-// sider-switch
-.header{
+
+.slider{
+     .ant-layout-sider-children{
+         background-color: #fff;
+    }
     :global{
         .ant-btn-text.ant-btn.ant-btn-icon-only{
             height: 66px ;
@@ -62,8 +63,8 @@ body{
             background-color:  #FFF ;
             clip-path: path("M0 -1.52588e-05L20 7.99998V58L0 66V-1.52588e-05Z");
             position:  absolute ;
-            top:  50vh;
-            left:  -1px ;
+            top:  50%;
+            right:  -20px ;
 
             &:active,
             &hover{
@@ -71,22 +72,14 @@ body{
             }
 
         }  
-    }
-
-}
-
-.slider{
-     .ant-layout-sider-children{
-         background-color: #fff;
-    }
+    }    
 }
 
 .sliderNav{
-    display: grid;
-    grid-template-rows: repeat(4, min-content) 1fr min-content;
-    align-content: center;
-    justify-content: center;
-    gap: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
     background-color: #FFF;
 }
 
@@ -94,6 +87,7 @@ body{
 
 .sliderLogo{
     height: 144px;
+    padding-bottom: 14px;
     display: grid;
     align-items: center;
     justify-items: center;

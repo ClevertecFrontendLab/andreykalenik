@@ -13,6 +13,7 @@ import {
   import {Layout, Menu, Button} from 'antd'
 
   import React, { useState } from 'react';
+  import { useWindowSize } from 'usehooks-ts'
 
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project icons';
   import styles from './main-page.module.scss';
@@ -48,6 +49,7 @@ import {
 export const MainPage: React.FC = () => {
 
     const [collapsed, setCollapsed] = useState(false);
+    const  {width} = useWindowSize()
 
     return (
       <Layout className={styles.mainLayout}>
@@ -57,6 +59,12 @@ export const MainPage: React.FC = () => {
           </div>
 
           <Menu className={styles.sliderNav} mode="vertical" items={items} />
+          <Button
+                  type='text'
+                  onClick={() => setCollapsed(!collapsed)}
+                  data-test-id={width > 576 ? 'sider-switch' : 'sider-switch-mobile'}
+                  icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+              />
         </Sider>
         <Layout className={styles.ContentLayout}>
             <Header className={styles.header} >
@@ -68,18 +76,9 @@ export const MainPage: React.FC = () => {
                 icon={<SettingOutlined />}>
                 Настройки
               </Button>  
-              <Button
-                  type='text'
-                  onClick={() => setCollapsed(!collapsed)}
-                  data-test-id='sider-switch'
-                  icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
-              />
-              
             </Header>
           <Content className={styles.contentWrapper}>
-            <div >
-              Bill is a cat.
-            </div>
+          
           </Content>
         </Layout>
       </Layout>
