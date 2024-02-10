@@ -46,23 +46,37 @@ import {
     getItem('Выход', 'logout', <ExitIcon/>),
   ];
 
+  const itemsMobile : MenuItem[] =[
+    getItem('Календарь', 'calendar'),
+    getItem('Тренировки', 'workouts'),
+    getItem('Достижения', 'records'),
+    getItem('Профиль', 'profile',),
+    getItem('Выход', 'logout'),
+  ]
+
 export const MainPage: React.FC = () => {
 
-    const [collapsed, setCollapsed] = useState(false);
-    const  {width} = useWindowSize()
+    const [collapsed, setCollapsed] = useState(false)
+    const  screenWidht = useWindowSize().width
+    const mobileBreakpoint = 576
 
     return (
       <Layout className={styles.mainLayout}>
-        <Sider className={styles.slider} collapsible collapsed={collapsed} width={204} collapsedWidth={64} trigger={null} onCollapse={value => setCollapsed(value)}>
+        <Sider 
+          className={styles.slider}
+          collapsible collapsed={collapsed}
+          width={screenWidht > mobileBreakpoint ? 204 : 106}
+          collapsedWidth={screenWidht > mobileBreakpoint ? 64 : 0}
+          trigger={null}
+          onCollapse={value => setCollapsed(value)}>
           <div className={styles.sliderLogo}>
                {collapsed ?  <LogoSmallIcon/> : <LogoIcon/>}
           </div>
-
-          <Menu className={styles.sliderNav} mode="vertical" items={items} />
+          <Menu className={styles.sliderNav} mode="vertical" items={screenWidht > mobileBreakpoint ? items: itemsMobile} />
           <Button
                   type='text'
                   onClick={() => setCollapsed(!collapsed)}
-                  data-test-id={width > 576 ? 'sider-switch' : 'sider-switch-mobile'}
+                  data-test-id={screenWidht > mobileBreakpoint ? 'sider-switch' : 'sider-switch-mobile'}
                   icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
               />
         </Sider>

@@ -101,7 +101,7 @@ aside{
         }
 
         .ant-menu-item:last-child{
-            grid-row: -1;
+            flex-grow: 3;
         }
     }
 }
