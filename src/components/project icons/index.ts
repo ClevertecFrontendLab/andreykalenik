@@ -1,1 +1,1 @@
-export { ExitIcon } from './project-icons';
+export { ExitIcon, LogoIcon, LogoSmallIcon } from './project-icons';

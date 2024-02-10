@@ -4,17 +4,20 @@ import {
     TrophyFilled,
     IdcardOutlined,
     MenuUnfoldOutlined,
-    MenuFoldOutlined
+    MenuFoldOutlined,
+    SettingOutlined,
   } from '@ant-design/icons';
 
-  import { ExitIcon } from '@components/project icons';
-  
+
   import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button } from 'antd';
+  import {Layout, Menu, Button} from 'antd'
+
   import React, { useState } from 'react';
 
-  
-  const { Header, Content, Footer, Sider } = Layout;
+  import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project icons';
+  import styles from './main-page.module.scss';
+
+  const { Header, Content,  Sider } = Layout
   
   type MenuItem = Required<MenuProps>['items'][number];
 
@@ -35,12 +38,11 @@ import {
 
 
   const items: MenuItem[] = [
-    getItem('Календарь', '1', <CalendarTwoTone />),
-    getItem('Тренировки', '2', <HeartFilled />),
-    getItem('Достижения', '3', <TrophyFilled />),
-    getItem('Профиль', '4', <IdcardOutlined />),
-    getItem('Выход', '5', <ExitIcon />),
-    
+    getItem('Календарь', 'calendar', <CalendarTwoTone twoToneColor='#061178' style={{ width: '16px', height: '16px' }} />),
+    getItem('Тренировки', 'workouts', <HeartFilled style={{ color: '#061178', width: '16px', height: '16px' }}  />),
+    getItem('Достижения', 'records', <TrophyFilled style={{ color: '#061178', width: '16px', height: '16px' }}  />),
+    getItem('Профиль', 'profile', <IdcardOutlined style={{ color: '#061178', width: '16px', height: '16px' }} />),
+    getItem('Выход', 'logout', <ExitIcon/>),
   ];
 
 export const MainPage: React.FC = () => {
@@ -48,38 +50,40 @@ export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
 
     return (
-      <Layout style={{ minHeight: '100vh', maxWidth: '1440px', marginRight:'auto', marginLeft:'auto'}}>
-        <Sider collapsible collapsed={collapsed} width={204} collapsedWidth={64} trigger={null} onCollapse={value => setCollapsed(value)}>
-          <div className="logo" />
-          <Menu theme="light" defaultSelectedKeys={['1']} mode="vertical" items={items}  style={{minHeight: '100%'}}/>
+      <Layout className={styles.mainLayout}>
+        <Sider className={styles.slider} collapsible collapsed={collapsed} width={204} collapsedWidth={64} trigger={null} onCollapse={value => setCollapsed(value)}>
+          <div className={styles.sliderLogo}>
+               {collapsed ?  <LogoSmallIcon/> : <LogoIcon/>}
+          </div>
+
+          <Menu className={styles.sliderNav} mode="vertical" items={items} />
         </Sider>
-        <Layout className="site-layout" style={{width:'100%'}}>
-            <Header className="site-layout-background" style={{ padding: 0 }}>
+        <Layout className={styles.ContentLayout}>
+            <Header className={styles.header} >
+              <p className={styles.headerTitle}>Главная</p>
+              <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
+              <Button
+                className={styles.headerActions}
+                type="text"
+                icon={<SettingOutlined />}>
+                Настройки
+              </Button>  
+              <Button
+                  type='text'
+                  onClick={() => setCollapsed(!collapsed)}
+                  data-test-id='sider-switch'
+                  icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+              />
+              
             </Header>
-          <Content>
-            <Button
-                type='link'
-                style={SiderHendlerStyle}
-                onClick={() => setCollapsed(!collapsed)}
-                className='siderHendler'
-                icon={collapsed ? <MenuUnfoldOutlined color='#8C8C8C' /> : <MenuFoldOutlined color='#8C8C8C'/>}
-            />
-            <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+          <Content className={styles.contentWrapper}>
+            <div >
               Bill is a cat.
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
       </Layout>
     );
 
 };
-
-const SiderHendlerStyle : React.CSSProperties = {
-    height:'66px',
-    width:'20px',
-    borderRadius:'0',
-    backgroundColor: '#fff',
-
-}
 

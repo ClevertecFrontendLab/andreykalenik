@@ -1,0 +1,121 @@
+body{
+    :global{
+        *{
+            font-family: 'Inter';
+        }
+    }
+}
+
+.mainLayout{
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+
+}
+.ContentLayout{
+    width: 100%;
+}
+
+.header{
+    display:grid;
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: min-content min-content;
+    gap: 16px;
+    align-items: center;
+    position: relative;
+    height: clamp( 132px, 168px, 194px );
+    background-color: #F0F5FF;
+    padding: 16px 24px;
+}
+
+.h1{
+    margin: 0;
+    grid-row: 2/3;
+    grid-column: 1/3;
+    text-wrap: balance
+}
+
+.headerTitle{
+    line-height: 18px;
+    margin: 0;
+    grid-row: 1/2 ;
+    grid-column: 1/2;
+}
+
+.headerActions{
+    margin: 0;
+    grid-row: 2/3 ;
+    grid-column: 3/4;
+    align-self: self-start;
+    line-height: 18px;
+}
+
+
+// sider-switch
+.header{
+    :global{
+        .ant-btn-text.ant-btn.ant-btn-icon-only{
+            height: 66px ;
+            width: 20px ;
+            border-radius: 0 ;
+            border:  none;
+            background-color:  #FFF ;
+            clip-path: path("M0 -1.52588e-05L20 7.99998V58L0 66V-1.52588e-05Z");
+            position:  absolute ;
+            top:  50vh;
+            left:  -1px ;
+
+            &:active,
+            &hover{
+                background-color:  #FFF;
+            }
+
+        }  
+    }
+
+}
+
+.slider{
+     .ant-layout-sider-children{
+         background-color: #fff;
+    }
+}
+
+.sliderNav{
+    display: grid;
+    grid-template-rows: repeat(4, min-content) 1fr min-content;
+    align-content: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: #FFF;
+}
+
+
+
+.sliderLogo{
+    height: 144px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background-color: #fff;
+}
+
+aside{
+    :global{
+        .ant-layout-sider-children{
+            background-color: #fff;
+        }
+
+        .ant-menu-item:last-child{
+            grid-row: -1;
+        }
+    }
+}
+
+
+
+.contentWrapper{
+    background-image: url(../../assets/img/backgraund_main_page_light.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
