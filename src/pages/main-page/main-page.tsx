@@ -10,15 +10,17 @@ import {
 
 
   import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button} from 'antd'
-
+  import {Layout, Menu, Button, Typography} from 'antd'
+ 
   import React, { useState } from 'react';
   import { useWindowSize } from 'usehooks-ts'
 
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project icons';
   import styles from './main-page.module.scss';
+  import { MainLayout } from '@components/main layout';
 
-  const { Header, Content,  Sider } = Layout
+  const {Sider } = Layout
+  const {Link} = Typography;
   
   type MenuItem = Required<MenuProps>['items'][number];
 
@@ -39,8 +41,8 @@ import {
 
 
   const items: MenuItem[] = [
-    getItem('Календарь', 'calendar', <CalendarTwoTone twoToneColor='#061178' style={{ width: '16px', height: '16px' }} />),
-    getItem('Тренировки', 'workouts', <HeartFilled style={{ color: '#061178', width: '16px', height: '16px' }}  />),
+    getItem('Календарь', 'calendar', <CalendarTwoTone twoToneColor='#061178' style={{ width: '16px', height: '16px' }}/> ),
+    getItem('Тренировки', 'workouts', <HeartFilled  color='#061178'   style={{ color: '#061178', width: '16px', height: '16px' }}  />),
     getItem('Достижения', 'records', <TrophyFilled style={{ color: '#061178', width: '16px', height: '16px' }}  />),
     getItem('Профиль', 'profile', <IdcardOutlined style={{ color: '#061178', width: '16px', height: '16px' }} />),
     getItem('Выход', 'logout', <ExitIcon/>),
@@ -59,6 +61,7 @@ export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false)
     const  screenWidht = useWindowSize().width
     const mobileBreakpoint = 576
+    const padBreakpoint = 992
 
     return (
       <Layout className={styles.mainLayout}>
@@ -81,19 +84,24 @@ export const MainPage: React.FC = () => {
               />
         </Sider>
         <Layout className={styles.ContentLayout}>
-            <Header className={styles.header} >
+            <header className={styles.header} >
               <p className={styles.headerTitle}>Главная</p>
               <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
-              <Button
+              <Link className={styles.headerActionsWrapper} >
+                <div className={styles.headerActions}>
+                {screenWidht < mobileBreakpoint || screenWidht > padBreakpoint ? <SettingOutlined />: null}
+                {screenWidht > mobileBreakpoint ? 'Настройки': ''}
+                </div>
+              </Link>
+              {/* <Button
                 className={styles.headerActions}
                 type="text"
-                icon={<SettingOutlined />}>
-                Настройки
-              </Button>  
-            </Header>
-          <Content className={styles.contentWrapper}>
-          
-          </Content>
+                icon={screenWidht < mobileBreakpoint || screenWidht > padBreakpoint ? <SettingOutlined />: null}
+                >
+                  {screenWidht > mobileBreakpoint ? 'Настройки': ''}
+              </Button>   */}
+            </header>
+            <MainLayout/>
         </Layout>
       </Layout>
     );
