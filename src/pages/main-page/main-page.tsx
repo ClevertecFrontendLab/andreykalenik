@@ -44,7 +44,6 @@ import { AppHeader } from '@components/app header';
     getItem('Тренировки', 'workouts', <HeartFilled  color='#061178'   style={{ color: '#061178', width: '16px', height: '16px' }}  />),
     getItem('Достижения', 'records', <TrophyFilled style={{ color: '#061178', width: '16px', height: '16px' }}  />),
     getItem('Профиль', 'profile', <IdcardOutlined style={{ color: '#061178', width: '16px', height: '16px' }} />),
-    getItem('Выход', 'logout', <ExitIcon/>),
   ];
 
   const itemsMobile : MenuItem[] =[
@@ -52,8 +51,18 @@ import { AppHeader } from '@components/app header';
     getItem('Тренировки', 'workouts'),
     getItem('Достижения', 'records'),
     getItem('Профиль', 'profile',),
+  ]
+
+  const footer: MenuItem[] = [
+    getItem('Выход', 'logout', <ExitIcon/>),
+  ];
+
+  const footerMobile : MenuItem[] =[
+
     getItem('Выход', 'logout'),
   ]
+
+
 
 export const MainPage: React.FC = () => {
 
@@ -65,16 +74,23 @@ export const MainPage: React.FC = () => {
     return (
       <Layout className={styles.mainLayout}>
         <Sider 
-          // className={styles.slider}
+          className={styles.sider}
           collapsible collapsed={collapsed}
           width={screenWidht > mobileBreakpoint ? 204 : 106}
-          collapsedWidth={screenWidht > mobileBreakpoint ? 64 : 0}
+          collapsedWidth={screenWidht > mobileBreakpoint ? 64 : 1}
           trigger={null}
           onCollapse={value => setCollapsed(value)}>
-          <div className={styles.sliderLogo}>
-               {collapsed ?  <LogoSmallIcon/> : <LogoIcon/>}
+          <div className={styles.siderLogo}>
+               { screenWidht > mobileBreakpoint ?
+               collapsed ?  <LogoSmallIcon/> : <LogoIcon/>:
+               collapsed ?  null : <LogoIcon/>
+               }
+
           </div>
-          <Menu className={styles.sliderNav} mode="vertical" items={screenWidht > mobileBreakpoint ? items: itemsMobile} />
+          <div className={styles.siderMenuWrapper}>
+            <Menu className={styles.siderNav} mode="vertical" items={screenWidht > mobileBreakpoint ? items: itemsMobile} />
+            <Menu className={styles.siderFooter} mode="vertical" items={screenWidht > mobileBreakpoint ? footer: footerMobile} />
+          </div>
           <Button
                   type='text'
                   onClick={() => setCollapsed(!collapsed)}

@@ -122,6 +122,7 @@
 
             color: #2F54EB;
             font-size: 14px;
+            margin: 0;
             span{
                 margin-right: 8px;
                 height: 14px;
@@ -198,6 +199,7 @@
 }
 
 @media only screen and (max-width: 576px) {
+
     .contentWrapper{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(5, max-content);
