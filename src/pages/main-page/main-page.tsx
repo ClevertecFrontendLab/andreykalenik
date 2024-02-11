@@ -5,12 +5,11 @@ import {
     IdcardOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    SettingOutlined,
   } from '@ant-design/icons';
 
 
   import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button, Typography} from 'antd'
+  import {Layout, Menu, Button} from 'antd'
  
   import React, { useState } from 'react';
   import { useWindowSize } from 'usehooks-ts'
@@ -18,9 +17,9 @@ import {
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project icons';
   import styles from './main-page.module.scss';
   import { MainLayout } from '@components/main layout';
+import { AppHeader } from '@components/app header';
 
-  const {Sider } = Layout
-  const {Link} = Typography;
+  const {Sider} = Layout
   
   type MenuItem = Required<MenuProps>['items'][number];
 
@@ -66,7 +65,7 @@ export const MainPage: React.FC = () => {
     return (
       <Layout className={styles.mainLayout}>
         <Sider 
-          className={styles.slider}
+          // className={styles.slider}
           collapsible collapsed={collapsed}
           width={screenWidht > mobileBreakpoint ? 204 : 106}
           collapsedWidth={screenWidht > mobileBreakpoint ? 64 : 0}
@@ -84,23 +83,11 @@ export const MainPage: React.FC = () => {
               />
         </Sider>
         <Layout className={styles.ContentLayout}>
-            <header className={styles.header} >
-              <p className={styles.headerTitle}>Главная</p>
-              <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
-              <Link className={styles.headerActionsWrapper} >
-                <div className={styles.headerActions}>
-                {screenWidht < mobileBreakpoint || screenWidht > padBreakpoint ? <SettingOutlined />: null}
-                {screenWidht > mobileBreakpoint ? 'Настройки': ''}
-                </div>
-              </Link>
-              {/* <Button
-                className={styles.headerActions}
-                type="text"
-                icon={screenWidht < mobileBreakpoint || screenWidht > padBreakpoint ? <SettingOutlined />: null}
-                >
-                  {screenWidht > mobileBreakpoint ? 'Настройки': ''}
-              </Button>   */}
-            </header>
+            <AppHeader 
+              screenWidht={screenWidht}
+              mobileBreakpoint={mobileBreakpoint} 
+              padBreakpoint={padBreakpoint}
+              />
             <MainLayout/>
         </Layout>
       </Layout>
