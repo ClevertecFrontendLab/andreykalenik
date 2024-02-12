@@ -78,7 +78,7 @@ export const MainPage: React.FC = () => {
     return (
       <Layout className={styles.mainLayout}>
         <Sider 
-          style={!trigger ? {zIndex:5, position:'absolute', height:'100%'}: {}}
+          style={!trigger ? {zIndex:5, position:'fixed', height:'100%'}: {}}
           className={styles.sider}
           collapsible collapsed={collapsed}
           width={trigger ? 204 : 106}
