@@ -87,7 +87,8 @@ aside{
     aside{
         :global{
            .ant-menu-item.ant-menu-item-only-child{
-            padding: 0 4px;
+            padding: 0;
+            margin: 0 6px;
            }
         }
     }
