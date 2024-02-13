@@ -2,29 +2,24 @@ import { SettingOutlined } from '@ant-design/icons';
 import {Typography, Button} from 'antd'
 import React from 'react';
 import styles from './AppHeader.module.scss';
+import { DevicesType } from '@pages/main-page/main-page';
 
-type AppHeaderProps = {
-    screenWidht:number,
-    mobileBreakpoint:number,
-    padBreakpoint:number
-
-}
 
 const {Link} = Typography
 
-export const AppHeader:React.FC<AppHeaderProps> = ({screenWidht, mobileBreakpoint, padBreakpoint}) =>{
+export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>{
     return(
         <header className={styles.header} >
         <p className={styles.headerTitle}>Главная</p>
         <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
         <div className={styles.headerActionsWrapper}>
             {
-            (screenWidht > padBreakpoint) ?
+            isDesktop ?
                 <Link style={{display:'flex', gap:'10px', color:'#262626'}}>
                     <SettingOutlined />
                     Настройки
                 </Link> : 
-            (screenWidht > mobileBreakpoint) ?
+            isTablet ?
                 <Link style={{color:'#262626'}}>
                         Настройки
                 </Link> :
@@ -33,7 +28,6 @@ export const AppHeader:React.FC<AppHeaderProps> = ({screenWidht, mobileBreakpoin
                 icon={<SettingOutlined/>}
                 /> 
             }
-       
         </div>   
       </header>
     )

@@ -23,6 +23,12 @@ import { AppHeader } from '@components/app header';
   
   type MenuItem = Required<MenuProps>['items'][number];
 
+  export type DevicesType = {
+    isDesktop?: boolean,
+    isTablet?: boolean,
+    isMobile?: boolean
+  }
+
   
   function getItem(
     label: React.ReactNode,
@@ -70,45 +76,43 @@ export const MainPage: React.FC = () => {
     const  screenWidht = useWindowSize().width
     
     const mobileBreakpoint = 576
-    const padBreakpoint = 992
-    const trigger = screenWidht > mobileBreakpoint
+    const tabletBreakpoint = 992
 
+    const isDesktop =  screenWidht > tabletBreakpoint
+    const isTablet =  screenWidht > mobileBreakpoint && screenWidht <= tabletBreakpoint
+    const isMobile = screenWidht <= mobileBreakpoint
 
     
     return (
       <Layout className={styles.mainLayout}>
         <Sider 
-          style={!trigger ? {zIndex:5, position:'fixed', height:'100%'}: {}}
+          style={isMobile ? {zIndex:5, position:'fixed', height:'100%'} : {}}
           className={styles.sider}
           collapsible collapsed={collapsed}
-          width={trigger ? 204 : 106}
-          collapsedWidth={trigger ? 64 : 1}
+          width={!isMobile ? 204 : 106}
+          collapsedWidth={!isMobile ? 64 : 1}
           trigger={null}
           onCollapse={value => setCollapsed(value)}>
           <div className={styles.siderLogo}>
-               { trigger ?
+               { !isMobile ?
                collapsed ?  <LogoSmallIcon/> : <LogoIcon/>:
                collapsed ?  null : <LogoIcon/>
                }
 
           </div>
           <div className={styles.siderMenuWrapper}>
-            <Menu className={styles.siderNav} mode="vertical" items={trigger ? items : itemsMobile} />
-            <Menu className={styles.siderFooter} mode="vertical" items={trigger ? footer : footerMobile} />
+            <Menu className={styles.siderNav} mode="vertical" items={!isMobile ? items : itemsMobile} />
+            <Menu className={styles.siderFooter} mode="vertical" items={!isMobile ? footer : footerMobile} />
           </div>
           <Button
                   type='text'
                   onClick={() => setCollapsed(!collapsed)}
-                  data-test-id={trigger ? 'sider-switch' : 'sider-switch-mobile'}
+                  data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
                   icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
               />
         </Sider>
         <Layout className={styles.ContentLayout}>
-            <AppHeader 
-              screenWidht={screenWidht}
-              mobileBreakpoint={mobileBreakpoint} 
-              padBreakpoint={padBreakpoint}
-              />
+            <AppHeader isDesktop={isDesktop} isTablet={isTablet}/>
             <MainLayout/>
         </Layout>
       </Layout>
