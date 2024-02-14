@@ -40,7 +40,7 @@ export const MainLayout:React.FC = () => (
 
             <Card size="small" title="Назначить календарь" className={styles.cardCalendar} >
                 <Link>
-                    <CalendarTwoTone/>
+                    <CalendarTwoTone twoToneColor='#2F54EB'/>
                     Календарь
                 </Link>
             </Card>

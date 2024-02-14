@@ -37,11 +37,10 @@
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 152px);
-    
 }
 
-.siderFooter{
 
+.siderFooter{
     margin-top: auto;
     max-height: 40px;
     border-top: 1px solid #f0f0f0;
@@ -61,10 +60,25 @@ aside{
 @media only screen and (max-width: 576px) {
     aside{
         :global{
+            .ant-menu .ant-menu-item{
+                padding: 0;
+            }
            .ant-menu-item.ant-menu-item-only-child{
-            padding: 0;
-            margin: 0 6px;
-           }
+                padding: 0;
+                margin: 0 6px;
+            }
+           .ant-menu .ant-menu-item .ant-menu-item-icon{
+                display: none;
+            }
+            .ant-menu .ant-menu-item .ant-menu-item-icon + span{
+                margin: 0;
+            }
+            .ant-menu-item span {
+                margin: 0;
+            }
+            .siderFooter .ant-menu-item span{
+                text-align: center;
+            }
         }
     }
     .sider{
@@ -87,5 +101,19 @@ aside{
                 }    
             }  
         }    
+    }
+    .siderNav{
+        :global{
+            .ant-menu-item{
+                margin: 14px 4px 14px 8px;
+            }
+        }
+    }
+    .siderFooter{
+        :global{
+            .ant-menu-item{
+                text-align: center;
+            }
+        }
     }
 }

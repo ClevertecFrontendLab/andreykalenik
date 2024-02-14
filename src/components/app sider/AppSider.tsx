@@ -42,47 +42,37 @@ import {
     getItem('Профиль', 'profile', <IdcardOutlined style={{ color: '#061178', width: '16px', height: '16px' }} />),
   ];
 
-  const itemsMobile : MenuItem[] =[
-    getItem('Календарь', 'calendar'),
-    getItem('Тренировки', 'workouts'),
-    getItem('Достижения', 'records'),
-    getItem('Профиль', 'profile',),
-  ]
-
   const footer: MenuItem[] = [
     getItem('Выход', 'logout', <ExitIcon/>),
   ];
 
-  const footerMobile : MenuItem[] =[
-
-    getItem('Выход', 'logout'),
-  ]
 
 
 
 export const AppSider:React.FC<DevicesType> = ({isMobile}) =>{
 
     const [collapsed, setCollapsed] = useState(false)
+    const isDesktop = !isMobile
 
     return(
         <Sider 
         style={isMobile ? {zIndex:5, position:'fixed', height:'100%'} : {}}
         className={styles.sider}
         collapsible collapsed={collapsed}
-        width={!isMobile ? 204 : 106}
-        collapsedWidth={!isMobile ? 64 : 1}
+        width={isDesktop ? 204 : 106}
+        collapsedWidth={isDesktop ? 64 : 1}
         trigger={null}
         onCollapse={value => setCollapsed(value)}>
         <div className={styles.siderLogo}>
-             { !isMobile ?
+             { isDesktop ?
              collapsed ?  <LogoSmallIcon/> : <LogoIcon/>:
              collapsed ?  null : <LogoIcon/>
              }
 
         </div>
         <div className={styles.siderMenuWrapper}>
-          <Menu className={styles.siderNav} mode="vertical" items={!isMobile ? items : itemsMobile} />
-          <Menu className={styles.siderFooter} mode="vertical" items={!isMobile ? footer : footerMobile} />
+          <Menu className={styles.siderNav} mode="vertical" items={ items } />
+          <Menu className={styles.siderFooter} mode="vertical" items={ footer} />
         </div>
         <Button
                 type='text'
