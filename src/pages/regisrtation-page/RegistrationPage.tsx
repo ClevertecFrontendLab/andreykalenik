@@ -4,11 +4,45 @@ import React from 'react';
 import styles from './RegistrationPage.module.scss'
 import { LogoIcon } from '@components/project icons'
 import { ServiceBackground } from '@components/service background'
+import type { FormInstance } from 'antd';
 
+const SubmitButton = ({ form }: { form: FormInstance }) => {
+
+  const { useBreakpoint } = Grid;
+  const {sm} = useBreakpoint()
+  const [submittable, setSubmittable] = React.useState(false);
+  const values = Form.useWatch([], form);
+
+  React.useEffect(() => {
+    form.validateFields({ validateOnly: true }).then(
+      () => {
+        setSubmittable(true);
+      },
+      () => {
+        setSubmittable(false);
+      },
+    );
+  }, [values]);
+
+  return (
+    <Button
+     type="primary" 
+     htmlType="submit" 
+     disabled={!submittable}
+     data-test-id='registration-submit-button'
+     style={sm ? {width:'100%', borderRadius:2}:{width:'100%', borderRadius:2, fontSize:14}}
+     >
+      Войти
+    </Button>
+  );
+};
 
 const Registration:React.FC = () =>{
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
+    const [form] = Form.useForm();
+    const regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
@@ -20,6 +54,7 @@ const Registration:React.FC = () =>{
 
     return(
         <Form
+        form={form}
         name="basic"
         size='large'
         initialValues={{ remember: true }}
@@ -33,7 +68,7 @@ const Registration:React.FC = () =>{
           name="username"
           data-test-id='registration-email'
           className={styles.emailInput}
-          rules={[{required: false, message: 'Please input your username!' }]
+          rules={[{required: true, message: '', type:'email' }]
         }
         >
           <Input style={{borderRadius:2}}/>
@@ -43,8 +78,12 @@ const Registration:React.FC = () =>{
           label=""
           name="password"
           data-test-id='registration-password'
-          extra="Пароль не менее 8 символов, с заглавной буквой и цифрой"
-          rules={[{required: false, message: 'Please input your password!' }]}
+          help="Пароль не менее 8 символов, с заглавной буквой и цифрой"
+          rules={[
+            {required: false, message: '' },
+            { pattern: regexp, message: ""}
+          ]}
+          hasFeedback
         >
           <Input.Password placeholder='Пароль' style={{borderRadius:2}} />
         </Form.Item>
@@ -53,21 +92,25 @@ const Registration:React.FC = () =>{
           label=""
           name="confirm-password"
           data-test-id='registration-confirm-password'
-          rules={[{required: false, message: 'Please input your password!' }]}
+          rules={[
+            {required: false, message: 'Пароли не совпадают' },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('Пароли не совпадают'));
+              },
+            }),
+        ]}
+          
         >
           <Input.Password placeholder='Повторите пароль' style={{borderRadius:2}} />
         </Form.Item>
         
   
         <Form.Item style={{marginBottom:16}}>
-          <Button 
-              type="primary" 
-              htmlType="submit" 
-              data-test-id='registration-submit-button'
-              style={sm ? {width:'100%', borderRadius:2, fontSize:16 }:{width:'100%', borderRadius:2, fontSize:14}}
-            >
-            Войти
-          </Button>
+          <SubmitButton form={form}/>
         </Form.Item>
 
         <Form.Item>

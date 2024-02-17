@@ -29,6 +29,7 @@ const SubmitButton = ({ form }: { form: FormInstance }) => {
     <Button
      type="primary" 
      htmlType="submit" 
+     data-test-id='login-submit-button'
      disabled={!submittable}
      style={sm ? {width:'100%', borderRadius:2}:{width:'100%', borderRadius:2, fontSize:14}}
      >
@@ -69,7 +70,6 @@ const LoginForm:React.FC = () =>{
         name="username"
         className={styles.emailInput}
         data-test-id='login-email'
-        validateTrigger="onBlur"
         rules={[{required: true,  message: "", type: 'email'}]
       }
       >
