@@ -65,8 +65,8 @@ export const AppSider:React.FC<DevicesType> = ({isMobile}) =>{
         onCollapse={value => setCollapsed(value)}>
         <div className={styles.siderLogo}>
              { isDesktop ?
-             collapsed ?  <LogoSmallIcon/> : <LogoIcon/>:
-             collapsed ?  null : <LogoIcon/>
+             collapsed ?  <LogoSmallIcon/> : <LogoIcon style={{width:133, height:33}}/>:
+             collapsed ?  null : <LogoIcon style={{width:72, height:18}}/>
              }
 
         </div>
