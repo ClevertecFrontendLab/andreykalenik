@@ -1,4 +1,4 @@
-import { Card, Tabs,  Button, Checkbox, Form, Input, Typography,Grid } from 'antd';
+import { Card, Tabs,  Button, Form, Input,Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import React from 'react';
 import styles from './RegistrationPage.module.scss'
@@ -7,7 +7,6 @@ import { ServiceBackground } from '@components/service background'
 
 
 const Registration:React.FC = () =>{
-    const { Link } = Typography;
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
 
@@ -32,6 +31,7 @@ const Registration:React.FC = () =>{
         <Form.Item
           label="e-mail:"
           name="username"
+          data-test-id='registration-email'
           className={styles.emailInput}
           rules={[{required: false, message: 'Please input your username!' }]
         }
@@ -42,6 +42,7 @@ const Registration:React.FC = () =>{
         <Form.Item
           label=""
           name="password"
+          data-test-id='registration-password'
           extra="Пароль не менее 8 символов, с заглавной буквой и цифрой"
           rules={[{required: false, message: 'Please input your password!' }]}
         >
@@ -50,7 +51,8 @@ const Registration:React.FC = () =>{
 
         <Form.Item
           label=""
-          name="password"
+          name="confirm-password"
+          data-test-id='registration-confirm-password'
           rules={[{required: false, message: 'Please input your password!' }]}
         >
           <Input.Password placeholder='Повторите пароль' style={{borderRadius:2}} />
@@ -58,7 +60,12 @@ const Registration:React.FC = () =>{
         
   
         <Form.Item style={{marginBottom:16}}>
-          <Button type="primary" htmlType="submit" style={sm ? {width:'100%', borderRadius:2, fontSize:16 }:{width:'100%', borderRadius:2, fontSize:14}}>
+          <Button 
+              type="primary" 
+              htmlType="submit" 
+              data-test-id='registration-submit-button'
+              style={sm ? {width:'100%', borderRadius:2, fontSize:16 }:{width:'100%', borderRadius:2, fontSize:14}}
+            >
             Войти
           </Button>
         </Form.Item>
