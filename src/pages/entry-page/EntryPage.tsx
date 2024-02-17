@@ -1,39 +1,76 @@
-import { Card, Tabs,  Button, Checkbox, Form, Input, Typography,Grid } from 'antd';
+import { Card, Tabs,  Button, Checkbox, Form, Input, Typography, Grid } from 'antd';
+import type { FormInstance } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import React from 'react';
 import styles from './EntryPage.module.scss'
 import { LogoIcon } from '@components/project icons'
 import { ServiceBackground } from '@components/service background'
 
-const Login:React.FC = () =>{
+
+const SubmitButton = ({ form }: { form: FormInstance }) => {
+
+  const { useBreakpoint } = Grid;
+  const {sm} = useBreakpoint()
+  const [submittable, setSubmittable] = React.useState(false);
+  const values = Form.useWatch([], form);
+
+  React.useEffect(() => {
+    form.validateFields({ validateOnly: true }).then(
+      () => {
+        setSubmittable(true);
+      },
+      () => {
+        setSubmittable(false);
+      },
+    );
+  }, [values]);
+
+  return (
+    <Button
+     type="primary" 
+     htmlType="submit" 
+     disabled={!submittable}
+     style={sm ? {width:'100%', borderRadius:2}:{width:'100%', borderRadius:2, fontSize:14}}
+     >
+      Войти
+    </Button>
+  );
+};
+
+const LoginForm:React.FC = () =>{
+
   const { Link } = Typography;
   const { useBreakpoint } = Grid;
   const {sm} = useBreakpoint()
+  const [form] = Form.useForm();
+  const regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
   const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  
-    const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
-    };
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return(
       <Form
-      name="basic"
-      size='large'
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-      className={styles.form}
-    >
+        form={form}
+        name="basic"
+        size='large'
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        initialValues={{ remember: false }}
+        autoComplete="off"
+        className={styles.form}
+      >
       <Form.Item
         label="e-mail:"
         name="username"
         className={styles.emailInput}
         data-test-id='login-email'
-        rules={[{required: false, message: 'Please input your username!' }]
+        validateTrigger="onBlur"
+        rules={[{required: true,  message: "", type: 'email'}]
       }
       >
         <Input style={{borderRadius:2}}/>
@@ -43,9 +80,12 @@ const Login:React.FC = () =>{
         label=""
         name="password"
         data-test-id='login-password'
-        rules={[{required: false, message: 'Please input your password!' }]}
+        rules={[
+          {required: true, message: ""},
+          { pattern: regexp, message: ""}
+        ]}
       >
-        <Input.Password style={{borderRadius:2}} />
+        <Input.Password placeholder='Пароль'  style={{borderRadius:2}} />
       </Form.Item>
       
       <div className={styles.additionalActions}>
@@ -66,14 +106,7 @@ const Login:React.FC = () =>{
 
 
       <Form.Item style={{marginBottom:16}}>
-        <Button 
-          type="primary"
-          htmlType="submit"
-          data-test-id='login-submit-button'
-          style={sm ? {width:'100%', borderRadius:2}:{width:'100%', borderRadius:2, fontSize:14}}
-          >
-            Войти
-        </Button>
+          <SubmitButton  form={form}/>
       </Form.Item>
 
       <Form.Item>
@@ -111,7 +144,7 @@ export const EntryPage:React.FC = () =>{
                             {
                                 label: `Вход`,
                                 key: '1',
-                                children: <Login/>,
+                                children: <LoginForm/>,
 
                             },
                             {

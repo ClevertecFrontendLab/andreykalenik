@@ -36,6 +36,9 @@
             padding: 10px 5px 10px 14px;
             justify-content: center;
         }
+        .ant-form-item .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before{
+            display: none;
+        }
         .ant-form-item + .ant-form-item{
             margin-bottom: 46px;
         }
@@ -46,7 +49,7 @@
         align-items: baseline;
         :global{
             .ant-form-item{
-                margin-bottom: 13px;
+                margin-bottom: 16px;
             }
         }
     }

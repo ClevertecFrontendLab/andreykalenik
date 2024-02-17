@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { store } from '@redux/configure-store';
-import { MainPage } from './pages';
+import { MainPage, EntryPage } from './pages';
 
 import 'normalize.css';
 import './index.css';
@@ -17,7 +17,8 @@ root.render(
         <Provider store={store}>
             <HashRouter>
                 <Routes>
-                    <Route path='/' element={<MainPage />} />
+                    {/* <Route path='/' element={<MainPage />} /> */}
+                    <Route path='/' element={<EntryPage />} /> 
                 </Routes>
             </HashRouter>
         </Provider>
