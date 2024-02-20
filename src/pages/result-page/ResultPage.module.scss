@@ -1,0 +1,29 @@
+.card{
+    :global{
+        .ant-card-body{
+            width: 100%;
+        }
+    }
+}
+
+
+.title{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.3;
+    text-align: center;
+    color: #262626;
+    margin-top: 24px;
+    margin-bottom: 0px;
+}
+
+
+.subtitle{
+
+    font-size: 14px;
+    line-height: 1.3;
+    text-align: center;
+    color: #8C8C8C;
+    margin-top: 0;
+    margin-bottom: 24px;
+}

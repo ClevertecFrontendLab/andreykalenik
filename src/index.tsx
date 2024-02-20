@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { store } from '@redux/configure-store';
-import { MainPage, EntryPage, RegistrationPage } from './pages';
+import { MainPage, EntryPage, RegistrationPage, ResultPage } from './pages';
 
 import 'normalize.css';
 import './index.css';
@@ -18,7 +18,7 @@ root.render(
             <HashRouter>
                 <Routes>
                     {/* <Route path='/' element={<MainPage />} /> */}
-                    <Route path='/' element={<RegistrationPage />} /> 
+                    <Route path='/' element={<ResultPage status={'error-change-password'} />} /> 
                 </Routes>
             </HashRouter>
         </Provider>
