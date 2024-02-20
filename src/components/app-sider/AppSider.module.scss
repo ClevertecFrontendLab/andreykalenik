@@ -88,6 +88,10 @@ aside{
                 width: 32px ;
                 border-radius: 0 ;
                 border:  none;
+                outline-color: transparent;
+                outline-width: 0;
+                outline-style: none;
+
                 background-color:  #FFF ;
                 clip-path: path("M0 0L32 5.81818V42.1818L0 48V0Z");
                 position:  absolute ;
@@ -96,8 +100,13 @@ aside{
                 z-index: 5;
     
                 &:active,
-                &hover{
-                    background-color:  #FFF;
+                &hover,
+                &:focus,
+                &:focus-visible
+                {
+                    outline-color: transparent;
+                    outline: none -webkit-focus-ring-color;
+
                 }    
             }  
         }    
