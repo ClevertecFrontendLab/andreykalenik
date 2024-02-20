@@ -9,7 +9,7 @@ import {
     CloseCircleFilled, 
 }from '@ant-design/icons';
 
-import { ServiceBackground } from '@components/service background'
+import { ServiceBackground } from '@components/service-background'
 
 type ResultPageProps =  {
     status : 'success' | 'error' | 'error-user-exist' | 'error-login' | 'error-check-email-no-exist' | 'error-check-email' | 'error-change-password' | 'success-change-password'

@@ -1,5 +1,4 @@
-export { MainPage } from './main-page';
-export { EntryPage } from './entry-page'
-export { RegistrationPage } from './regisrtation-page'
-export { ResultPage } from './result-page'
+export { MainPage } from './main/MainPage';
+export { AuthPage } from './auth/AuthPage'
+export { ResultPage } from './result/ResultPage'
 

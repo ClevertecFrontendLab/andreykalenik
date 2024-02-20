@@ -2,7 +2,7 @@ import { SettingOutlined } from '@ant-design/icons';
 import {Typography, Button} from 'antd'
 import React from 'react';
 import styles from './AppHeader.module.scss';
-import { DevicesType } from '@pages/main-page/main-page';
+import { DevicesType } from '@pages/main/MainPage';
 
 
 const {Link} = Typography
