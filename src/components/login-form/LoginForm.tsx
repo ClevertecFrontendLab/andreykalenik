@@ -1,72 +1,48 @@
 import { Button, Checkbox, Form, Input, Typography, Grid } from 'antd';
-import type { FormInstance } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, {useState}  from 'react';
 import styles from './LoginForm.module.scss'
+import {  PASSWORD_REGEXP} from '@constants/constants';
+import {useDispatch } from 'react-redux'
 
-const SubmitButton = ({ form }: { form: FormInstance }) => {
 
-    const { useBreakpoint } = Grid;
-    const {sm} = useBreakpoint()
-    const [submittable, setSubmittable] = React.useState(false);
-    const values = Form.useWatch([], form);
-    
-  
-    React.useEffect(() => {
-      form.validateFields({ validateOnly: true }).then(
-        () => {
-          setSubmittable(true);
-        },
-        () => {
-          setSubmittable(false);
-        },
-      );
-    }, [values]);
-  
-    return (
-      <Button
-       type="primary" 
-       htmlType="submit" 
-       data-test-id='login-submit-button'
-       disabled={!submittable}
-       style={sm ? {width:'100%'}:{width:'100%', fontSize:14}}
-       >
-        Войти
-      </Button>
-    );
-  };
-  
+
+
+
 
 export const LoginForm:React.FC = () =>{
 
     const { Link } = Typography;
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
-    const [LoginForm] = Form.useForm();
-    const regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const [form] = Form.useForm();
+    const [rememberUser, setRememerUser] = useState(false)
+    const dispath = useDispatch()
+
+
+
+    const values = Form.useWatch(['email', 'password'], form);
+
+    const checkboxHendler = () => setRememerUser(!rememberUser)
+
+    const onFinish = async(values: any) => { console.log('none')}
+
   
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
   
-    const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
-    };
   
     return(
         <Form
-          form={LoginForm}
+          form={form}
           name="LoginForm"
           size='large'
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           initialValues={{ remember: false }}
           autoComplete="off"
+          onFinish={onFinish}
           className={styles.loginForm}
         >
         <Form.Item
           label=""
-          name="username"
+          name="email"
           className={styles.emailInput}
           data-test-id='login-email'
           rules={[{required: true,  message: "", type: 'email'}]
@@ -81,7 +57,7 @@ export const LoginForm:React.FC = () =>{
           data-test-id='login-password'
           rules={[
             {required: true, message: ""},
-            { pattern: regexp, message: ""}
+            { pattern: PASSWORD_REGEXP, message: ""}
           ]}
         >
           <Input.Password placeholder='Пароль'/>
@@ -93,7 +69,7 @@ export const LoginForm:React.FC = () =>{
               valuePropName="checked" 
               data-test-id='login-remember'
               className={styles.formCheckbox} >
-            <Checkbox>Запомнить меня</Checkbox>
+            <Checkbox onChange={checkboxHendler}>Запомнить меня</Checkbox>
             </Form.Item>
             <Link 
               data-test-id='login-forgot-button'
@@ -105,7 +81,14 @@ export const LoginForm:React.FC = () =>{
   
   
         <Form.Item style={{marginBottom:16}}>
-            <SubmitButton  form={LoginForm}/>
+        <Button
+          type="primary" 
+          htmlType="submit" 
+          data-test-id='login-submit-button'
+          style={sm ? {width:'100%'}:{width:'100%', fontSize:14}}
+          >
+            Войти
+          </Button>
         </Form.Item>
   
         <Form.Item className={styles.buttonGroup}>
