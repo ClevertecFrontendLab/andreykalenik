@@ -38,6 +38,11 @@ const SubmitButton = ({ form }: { form: FormInstance }) => {
 export const RegForm:React.FC = () =>{
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
+
+
+
+
+
     const [form] = Form.useForm();
     const regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   
