@@ -1,119 +1,138 @@
 import { Button, Form, Input,  Grid } from 'antd';
-import type { FormInstance } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import styles from './RegForm.module.scss'
+import { useRegistrationMutation } from '@redux/reducers/authApi';
+import { AppLoader } from '@components/app-loader';
+import { setUserData } from '@redux/reducers/userSlice';
+import { REGEXP_PASSWORD, ROUTER_PATHS } from '@constants/constants';
 
-const SubmitButton = ({ form }: { form: FormInstance }) => {
+export interface IValuesRegForm {
+  email: string,
+  password: string,
+}
 
-  const { useBreakpoint } = Grid;
-  const {sm} = useBreakpoint()
-  const [submittable, setSubmittable] = React.useState(false);
-  const values = Form.useWatch([], form);
 
-  React.useEffect(() => {
-    form.validateFields({ validateOnly: true }).then(
-      () => {
-        setSubmittable(true);
-      },
-      () => {
-        setSubmittable(false);
-      },
-    );
-  }, [values]);
 
-  return (
-    <Button
-     type="primary" 
-     htmlType="submit" 
-     disabled={!submittable}
-     data-test-id='registration-submit-button'
-     style={sm ? {width:'100%'}:{width:'100%', fontSize:14}}
-     >
-      Войти
-    </Button>
-  );
-};
+const { useBreakpoint } = Grid;
+
 
 export const RegForm:React.FC = () =>{
-    const { useBreakpoint } = Grid;
-    const {sm} = useBreakpoint()
+const {sm} = useBreakpoint();
+const [form] = Form.useForm();
+const [, forceUpdate] = useState({});
+const [reg, { isLoading }] = useRegistrationMutation();
+const [formValid, setFormValid] = useState(false)
+const navigate = useNavigate();
+const location = useLocation();
+const dispatch = useAppDispatch();
+const  userData = useAppSelector((state) => state.user);
+
+const onChange = () => {
+  form.validateFields(['email','password','confirm-password']).then(() => {
+      setFormValid(false);
+  }).catch(() => {
+      setFormValid(true);
+  })
+};
 
 
+const onFinish = useCallback(
+  (values: IValuesRegForm) => {
+      reg({ email: values.email, password: values.password })
+          .unwrap()
+          .then(() => {
+              navigate(ROUTER_PATHS.RESULT_SUCCESS, { state: ROUTER_PATHS.REGISTRATION });
+          })
+          .catch((error) => {
+              if (error.status === 409) {
+                  navigate(ROUTER_PATHS.RESULT_ERROR_USER_EXIST, {state: ROUTER_PATHS.REGISTRATION,});
+              } else {
+                  navigate(ROUTER_PATHS.RESULT_ERROR, { state: ROUTER_PATHS.REGISTRATION });
+                  dispatch(setUserData(values));
+              }
+          });
+  },
+  [dispatch, navigate, reg],
+);
 
+    useEffect(() => {
+      forceUpdate({});
+      if (location.state === ROUTER_PATHS.RESULT_ERROR) {
+          onFinish(userData);
+         
+      }
+    }, [location.state, onFinish, userData]);
 
-
-    const [form] = Form.useForm();
-    const regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-  
-  
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-      };
-    
-      const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-      };
   
     return(
+      <>
+         {isLoading && <AppLoader/>}
         <Form
-        form={form}
-        name="basic"
-        size='large'
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        className={styles.regForm}
-      >
-        <Form.Item
-          label=""
-          name="username"
-          data-test-id='registration-email'
-          className={styles.emailInput}
-          rules={[{required: true, message: '', type:'email' }]
-        }
+          form={form}
+          name="basic"
+          size='large'
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onChange={onChange}
+          autoComplete="off"
+          className={styles.regForm}
         >
-          <Input addonBefore="e-mail:"/>
-        </Form.Item>
-  
-        <Form.Item
-          label=""
-          name="password"
-          data-test-id='registration-password'
-          help="Пароль не менее 8 символов, с заглавной буквой и цифрой"
-          rules={[
-            {required: false, message: '' },
-            { pattern: regexp, message: ""}
-          ]}
-          hasFeedback
-        >
-          <Input.Password placeholder='Пароль' style={{borderRadius:2}} />
-        </Form.Item>
-  
-        <Form.Item
-          label=""
-          name="confirm-password"
-          data-test-id='registration-confirm-password'
-          rules={[
-            {required: false, message: 'Пароли не совпадают' },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error('Пароли не совпадают'));
-              },
-            }),
-        ]}
+          <Form.Item
+            label=""
+            name="email"
+            className={styles.emailInput}
+            rules={[{required: true, message: '', type:'email', min: 0 }]
+          }
+          >
+            <Input data-test-id='registration-email' addonBefore="e-mail:"/>
+          </Form.Item>
+        
+          <Form.Item
+            label=""
+            name="password"
+            help="Пароль не менее 8 символов, с заглавной буквой и цифрой"
+            rules={[
+              {required: false, message: '' },
+              {pattern: REGEXP_PASSWORD, message: ""}
+            ]}
+          >
+            <Input.Password placeholder='Пароль' data-test-id='registration-password' />
+          </Form.Item>
           
-        >
-          <Input.Password placeholder='Повторите пароль' style={{borderRadius:2}} />
+          <Form.Item
+            label=""
+            name="confirm-password"
+            dependencies={['password']}
+            rules={[
+              {required: false, message: 'Пароли не совпадают' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Пароли не совпадают'));
+                },
+              }),
+          ]}
+
+          >
+          <Input.Password placeholder='Повторите пароль'  data-test-id='registration-confirm-password' />
         </Form.Item>
         
   
         <Form.Item style={{marginBottom:16}}>
-          <SubmitButton form={form}/>
+          <Button
+            type="primary" 
+            htmlType="submit" 
+            disabled={formValid}
+            data-test-id='registration-submit-button'
+            style={sm ? {width:'100%'}:{width:'100%', fontSize:14}}
+          >
+              Войти
+          </Button>
         </Form.Item>
   
         <Form.Item>
@@ -123,6 +142,8 @@ export const RegForm:React.FC = () =>{
           </Button>
         </Form.Item>
       </Form>
+      </>
+
     )
   
   }

@@ -1,17 +1,53 @@
 import { Card, Tabs, Grid } from 'antd';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './AuthPage.module.scss'
 import { LogoIcon } from '@components/project-icons'
 import { ServiceBackground } from '@components/service-background'
 import { LoginForm } from '@components/login-form'; 
 import { RegForm } from '@components/reg-form';
+import { ROUTER_PATHS } from '@constants/constants';
 
+
+
+
+export interface IItemsTab {
+    label: string,
+    key: string,
+    children: React.ReactNode,
+}
 
 
 export const AuthPage:React.FC = () =>{
 
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
+    const [key, setKey] = useState('1');
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+
+    const itemsTab: IItemsTab[] = [
+        {
+            label: `Вход`,
+            key: '1',
+            children: <LoginForm/>,
+
+        },
+        {
+            label: `Регистрация`,
+            key: '2',
+            children: <RegForm/>,
+        },
+    ]
+
+
+
+    useEffect(() => {
+        location.pathname === ROUTER_PATHS.AUTH ? setKey('1') : setKey('2');
+    }, [location.pathname]);
+
+
 
     return(
         <ServiceBackground>
@@ -27,20 +63,12 @@ export const AuthPage:React.FC = () =>{
                             tabBarStyle={{display:'flex', justifyContent:'space-between', marginBottom:24}}
                             className={styles.tabs}
                             size={sm ? 'large' :'middle'}
-                            defaultActiveKey="1" 
-                            items={[
-                            {
-                                label: `Вход`,
-                                key: '1',
-                                children: <LoginForm/>,
-
-                            },
-                            {
-                                label: `Регистрация`,
-                                key: '2',
-                                children: <RegForm/>,
-                            },
-                            ]}
+                            items={itemsTab}
+                            activeKey={key}
+                            onChange={(k: string) => {
+                                setKey(k);
+                                key === '1' ? navigate(ROUTER_PATHS.REGISTRATION) : navigate(ROUTER_PATHS.AUTH);
+                            }}
                         />
             </Card>
       </ServiceBackground>

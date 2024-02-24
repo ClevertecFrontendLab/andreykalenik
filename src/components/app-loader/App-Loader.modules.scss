@@ -1,0 +1,19 @@
+.loaderWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #799cd480;
+    backdrop-filter: blur(3px);
+}
+
+.appLoader{
+    z-index: 10;
+    width: 150px;
+    height: 150px;
+}

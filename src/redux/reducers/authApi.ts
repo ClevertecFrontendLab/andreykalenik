@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL } from '../../constants/constants'
 
 
 
@@ -43,60 +42,57 @@ export interface IResponseChangePass {
 
 
 
-enum queryEndpoints {
-    login = 'login',
-    registration =  'registration',
-    checkEmail = 'check-email',
-    confirmEmail = 'confirm-email',
-    changePassword = 'change-password',
-}
-
+const headers = {
+    'accept': 'application/json',
+    'Content-Type': 'application/json',
+};
 
 
 export const authApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: `${BASE_URL}/auth/`,
+        baseUrl: 'https://marathon-api.clevertec.ru/',
         credentials: 'include',
-        prepareHeaders: (headers) => {
-                headers.set('accept', 'application/json',);
-                headers.set('Content-Type', 'application/json');
-            }
     }),
+    tagTypes: ['Auth'],
     endpoints: (build) => ({
         login: build.mutation<IResponseLogin, IRequestLogin>({
-            query: (body) => ({
-                url: queryEndpoints.login,
+            query: ({email, password}) => ({
+                url: '/auth/login',
                 method: 'POST',
-                body,
+                body: {email, password},
             }),
         }),
         registration: build.mutation<object, IRequestLogin>({
             query: (body) => ({
-                url: queryEndpoints.registration,
+                url: '/auth/registration',
                 method: 'POST',
                 body,
+                headers: headers,
             }),
         }),
         checkEmail: build.mutation<IResponseCheck, IRequestCheck>({
             query: (email) => ({
-                url: queryEndpoints.checkEmail,
+                url: '/auth/check-email',
                 method: 'POST',
                 body: email,
+                headers: headers,
             }),
         }),
         confirmEmail: build.mutation<IResponseConfirm, IRequestConfirm>({
             query: (body) => ({
-                url: queryEndpoints.confirmEmail,
+                url: '/auth/confirm-email',
                 method: 'POST',
                 body,
+                headers: headers,
             }),
         }),
         changePassord: build.mutation<IResponseChangePass, IRequestChangePass>({
             query: (body) => ({
-                url: queryEndpoints.changePassword,
+                url: '/auth/change-password',
                 method: 'POST',
                 body,
+                headers: headers,
             }),
         }),
     }),

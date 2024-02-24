@@ -1,6 +1,6 @@
 
 .tabs{
-    padding-top: 17px;
+    padding-top: 24px;
     :global{
         .ant-tabs-nav-list {
             display: flex;
@@ -18,6 +18,12 @@
           }
           .ant-tabs-nav .ant-tabs-tab{
             padding: 20px 0 11px ;
+          }
+          .ant-input-group-wrapper-status-error .ant-input-group-addon{
+            border-right-color: #d9d9d9;
+          }
+          .ant-input-group-wrapper-status-error .ant-input-status-error{
+            border-left-color: #d9d9d9;
           }
     }
 

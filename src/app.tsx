@@ -1,18 +1,16 @@
 import  React  from "react";
 import { Provider } from 'react-redux';
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, Navigate, Outlet} from 'react-router-dom';
 import { HistoryRouter as Router } from 'redux-first-history/rr6';
+import { MainPage, AuthPage, ResultPage} from './pages';
+import { ConfigProvider } from 'antd';
+import { store, history } from '@redux/configure-store';
 import { ROUTER_PATHS } from './constants';
 
-import { store, history } from '@redux/configure-store';
-import { MainPage, AuthPage} from './pages';
-import { ConfigProvider } from 'antd';
-import { useLocalStorage } from 'usehooks-ts';
 
 
 export const App:React.FC = () =>{
 
-    useLocalStorage('LOCALSTORAGE_AUTH_TOKEN_KEY', '')
 
     return(
         <ConfigProvider theme={{
@@ -58,10 +56,36 @@ export const App:React.FC = () =>{
         }}>
             <Provider store={store}>
                 <Router history={history}>
-                        <Routes>
-                            <Route index path={ROUTER_PATHS.MAIN} element={<MainPage />} />
-                            <Route path={ROUTER_PATHS.AUTH} element={<AuthPage/>}/>
-                        </Routes>
+                    <Routes>
+                        <Route path={ROUTER_PATHS.ROOT} element={<Outlet/>}> 
+                            <Route
+                                path={ROUTER_PATHS.AUTH}
+                                element={<AuthPage/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.REGISTRATION}
+                                element={<AuthPage/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR_LOGIN}
+                                element={<ResultPage status="error-login"/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_SUCCESS}
+                                element={<ResultPage status="success"/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR}
+                                element={<ResultPage status="error"/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR_USER_EXIST}
+                                element={<ResultPage status='error-user-exist'/>}
+                            />
+                            <Route path={ROUTER_PATHS.MAIN} element={<MainPage />} />
+                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} /> 
+                        </Route>
+                    </Routes>
                 </Router>
             </Provider>
         </ConfigProvider>
