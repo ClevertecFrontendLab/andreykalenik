@@ -3,9 +3,8 @@ import { Layout } from 'antd';
 import styles from './ServiceBackgroun.module.scss'
 
 
-type ServiceBackgroundProps = {children: ReactNode}
 
-export const ServiceBackground:React.FC<ServiceBackgroundProps> = ({children}) =>{
+export const ServiceBackground:React.FC<{children: ReactNode}> = ({children}) =>{
     return(
         <Layout className={styles.pageWrapper}>
                 <div className={styles.contentWrapper}>

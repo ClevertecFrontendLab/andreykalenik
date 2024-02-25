@@ -6,6 +6,8 @@ import { MainPage, AuthPage, ResultPage} from './pages';
 import { ConfigProvider } from 'antd';
 import { store, history } from '@redux/configure-store';
 import { ROUTER_PATHS } from './constants';
+import { ConfirmEmail } from "@components/confirm-email";
+import { ChangePassword } from "@components/change-password";
 
 
 
@@ -32,6 +34,7 @@ export const App:React.FC = () =>{
                     borderRadiusOuter:2,
                     colorBorder:'none'
                 },
+
                 Input:{
                     borderRadius:2,
                     borderRadiusLG:2,
@@ -42,14 +45,19 @@ export const App:React.FC = () =>{
                     fontSizeLG:14,
                     fontSizeSM:14,
                     fontSizeXL:14,
+                    controlHeight:40,
+                    
                 },
+                
                 Button:{
                     borderRadius:2,
                     borderRadiusLG:2,
                     borderRadiusSM:2,
                     borderRadiusXS:2,
                     borderRadiusOuter:2,
-                }
+                    controlHeight:40,
+                    fontSize:16,
+                },
             
             }
             
@@ -57,14 +65,27 @@ export const App:React.FC = () =>{
             <Provider store={store}>
                 <Router history={history}>
                     <Routes>
-                        <Route path={ROUTER_PATHS.ROOT} element={<Outlet/>}> 
-                            <Route
+                         <Route path={ROUTER_PATHS.ROOT} element={<Outlet/>}> 
+                         <Route
+                                path={ROUTER_PATHS.AUTH}
+                                element={<ChangePassword/>}
+                            />
+                            {/* <Route
                                 path={ROUTER_PATHS.AUTH}
                                 element={<AuthPage/>}
-                            />
+                            /> */}
+                            {/*
                             <Route
                                 path={ROUTER_PATHS.REGISTRATION}
                                 element={<AuthPage/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.CONFIRM_EMAIL}
+                                element={<ConfirmEmail/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.CHANGE_PASSWORD}
+                                element={<ChangePassword/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_LOGIN}
@@ -82,8 +103,24 @@ export const App:React.FC = () =>{
                                 path={ROUTER_PATHS.RESULT_ERROR_USER_EXIST}
                                 element={<ResultPage status='error-user-exist'/>}
                             />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR_EMAIL_NO_EXIST}
+                                element={<ResultPage status='error-check-email-no-exist'/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_SUCCESS_CHANGE_PASSWORD}
+                                element={<ResultPage status='success-change-password'/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR_CHANGE_PASSWORD}
+                                element={<ResultPage status='error-change-password'/>}
+                            />
+                            <Route
+                                path={ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL}
+                                element={<ResultPage status='error-check-email'/>}
+                            />
                             <Route path={ROUTER_PATHS.MAIN} element={<MainPage />} />
-                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} /> 
+                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} />  */}
                         </Route>
                     </Routes>
                 </Router>

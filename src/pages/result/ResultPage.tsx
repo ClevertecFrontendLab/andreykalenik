@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Card, Button, Grid } from 'antd';
+import { Card, Button, Grid, Result  } from 'antd';
 import styles from './ResultPage.module.scss'
 
 import {
@@ -12,6 +12,7 @@ import {
 
 import { ServiceBackground } from '@components/service-background'
 import { ROUTER_PATHS } from '@constants/constants';
+import { CardAuth } from '@components/card-auth';
 
 type ResultPageProps =  {
     status : 'success' | 'error' | 'error-user-exist' | 'error-login' | 'error-check-email-no-exist' | 'error-check-email' | 'error-change-password' | 'success-change-password'
@@ -57,7 +58,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({status}) =>{
                         subtitle='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.'
                         buttonText='Повторить'
                         testID='registration-back-button'
-                        redirectPath ={ROUTER_PATHS.REGISTRATION} // повторный запрос
+                        redirectPath ={ROUTER_PATHS.REGISTRATION}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='defoult'
                         />
@@ -76,20 +77,20 @@ export const ResultPage: React.FC<ResultPageProps> = ({status}) =>{
                         title='Такой e-mail не зарегистрирован'
                         subtitle='Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail.'
                         buttonText='Попробовать снова'
-                        testID='change-retry-button'
+                        testID='check-retry-button'
                         redirectPath ={ROUTER_PATHS.AUTH}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='slim'
                         /> 
                     case 'error-check-email':
-                        return 'error-check-email'
+                        return   <Component500/>
                     case 'error-change-password':
                         return <Component
                         title='Данные не сохранились'
                         subtitle='Что-то пошло не так. Попробуйте ещё раз'
                         buttonText='Повторить'
                         testID='change-retry-button'
-                        redirectPath ={ROUTER_PATHS.REGISTRATION}
+                        redirectPath ={ROUTER_PATHS.CHANGE_PASSWORD}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='defoult'
                         />  
@@ -156,9 +157,32 @@ const Component:React.FC<ComponentProps> = ({title, subtitle, buttonText, testID
     )
 }
 
-// import { useRegistrationMutation } from '@redux/reducers/authApi';
-// import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-// const email = useAppSelector(state => state.user.email)
-// const password = useAppSelector(state => state.user.password)
 
-// const repeatReg = () => reg({ email, password }) 
+const Component500:React.FC = () =>{
+    const navigate = useNavigate();
+    const location = useLocation();
+return(
+    <CardAuth 
+    >
+        <Result
+            status="500"
+            title='Что-то пошло не так'
+            subTitle="Произошла ошибка, попробуйте отправить форму ещё раз."
+            extra={
+                <Button 
+                    type="primary" 
+                    data-test-id='check-back-button'
+                    onClick={() => {
+                        navigate(".", { replace: true }), 
+                        navigate(ROUTER_PATHS.AUTH, {state: location.pathname})
+                    }} 
+                    style={{height:40}}
+                    >
+                        Назад
+                    </Button>}
+          />
+          
+    </CardAuth>    
+)
+}
+
