@@ -44,7 +44,7 @@ export const LoginForm:React.FC = () =>{
     };
 
   const onChange = () => {
-      form.validateFields(['email','password']).then(() => {
+      form.validateFields(['email','pррassword']).then(() => {
           setFormValid(false);
           setForgotDisabled(false);
       }).catch(() => {
@@ -88,7 +88,7 @@ export const LoginForm:React.FC = () =>{
   
     return(
       <>
-        {isLoadingLogin && <AppLoader />}
+        {(isLoadingLogin || isLoadingEmail) && <AppLoader />}
         <Form
           form={form}
           name="LoginForm"
