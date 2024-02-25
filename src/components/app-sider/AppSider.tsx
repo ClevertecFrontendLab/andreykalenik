@@ -1,6 +1,4 @@
 import React, { useState} from 'react';
-import styles from './AppSider.module.scss';
-import { DevicesType } from '@pages/main/MainPage';
 import {
     CalendarTwoTone,
     HeartFilled,
@@ -9,12 +7,11 @@ import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
   } from '@ant-design/icons';
-
-
   import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button} from 'antd'
- 
+  import {Layout, Menu, Button} from 'antd';
+  import { DevicesType } from '@pages/main/MainPage'
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
+  import styles from './AppSider.module.scss';
 
   const {Sider} = Layout
   

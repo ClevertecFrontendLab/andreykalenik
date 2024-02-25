@@ -1,10 +1,10 @@
 import React from 'react';
 import { useWindowSize } from 'usehooks-ts'
 import { Layout } from 'antd'
-import styles from './MainPage.module.scss';
 import { MainLayout } from '@components/main-layout';
 import { AppHeader } from '@components/app-header';
 import { AppSider } from '@components/app-sider';
+import styles from './MainPage.module.scss';
 
 
 

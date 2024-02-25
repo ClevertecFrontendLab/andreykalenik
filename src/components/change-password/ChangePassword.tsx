@@ -1,19 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './ChangePassword.module.scss';
 import { Button, Form, Input } from 'antd';
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useChangePassordMutation } from '@redux/reducers/authApi';
 import { setUserData } from '@redux/reducers/userSlice';
-
-import { REGEXP_PASSWORD, ROUTER_PATHS } from '@constants/constants';
 import { AppLoader } from '@components/app-loader';
 import { CardAuth } from '@components/card-auth';
 import { ServiceBackground } from '@components/service-background';
+import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
 import styles from './ChangePassword.module.scss'
 
-export interface IChangePassord {
+
+
+type ChangePasswordData =  {
     password: string,
     confirmPassword: string
 }
@@ -37,7 +36,7 @@ export const ChangePassword: React.FC = () => {
     };
 
     const onFinish = useCallback(
-        (values: IChangePassord) => {
+        (values:ChangePasswordData) => {
             dispatch(setUserData({ email: userData.email, password: values.password }));
             change(values)
                 .unwrap()
@@ -87,14 +86,14 @@ export const ChangePassword: React.FC = () => {
                     </Form.Item>
                     <Form.Item
                         name='password'
-                        help={'validateMessage.password'}
+                        help={VALIDATE_MESSAGE.PasswordInfo}
                         rules={[
                             {
                                 validator: (_, value) => {
                                     if (REGEXP_PASSWORD.test(value)) {
                                         return Promise.resolve();
                                     } else {
-                                        return Promise.reject(new Error('validateMessage.password'));
+                                        return Promise.reject(new Error(VALIDATE_MESSAGE.RepeatPassword));
                                     }
                                 },
                             },
@@ -139,7 +138,6 @@ export const ChangePassword: React.FC = () => {
                                 disabled={formValid}
                                 data-test-id='change-submit-button'
                                 htmlType='submit'
-                                className='login-form-button'
                             >
                                 Сохранить
                             </Button>

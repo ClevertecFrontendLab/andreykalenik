@@ -6,54 +6,42 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLoginMutation, useCheckEmailMutation } from '@redux/reducers/authApi';
 import { setUserData } from '@redux/reducers/userSlice';
 import { AppLoader } from '@components/app-loader';
-import { ROUTER_PATHS, LOCALSTORAGE_AUTH_TOKEN_KEY, REGEXP_PASSWORD} from '@constants/constants';
+import { ROUTER_PATHS, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL} from '@utils/constants';
 import styles from './LoginForm.module.scss'
 
 
 
-export interface IValuesLoginForm {
+type LoginFormData = {
   email: string,
   password: string,
   remember: boolean
 }
 
 export const LoginForm:React.FC = () =>{
-  
+  const [forgotDisabled, setForgotDisabled] = useState(true);
   const { Link } = Typography;
   const { useBreakpoint } = Grid;
   const {sm} = useBreakpoint()
   const [form] = Form.useForm();
   const [loginUser, { isLoading: isLoadingLogin }] = useLoginMutation();
   const [checkEmail, { isLoading: isLoadingEmail }] = useCheckEmailMutation();
-  const [formValid, setFormValid] = useState(false)
-  const [forgotDisabled, setForgotDisabled] = useState<boolean>(true);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.user);
 
-  const onFinish = (values: IValuesLoginForm) => {
+  const onFinish = (values: LoginFormData) => {
     loginUser({ email: values.email, password: values.password })
         .unwrap()
         .then((res) => {
-            values.remember ? localStorage.setItem(LOCALSTORAGE_AUTH_TOKEN_KEY, res.accessToken) : '';
+            values.remember ? localStorage.setItem(TOKEN_ID, res.accessToken) : '';
             dispatch(setUserData({ email: values.email, password: values.password }));
             navigate(ROUTER_PATHS.MAIN);
         })
         .catch(() => navigate(ROUTER_PATHS.RESULT_ERROR_LOGIN, { state: ROUTER_PATHS.AUTH}));
     };
 
-  const onChange = () => {
-      form.validateFields(['email','password']).then(() => {
-          setFormValid(false);
-          setForgotDisabled(false);
-      }).catch(() => {
-          setFormValid(true);
-          setForgotDisabled(true);
-      })
-  };
-
-  const check = useCallback(
+  const checkUserEmail = useCallback(
     (email: string) => {
         checkEmail({ email })
             .unwrap()
@@ -68,27 +56,20 @@ export const LoginForm:React.FC = () =>{
                     navigate(ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL, { state: ROUTER_PATHS.AUTH });
                 }
             });
-    },
-    [checkEmail, dispatch, navigate],
-);
+    },[checkEmail, dispatch, navigate],);
     
     useEffect(() => {
-        if (localStorage.getItem(LOCALSTORAGE_AUTH_TOKEN_KEY)) {
+        if (localStorage.getItem(TOKEN_ID)) {
             navigate(ROUTER_PATHS.MAIN);
         }
         if (location.state === ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL) {
-          check(userData.email);
+          checkUserEmail(userData.email);
       }
-    }, [check, location.state, navigate, userData.email]);  
+    }, [checkUserEmail, location.state, navigate, userData.email]);  
 
-    useEffect(() =>{
-      setFormValid(false)
-    },[])
-
-  
     return(
       <>
-        {isLoadingLogin && <AppLoader />}
+        {(isLoadingLogin || isLoadingEmail) && <AppLoader />}
         <Form
           form={form}
           name="LoginForm"
@@ -96,22 +77,33 @@ export const LoginForm:React.FC = () =>{
           initialValues={{ remember: true }}
           autoComplete="off"
           onFinish={onFinish}
-          onChange={onChange}
           className={styles.loginForm}
         >
           <Form.Item
             name="email"
             className={styles.emailInput}
             data-test-id='login-email'
-            rules={[{required: true,  message: "", type: 'email'}]}
+            rules={[
+              {required: true,  message: '', type: 'email'},
+              {
+                validator: (_, value) => {
+                    if (REGEXP_EMAIL.test(value)) {
+                      dispatch(setUserData({ email: value, password: '' }))
+                        return Promise.resolve(setForgotDisabled(false));
+                    } else {
+                        return Promise.reject(setForgotDisabled(true));
+                    }
+                },
+            },
+            ]}
           >
             <Input addonBefore="e-mail:"/>
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
-              {required: true, message: ""},
-              {pattern: REGEXP_PASSWORD, message: ""},
+              {required: true, message: ''},
+              {pattern: REGEXP_PASSWORD, message: ''},
             ]}
           >
             <Input.Password placeholder='Пароль'  data-test-id='login-password'/>
@@ -126,8 +118,7 @@ export const LoginForm:React.FC = () =>{
               </Form.Item>
               <Link 
                 data-test-id='login-forgot-button'
-                disabled={forgotDisabled}
-                onClick={() => !forgotDisabled && check(userData.email)}
+                onClick={() => !forgotDisabled && checkUserEmail(userData.email)}
                 style={sm ? {fontSize:17, fontOpticalSizing:'auto'} : {fontSize:14,fontOpticalSizing:'auto', marginRight:8}} 
                 >
                   Забыли пароль?
@@ -138,8 +129,7 @@ export const LoginForm:React.FC = () =>{
             type="primary" 
             htmlType="submit" 
             data-test-id='login-submit-button'
-            disabled={formValid}
-            // onClick={}
+            onSubmit={(e) => e.preventDefault()}
             style={sm ? {width:'100%'}:{width:'100%', fontSize:14}}
             >
               Войти

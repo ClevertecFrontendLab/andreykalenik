@@ -1,17 +1,17 @@
-import { Card, Tabs, Grid } from 'antd';
 import React, {useEffect, useState} from 'react';
+import { Card, Tabs, Grid } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './AuthPage.module.scss'
 import { LogoIcon } from '@components/project-icons'
 import { ServiceBackground } from '@components/service-background'
 import { LoginForm } from '@components/login-form'; 
 import { RegForm } from '@components/reg-form';
-import { ROUTER_PATHS } from '@constants/constants';
+import { ROUTER_PATHS } from '@utils/constants/router';
+import styles from './AuthPage.module.scss'
 
 
 
 
-export interface IItemsTab {
+type ItemsTab = {
     label: string,
     key: string,
     children: React.ReactNode,
@@ -27,7 +27,7 @@ export const AuthPage:React.FC = () =>{
     const location = useLocation();
     
 
-    const itemsTab: IItemsTab[] = [
+    const itemsTab: ItemsTab[] = [
         {
             label: `Вход`,
             key: '1',

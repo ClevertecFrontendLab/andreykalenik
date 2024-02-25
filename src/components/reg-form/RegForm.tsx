@@ -1,15 +1,17 @@
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Input,  Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import styles from './RegForm.module.scss'
 import { useRegistrationMutation } from '@redux/reducers/authApi';
 import { AppLoader } from '@components/app-loader';
 import { setUserData } from '@redux/reducers/userSlice';
-import { REGEXP_PASSWORD, ROUTER_PATHS } from '@constants/constants';
+import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
+import styles from './RegForm.module.scss'
 
-export interface IValuesRegForm {
+
+
+type RegFormData =  {
   email: string,
   password: string,
 }
@@ -40,7 +42,7 @@ const onChange = () => {
 
 
 const onFinish = useCallback(
-  (values: IValuesRegForm) => {
+  (values: RegFormData) => {
       reg({ email: values.email, password: values.password })
           .unwrap()
           .then(() => {
@@ -93,7 +95,7 @@ const onFinish = useCallback(
           <Form.Item
             label=""
             name="password"
-            help="Пароль не менее 8 символов, с заглавной буквой и цифрой"
+            help={VALIDATE_MESSAGE.PasswordInfo}
             rules={[
               {required: false, message: '' },
               {pattern: REGEXP_PASSWORD, message: ""}
@@ -107,13 +109,13 @@ const onFinish = useCallback(
             name="confirm-password"
             dependencies={['password']}
             rules={[
-              {required: false, message: 'Пароли не совпадают' },
+              {required: false, message: VALIDATE_MESSAGE.RepeatPassword },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Пароли не совпадают'));
+                  return Promise.reject(new Error(VALIDATE_MESSAGE.RepeatPassword));
                 },
               }),
           ]}

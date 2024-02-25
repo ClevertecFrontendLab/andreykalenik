@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import VerificationInput from "react-verification-input";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { Result, Typography } from 'antd';
 import { useConfirmEmailMutation } from '@redux/reducers/authApi';
-import { ROUTER_PATHS } from '@constants/constants';
+import { ROUTER_PATHS } from '@utils/constants/router';
 import { AppLoader } from '@components/app-loader';
 import { ServiceBackground } from '@components/service-background';
 import styles from './ConfirmEmail.module.scss'
@@ -45,7 +44,7 @@ export const ConfirmEmail:React.FC = () => {
         <CardAuth>
             <ExclamationCircleFilled style={{fontSize:70, color:'#2F54EB', display:'block', padding:5}}/>
             <h2 className={styles.title}>Введите код <br/> для восстановления аккауанта</h2>
-            <p className={styles.subtitle}>Мы отправили вам на e-mail <span>victorbyden@gmail.com </span>шестизначный код. Введите его в поле ниже.</p>
+            <p className={styles.subtitle}>Мы отправили вам на e-mail <span> {userData.email} </span> шестизначный код. Введите его в поле ниже.</p>
             <VerificationInput
                             value={value}
                             placeholder=''

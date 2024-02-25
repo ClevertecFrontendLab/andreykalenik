@@ -5,7 +5,7 @@ import { HistoryRouter as Router } from 'redux-first-history/rr6';
 import { MainPage, AuthPage, ResultPage} from './pages';
 import { ConfigProvider } from 'antd';
 import { store, history } from '@redux/configure-store';
-import { ROUTER_PATHS } from './constants';
+import { ROUTER_PATHS } from './utils/constants';
 import { ConfirmEmail } from "@components/confirm-email";
 import { ChangePassword } from "@components/change-password";
 
@@ -66,15 +66,10 @@ export const App:React.FC = () =>{
                 <Router history={history}>
                     <Routes>
                          <Route path={ROUTER_PATHS.ROOT} element={<Outlet/>}> 
-                         <Route
-                                path={ROUTER_PATHS.AUTH}
-                                element={<ChangePassword/>}
-                            />
-                            {/* <Route
+                            <Route
                                 path={ROUTER_PATHS.AUTH}
                                 element={<AuthPage/>}
-                            /> */}
-                            {/*
+                            /> 
                             <Route
                                 path={ROUTER_PATHS.REGISTRATION}
                                 element={<AuthPage/>}
@@ -89,38 +84,38 @@ export const App:React.FC = () =>{
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_LOGIN}
-                                element={<ResultPage status="error-login"/>}
+                                element={<ResultPage result="error-login"/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_SUCCESS}
-                                element={<ResultPage status="success"/>}
+                                element={<ResultPage result="success"/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR}
-                                element={<ResultPage status="error"/>}
+                                element={<ResultPage result="error"/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_USER_EXIST}
-                                element={<ResultPage status='error-user-exist'/>}
+                                element={<ResultPage result='error-user-exist'/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_EMAIL_NO_EXIST}
-                                element={<ResultPage status='error-check-email-no-exist'/>}
+                                element={<ResultPage result='error-check-email-no-exist'/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_SUCCESS_CHANGE_PASSWORD}
-                                element={<ResultPage status='success-change-password'/>}
+                                element={<ResultPage result='success-change-password'/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_CHANGE_PASSWORD}
-                                element={<ResultPage status='error-change-password'/>}
+                                element={<ResultPage result='error-change-password'/>}
                             />
                             <Route
                                 path={ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL}
-                                element={<ResultPage status='error-check-email'/>}
+                                element={<ResultPage result='error-check-email'/>}
                             />
                             <Route path={ROUTER_PATHS.MAIN} element={<MainPage />} />
-                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} />  */}
+                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} /> 
                         </Route>
                     </Routes>
                 </Router>

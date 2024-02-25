@@ -1,4 +1,4 @@
-import React, {ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { Card, Grid } from 'antd'
 
 export const CardAuth:React.FC<{children:ReactNode}> = ({children}) => {
