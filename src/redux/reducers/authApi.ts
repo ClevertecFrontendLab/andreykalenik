@@ -1,45 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-
-export interface IRequestLogin {
+type Request ={
     email: string;
     password: string;
-}
-
-export interface IResponseLogin {
-    accessToken: string;
-}
-
-export interface IRequestCheck {
-    email: string;
-}
-
-export interface IResponseCheck {
-    email: string;
+    confirmPassword: string
     message: string;
-}
-
-export interface IRequestConfirm {
-    email: string;
     code: string;
 }
 
-export interface IResponseConfirm {
-    email: string;
-    message: string;
+type Response = {
+    accessToken: string;
+    email: string
+    message : string
 }
-
-export interface IRequestChangePass {
-    password: string;
-    confirmPassword: string;
-}
-
-export interface IResponseChangePass {
-    message: string;
-}
-
-
 
 
 const headers = {
@@ -56,14 +30,14 @@ export const authApi = createApi({
     }),
     tagTypes: ['Auth'],
     endpoints: (build) => ({
-        login: build.mutation<IResponseLogin, IRequestLogin>({
+        login: build.mutation<Pick<Response, 'accessToken'>, Pick<Request,'email'|'password' >>({
             query: ({email, password}) => ({
                 url: '/auth/login',
                 method: 'POST',
                 body: {email, password},
             }),
         }),
-        registration: build.mutation<object, IRequestLogin>({
+        registration: build.mutation<object, Pick<Request,'email'|'password' >>({
             query: (body) => ({
                 url: '/auth/registration',
                 method: 'POST',
@@ -71,7 +45,7 @@ export const authApi = createApi({
                 headers: headers,
             }),
         }),
-        checkEmail: build.mutation<IResponseCheck, IRequestCheck>({
+        checkEmail: build.mutation<Pick<Response, 'email'|'message'>, Pick<Request,'email' >>({
             query: (email) => ({
                 url: '/auth/check-email',
                 method: 'POST',
@@ -79,7 +53,7 @@ export const authApi = createApi({
                 headers: headers,
             }),
         }),
-        confirmEmail: build.mutation<IResponseConfirm, IRequestConfirm>({
+        confirmEmail: build.mutation<Pick<Response, 'email'|'message'>, Pick<Request,'email'|'code' >>({
             query: (body) => ({
                 url: '/auth/confirm-email',
                 method: 'POST',
@@ -87,7 +61,7 @@ export const authApi = createApi({
                 headers: headers,
             }),
         }),
-        changePassord: build.mutation<IResponseChangePass, IRequestChangePass>({
+        changePassord: build.mutation<Pick<Response, 'message'>, Pick<Request,'password'| 'confirmPassword' >>({
             query: (body) => ({
                 url: '/auth/change-password',
                 method: 'POST',
