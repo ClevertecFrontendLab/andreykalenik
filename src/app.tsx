@@ -66,14 +66,15 @@ export const App:React.FC = () =>{
                 <Router history={history}>
                     <Routes>
                          <Route path={ROUTER_PATHS.ROOT} element={<Outlet/>}> 
-                         {/* <Route
+                         <Route
                                 path={ROUTER_PATHS.AUTH}
                                 element={<ChangePassword/>}
-                            /> */}
-                            <Route
+                            />
+                            {/* <Route
                                 path={ROUTER_PATHS.AUTH}
                                 element={<AuthPage/>}
-                            /> 
+                            /> */}
+                            {/*
                             <Route
                                 path={ROUTER_PATHS.REGISTRATION}
                                 element={<AuthPage/>}
@@ -119,7 +120,7 @@ export const App:React.FC = () =>{
                                 element={<ResultPage status='error-check-email'/>}
                             />
                             <Route path={ROUTER_PATHS.MAIN} element={<MainPage />} />
-                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} /> 
+                            <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} />  */}
                         </Route>
                     </Routes>
                 </Router>
