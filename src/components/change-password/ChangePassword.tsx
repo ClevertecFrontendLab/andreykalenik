@@ -9,6 +9,7 @@ import { AppLoader } from '@components/app-loader';
 import { CardAuth } from '@components/card-auth';
 import { ServiceBackground } from '@components/service-background';
 import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
+import { selectUserData } from '@utils/selectors';
 
 import styles from './ChangePassword.module.scss'
 
@@ -22,7 +23,7 @@ type ChangePasswordData =  {
 export const ChangePassword: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const userData = useAppSelector((state) => state.user);
+    const userData = useAppSelector(selectUserData);
     const dispatch = useAppDispatch();
     const [formValid, setFormValid] = useState(false)
     const [change, { isLoading }] = useChangePassordMutation();

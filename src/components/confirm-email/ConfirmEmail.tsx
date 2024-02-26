@@ -5,19 +5,21 @@ import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
 import { useConfirmEmailMutation } from '@redux/reducers/authApi';
-import { ROUTER_PATHS } from '@utils/constants/router';
 import { AppLoader } from '@components/app-loader';
 import { ServiceBackground } from '@components/service-background';
 import { CardAuth } from '@components/card-auth';
+import { ROUTER_PATHS } from '@utils/constants/router';
+import { selectUserData } from '@utils/selectors';
 
 import styles from './ConfirmEmail.module.scss'
 import './ValidationInput.scss'
 
 
+
 export const ConfirmEmail:React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const userData = useAppSelector((state) => state.user);
+    const userData = useAppSelector(selectUserData);
     const [confirm, { isLoading }] = useConfirmEmailMutation();
     const [borderStyle, setBorderStyle] = useState<string>('character');
     const [value, setValue] = useState<string>('');

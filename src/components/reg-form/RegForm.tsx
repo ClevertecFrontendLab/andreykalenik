@@ -8,6 +8,7 @@ import { useRegistrationMutation } from '@redux/reducers/authApi';
 import { AppLoader } from '@components/app-loader';
 import { setUserData } from '@redux/reducers/userSlice';
 import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
+import { selectUserData } from '@utils/selectors';
 
 import styles from './RegForm.module.scss'
 
@@ -29,7 +30,7 @@ const [formValid, setFormValid] = useState(false)
 const navigate = useNavigate();
 const location = useLocation();
 const dispatch = useAppDispatch();
-const  userData = useAppSelector((state) => state.user);
+const  userData = useAppSelector(selectUserData);
 
 const onChange = () => {
   form.validateFields(['email','password','confirm-password']).then(() => {

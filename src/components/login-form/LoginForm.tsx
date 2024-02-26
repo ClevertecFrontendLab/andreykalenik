@@ -8,6 +8,7 @@ import { useLoginMutation, useCheckEmailMutation } from '@redux/reducers/authApi
 import { setUserData } from '@redux/reducers/userSlice';
 import { AppLoader } from '@components/app-loader';
 import { ROUTER_PATHS, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL} from '@utils/constants';
+import { selectUserData } from '@utils/selectors';
 
 import styles from './LoginForm.module.scss'
 
@@ -29,7 +30,7 @@ export const LoginForm:React.FC = () =>{
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.user);
+  const userData = useAppSelector(selectUserData);
 
   const onFinish = (values: LoginFormData) => {
     loginUser({ email: values.email, password: values.password })
