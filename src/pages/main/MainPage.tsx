@@ -6,6 +6,8 @@ import { AppHeader } from '@components/app-header';
 import { AppSider } from '@components/app-sider';
 
 import styles from './MainPage.module.scss';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { AppLoader } from '@components/app-loader';
 
 export type DevicesType = {
     isDesktop?: boolean,
@@ -14,7 +16,12 @@ export type DevicesType = {
   }
 
 
+
 export const MainPage: React.FC = () => {
+    const [loaderVisable, setLoaderViable] = useState(false)
+    useLayoutEffect(()=> setLoaderViable(true), []) 
+    useEffect(()=> setLoaderViable(false), []) 
+
     const  screenWidht = useWindowSize().width
     const mobileBreakpoint = 576
     const tabletBreakpoint = 992
@@ -24,13 +31,16 @@ export const MainPage: React.FC = () => {
     const isMobile = screenWidht <= mobileBreakpoint
 
     return (
-      <Layout className={styles.mainLayout}>
-        <AppSider isMobile={isMobile}/>
-        <Layout className={styles.ContentLayout}>
-            <AppHeader isDesktop={isDesktop} isTablet={isTablet}/>
-            <MainLayout/>
+      <>
+        {loaderVisable && <AppLoader/>}
+        <Layout className={styles.mainLayout}>
+          <AppSider isMobile={isMobile}/>
+          <Layout className={styles.ContentLayout}>
+              <AppHeader isDesktop={isDesktop} isTablet={isTablet}/>
+              <MainLayout/>
+          </Layout>
         </Layout>
-      </Layout>
+      </>
     );
 
 };
