@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, Button, Grid, Result  } from 'antd';
 import { CardAuth } from '@components/card-auth';
+
 import { ROUTER_PATHS } from '@utils/constants';
+
 import styles from './ResultContent.module.scss'
 
 type ResultContentProps={
@@ -30,7 +32,6 @@ export const ResultContent:React.FC<ResultContentProps> = ({title, subtitle, but
         !location.state ? navigate(ROUTER_PATHS.AUTH) : '';
     },[location.state, navigate])
     
-
     return(
         <Card
             className={styles.card}

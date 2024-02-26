@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Tabs, Grid } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import { LogoIcon } from '@components/project-icons'
 import { ServiceBackground } from '@components/service-background'
 import { LoginForm } from '@components/login-form'; 
 import { RegForm } from '@components/reg-form';
 import { ROUTER_PATHS } from '@utils/constants/router';
+
 import styles from './AuthPage.module.scss'
-
-
 
 
 type ItemsTab = {
@@ -17,16 +17,13 @@ type ItemsTab = {
     children: React.ReactNode,
 }
 
-
 export const AuthPage:React.FC = () =>{
-
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
     const [key, setKey] = useState('1');
     const navigate = useNavigate();
     const location = useLocation();
     
-
     const itemsTab: ItemsTab[] = [
         {
             label: `Вход`,
@@ -41,13 +38,9 @@ export const AuthPage:React.FC = () =>{
         },
     ]
 
-
-
     useEffect(() => {
         location.pathname === ROUTER_PATHS.AUTH ? setKey('1') : setKey('2');
     }, [location.pathname]);
-
-
 
     return(
         <ServiceBackground>

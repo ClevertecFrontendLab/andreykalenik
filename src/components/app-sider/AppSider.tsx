@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import { useState } from 'react';
 import {
     CalendarTwoTone,
     HeartFilled,
@@ -9,11 +9,12 @@ import {
   } from '@ant-design/icons';
   import type { MenuProps } from 'antd';
   import {Layout, Menu, Button} from 'antd';
+
   import { DevicesType } from '@pages/main/MainPage'
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
+
   import styles from './AppSider.module.scss';
 
-  const {Sider} = Layout
   
   type MenuItem = Required<MenuProps>['items'][number];
   
@@ -47,7 +48,7 @@ import {
 
 
 export const AppSider:React.FC<DevicesType> = ({isMobile}) =>{
-
+    const {Sider} = Layout
     const [collapsed, setCollapsed] = useState(false)
     const isDesktop = !isMobile
 

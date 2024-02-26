@@ -1,15 +1,15 @@
-import React from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import {Typography, Button} from 'antd'
-import styles from './AppHeader.module.scss';
+
 import { DevicesType } from '@pages/main/MainPage';
+
+import styles from './AppHeader.module.scss';
 
 
 const {Link} = Typography
 
-export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>{
-    return(
-        <header className={styles.header} >
+export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>
+    <header className={styles.header} >
         <p className={styles.headerTitle}>Главная</p>
         <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
         <div className={styles.headerActionsWrapper}>
@@ -29,6 +29,4 @@ export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>{
                 /> 
             }
         </div>   
-      </header>
-    )
-}
+    </header>

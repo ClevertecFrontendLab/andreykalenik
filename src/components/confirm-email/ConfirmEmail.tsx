@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import VerificationInput from "react-verification-input";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+
 import { useConfirmEmailMutation } from '@redux/reducers/authApi';
 import { ROUTER_PATHS } from '@utils/constants/router';
 import { AppLoader } from '@components/app-loader';
 import { ServiceBackground } from '@components/service-background';
-import styles from './ConfirmEmail.module.scss'
 import { CardAuth } from '@components/card-auth';
-import { ExclamationCircleFilled } from '@ant-design/icons';
-import './ValidationInput.scss'
 
+import styles from './ConfirmEmail.module.scss'
+import './ValidationInput.scss'
 
 
 export const ConfirmEmail:React.FC = () => {
@@ -20,8 +21,6 @@ export const ConfirmEmail:React.FC = () => {
     const [confirm, { isLoading }] = useConfirmEmailMutation();
     const [borderStyle, setBorderStyle] = useState<string>('character');
     const [value, setValue] = useState<string>('');
-
-
 
     const onComplete = (value: string) => {
         confirm({ email: userData.email, code: value })

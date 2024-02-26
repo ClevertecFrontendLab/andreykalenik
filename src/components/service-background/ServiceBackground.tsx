@@ -4,12 +4,9 @@ import styles from './ServiceBackgroun.module.scss'
 
 
 
-export const ServiceBackground:React.FC<{children: ReactNode}> = ({children}) =>{
-    return(
-        <Layout className={styles.pageWrapper}>
-                <div className={styles.contentWrapper}>
-                    {children}
-                </div>
-        </Layout>
-    )
-}
+export const ServiceBackground:React.FC<{children: ReactNode}> = ({children}) =>
+    <Layout className={styles.pageWrapper}>
+            <div className={styles.contentWrapper}>
+                {children}
+            </div>
+    </Layout>

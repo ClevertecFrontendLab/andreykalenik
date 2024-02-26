@@ -1,22 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Input,  Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+
 import { useRegistrationMutation } from '@redux/reducers/authApi';
 import { AppLoader } from '@components/app-loader';
 import { setUserData } from '@redux/reducers/userSlice';
 import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
-import styles from './RegForm.module.scss'
 
+import styles from './RegForm.module.scss'
 
 
 type RegFormData =  {
   email: string,
   password: string,
 }
-
-
 
 const { useBreakpoint } = Grid;
 

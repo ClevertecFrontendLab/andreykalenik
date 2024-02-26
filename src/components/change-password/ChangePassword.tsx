@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+
 import { useChangePassordMutation } from '@redux/reducers/authApi';
 import { setUserData } from '@redux/reducers/userSlice';
 import { AppLoader } from '@components/app-loader';
 import { CardAuth } from '@components/card-auth';
 import { ServiceBackground } from '@components/service-background';
 import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
-import styles from './ChangePassword.module.scss'
 
+import styles from './ChangePassword.module.scss'
 
 
 type ChangePasswordData =  {

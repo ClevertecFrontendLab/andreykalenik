@@ -1,14 +1,15 @@
-import React, {useEffect, useState, useCallback } from 'react';
+import {useEffect, useState, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input, Typography, Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
+
 import { useLoginMutation, useCheckEmailMutation } from '@redux/reducers/authApi';
 import { setUserData } from '@redux/reducers/userSlice';
 import { AppLoader } from '@components/app-loader';
 import { ROUTER_PATHS, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL} from '@utils/constants';
-import styles from './LoginForm.module.scss'
 
+import styles from './LoginForm.module.scss'
 
 
 type LoginFormData = {

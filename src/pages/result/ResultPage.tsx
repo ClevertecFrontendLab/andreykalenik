@@ -1,9 +1,9 @@
-import React  from 'react';
 import {
     CheckCircleFilled,
     WarningFilled,
     CloseCircleFilled, 
 }from '@ant-design/icons';
+
 import { ServiceBackground } from '@components/service-background'
 import { ResultContent, ResultContent500 } from '@components/result-content';
 import { ROUTER_PATHS } from '@utils/constants';
