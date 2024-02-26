@@ -1,6 +1,4 @@
-import React from 'react';
 import {Layout, Card, Typography  } from 'antd';
-
 import {
     CalendarTwoTone,
     IdcardOutlined,
@@ -9,13 +7,12 @@ import {
     AndroidFilled,
   } from '@ant-design/icons';
 
-
 import styles from './MainLayout.module.scss';
 
 const { Content } = Layout;
 const {Link} = Typography;
 
-export const MainLayout:React.FC = () => (
+export const MainLayout:React.FC = () => 
     <Content className={styles.contentWrapper}>
         <Card className={styles.cardBenefits}>
         С CleverFit ты сможешь:
@@ -40,7 +37,7 @@ export const MainLayout:React.FC = () => (
 
             <Card size="small" title="Назначить календарь" className={styles.cardCalendar} >
                 <Link>
-                    <CalendarTwoTone/>
+                    <CalendarTwoTone twoToneColor='#2F54EB'/>
                     Календарь
                 </Link>
             </Card>
@@ -66,4 +63,3 @@ export const MainLayout:React.FC = () => (
             </Link>
         </Card>
   </Content>
-)

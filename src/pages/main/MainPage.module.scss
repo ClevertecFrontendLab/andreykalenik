@@ -1,0 +1,17 @@
+body{
+    :global{
+        *{
+            font-family: 'Inter';
+        }
+    }
+}
+
+.mainLayout{
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+
+}
+.ContentLayout{
+    width: 100%;
+}

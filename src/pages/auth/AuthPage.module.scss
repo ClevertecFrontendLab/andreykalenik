@@ -1,0 +1,48 @@
+
+.tabs{
+    padding-top: 24px;
+    :global{
+        .ant-tabs-nav-list {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0;
+          }
+          .ant-tabs-tab {
+            width: 50%;
+            justify-content: center;
+          }
+          .ant-tabs-tab + .ant-tabs-tab{
+            margin-left: 0;
+          }
+          .ant-tabs-nav .ant-tabs-tab{
+            padding: 20px 0 11px ;
+          }
+          .ant-input-group-wrapper-status-error .ant-input-group-addon{
+            border-right-color: #d9d9d9;
+          }
+          .ant-input-group-wrapper-status-error .ant-input-status-error{
+            border-left-color: #d9d9d9;
+          }
+    }
+
+}
+
+
+@media only screen and (max-width: 576px) {
+    .tabs{
+         padding-top: 0;
+        :global{
+              .ant-tabs-tab{
+                padding: 0
+              }
+              .ant-tabs-nav .ant-tabs-tab{
+                padding: 10px 0 9px ;
+              }
+              .ant-tabs-tab-btn{
+                padding: 2px;
+              }
+        }
+    }
+}
