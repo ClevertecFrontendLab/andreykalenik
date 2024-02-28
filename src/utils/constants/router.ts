@@ -2,6 +2,8 @@ export const enum ROUTER_PATHS  {
 
     ROOT =  '/',
     MAIN =  '/main',
+    FEEDBACKS = '/feedbacks',
+
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL =  '/auth/confirm-email',
