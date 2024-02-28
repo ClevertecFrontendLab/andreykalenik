@@ -1,25 +1,27 @@
 import { SettingOutlined } from '@ant-design/icons';
-import {Typography, Button} from 'antd'
-
-import { DevicesType } from '@pages/main/MainPage';
+import { Typography, Button, Grid } from 'antd'
 
 import styles from './AppHeader.module.scss';
 
 
 const {Link} = Typography
+const { useBreakpoint } = Grid;
 
-export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>
+
+export const AppHeader:React.FC = () =>{
+    const {lg, md, xs} = useBreakpoint()
+    return(
     <header className={styles.header} >
         <p className={styles.headerTitle}>Главная</p>
         <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
         <div className={styles.headerActionsWrapper}>
             {
-            isDesktop ?
+            lg ?
                 <Link style={{display:'flex', gap:'10px', color:'#262626'}}>
                     <SettingOutlined />
                     Настройки
                 </Link> : 
-            isTablet ?
+            xs && md ?
                 <Link style={{color:'#262626'}}>
                         Настройки
                 </Link> :
@@ -30,3 +32,5 @@ export const AppHeader:React.FC<DevicesType> = ({isDesktop, isTablet}) =>
             }
         </div>   
     </header>
+    )
+}

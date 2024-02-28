@@ -8,9 +8,8 @@ import {
     MenuFoldOutlined,
   } from '@ant-design/icons';
   import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button} from 'antd';
+  import {Layout, Menu, Button, Grid} from 'antd';
 
-  import { DevicesType } from '@pages/main/MainPage'
   import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
 
   import styles from './AppSider.module.scss';
@@ -47,22 +46,23 @@ import {
 
 
 
-export const AppSider:React.FC<DevicesType> = ({isMobile}) =>{
+export const AppSider:React.FC = () =>{
     const {Sider} = Layout
     const [collapsed, setCollapsed] = useState(false)
-    const isDesktop = !isMobile
+    const { useBreakpoint } = Grid;
+    const {sm} = useBreakpoint()
 
     return(
         <Sider 
-        style={isMobile ? {zIndex:5, position:'fixed', height:'100%'} : {}}
+        style={!sm ? {zIndex:5, position:'fixed', height:'100%'} : {}}
         className={styles.sider}
         collapsible collapsed={collapsed}
-        width={isDesktop ? 204 : 106}
-        collapsedWidth={isDesktop ? 64 : 1}
+        width={sm ? 204 : 106}
+        collapsedWidth={sm ? 64 : 1}
         trigger={null}
         onCollapse={value => setCollapsed(value)}>
         <div className={styles.siderLogo}>
-             { isDesktop ?
+             { sm ?
              collapsed ?  <LogoSmallIcon/> : <LogoIcon style={{width:133, height:33}}/>:
              collapsed ?  null : <LogoIcon style={{width:72, height:18}}/>
              }
@@ -75,7 +75,7 @@ export const AppSider:React.FC<DevicesType> = ({isMobile}) =>{
         <Button
                 type='text'
                 onClick={() => setCollapsed(!collapsed)}
-                data-test-id={isMobile ? 'sider-switch-mobile' : 'sider-switch'}
+                data-test-id={!sm ? 'sider-switch-mobile' : 'sider-switch'}
                 icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
             />
       </Sider>
