@@ -65,7 +65,7 @@ export const MainLayout:React.FC = () => {
             >
                 Смотреть отзывы
             </Link>
-            <Card title={<p><p>Скачать на телефон</p><p> Доступно в PRO-тарифе</p></p>} className={styles.cardMobileApp}>
+            <Card title={<><p>Скачать на телефон</p><p> Доступно в PRO-тарифе</p></>} className={styles.cardMobileApp}>
                 <Link>
                     {<AndroidFilled />}
                     Android OS
