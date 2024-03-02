@@ -1,1 +1,0 @@
-export { isMainPage } from './location'
