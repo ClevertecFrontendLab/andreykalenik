@@ -1,0 +1,1 @@
+export { isMainPage } from './location'

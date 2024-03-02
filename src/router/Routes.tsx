@@ -1,9 +1,14 @@
 
 import { Route, Routes, Navigate, Outlet} from 'react-router-dom';
+
 import { MainPage, AuthPage, ResultPage} from '../pages';
+import { MainLayout } from '@components/main-layout';
+import { FeedbackLayout } from '@components/feedback-layout';
 import { ROUTER_PATHS } from '../utils/constants';
 import { ConfirmEmail } from "@components/confirm-email";
 import { ChangePassword } from "@components/change-password";
+
+
 
 export const routes = (
     <Routes>
@@ -56,7 +61,10 @@ export const routes = (
                 path={ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL}
                 element={<ResultPage result='error-check-email'/>}
             />
-            <Route path={ROUTER_PATHS.MAIN} element={<MainPage />} />
+            <Route element={<MainPage />}>
+            <Route path={ROUTER_PATHS.MAIN} element={<MainLayout />} />
+                <Route path={ROUTER_PATHS.FEEDBACKS} element={<FeedbackLayout />} />
+            </Route>
             <Route path={ROUTER_PATHS.ROOT} element={<Navigate to={ROUTER_PATHS.AUTH} />} /> 
         </Route>
     </Routes>

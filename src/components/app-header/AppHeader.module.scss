@@ -34,6 +34,18 @@
     padding-right: 16px;
 }
 
+.headerAlternative{
+    display:grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-rows: min-content;
+    gap: 14px;
+    align-items: center;
+    position: relative;
+    min-height: 50px;
+    background-color: #F0F5FF;
+    padding: 16px 24px;
+}
+
 
 @media only screen and (max-width: 992px) {
     .h1{

@@ -1,19 +1,29 @@
 import { SettingOutlined } from '@ant-design/icons';
 import { Typography, Button, Grid } from 'antd'
-
+import { AppBreadcrumb } from '@components/app-breadcrumb';
+import { isMainPage } from '@utils/location';
 import styles from './AppHeader.module.scss';
+
 
 
 const {Link} = Typography
 const { useBreakpoint } = Grid;
 
-
 export const AppHeader:React.FC = () =>{
+
     const {lg, md, xs} = useBreakpoint()
     return(
-    <header className={styles.header} >
-        <p className={styles.headerTitle}>Главная</p>
-        <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
+    <header className={ isMainPage ? styles.header : styles.headerAlternative} >
+        {
+            isMainPage ? 
+            <>
+                <p>Главная</p>
+                <h1 className={styles.h1}>Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться своей мечты!</h1>
+            </>
+             : 
+            <AppBreadcrumb/>
+
+        }
         <div className={styles.headerActionsWrapper}>
             {
             lg ?
@@ -31,6 +41,10 @@ export const AppHeader:React.FC = () =>{
                 /> 
             }
         </div>   
+        
     </header>
     )
 }
+
+
+

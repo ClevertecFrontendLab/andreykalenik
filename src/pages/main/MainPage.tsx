@@ -1,10 +1,11 @@
 import { Layout } from 'antd'
+import { Outlet } from 'react-router-dom';
 
-import { MainLayout } from '@components/main-layout';
 import { AppHeader } from '@components/app-header';
 import { AppSider } from '@components/app-sider';
 
 import styles from './MainPage.module.scss';
+
 
 export type DevicesType = {
     isDesktop?: boolean,
@@ -20,7 +21,7 @@ export const MainPage: React.FC = () =>
     <AppSider/>
     <Layout className={styles.ContentLayout}>
         <AppHeader/>
-        <MainLayout/>
+        <Outlet/>
     </Layout>
   </Layout>
 

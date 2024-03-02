@@ -43,6 +43,9 @@ export const AntTheme:ThemeConfig ={
             controlHeight:40,
             fontSize:16,
         },
+        Breadcrumb:{
+            lastItemColor:'#262626',
+        }
     
     }
 }
