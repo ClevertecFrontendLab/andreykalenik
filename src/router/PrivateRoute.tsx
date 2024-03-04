@@ -1,4 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { ROUTER_PATHS } from "@utils/constants";
+import { ROUTER_PATHS, TOKEN_ID } from "@utils/constants";
 
-export const PrivateRoute = ( fb:boolean, redirect:ROUTER_PATHS, ) =>  fb ? <Outlet /> : <Navigate to={redirect} />;
+
+
+export const PrivateRoute = () =>  localStorage.getItem(TOKEN_ID) ? <Outlet /> : <Navigate to={ROUTER_PATHS.AUTH} />;

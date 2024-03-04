@@ -31,8 +31,8 @@ export const AntTheme:ThemeConfig ={
             fontSizeSM:14,
             fontSizeXL:14,
             controlHeight:40,
-            
         },
+
         
         Button:{
             borderRadius:2,
@@ -45,7 +45,15 @@ export const AntTheme:ThemeConfig ={
         },
         Breadcrumb:{
             lastItemColor:'#262626',
-        }
-    
+        },
+        Modal:{
+            borderRadius:2,
+            borderRadiusLG:2,
+            borderRadiusSM:2,
+            borderRadiusXS:2,
+            borderRadiusOuter:2,
+        },
+        
+
     }
 }

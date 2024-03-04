@@ -56,7 +56,8 @@ export const AppSider:React.FC = () =>{
         <Sider 
         style={!sm ? {zIndex:5, position:'fixed', height:'100%'} : {}}
         className={styles.sider}
-        collapsible collapsed={collapsed}
+        collapsible
+        collapsed={collapsed }
         width={sm ? 204 : 106}
         collapsedWidth={sm ? 64 : 1}
         trigger={null}

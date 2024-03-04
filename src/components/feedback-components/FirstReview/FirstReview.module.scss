@@ -1,10 +1,10 @@
-.feedbackWrapper{
+.wrapper{
     display: grid;
     grid-template-columns: 1fr ;
     grid-template-rows:  1fr max-content 1fr;
     gap:16px;
     padding: 24px 24px 42px;
-    background-image: url(../../assets/img/backgraund_main_page_light.jpg);
+    background-image: url('../../../assets/img/backgraund_main_page_light.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,22 +24,4 @@
 
 .firstReview{
     grid-row: 2/3;
-}
-
-
-
-
-
-@media only screen and (max-width: 576px) {
-        :global{
-            .ant-modal-wrap{
-                .ant-modal-content, .ant-modal, .ant-result, ant-modal-body{
-                    width: 328px !important;
-                }
-                .ant-result-subtitle{
-                    padding-inline: 30px;
-                }
-        }
-        }
-
 }

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import {Layout, Card, Typography  } from 'antd';
+import { Card, Typography, Layout, Button  } from 'antd';
 import {
     CalendarTwoTone,
     IdcardOutlined,
@@ -11,15 +11,16 @@ import {
 import { ROUTER_PATHS } from '@utils/constants';
 import styles from './MainLayout.module.scss';
 
-const { Content } = Layout;
+
 const {Link} = Typography;
+const { Content } = Layout;
 
 export const MainLayout:React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
     return(
-        <Content className={styles.contentWrapper}>
+        <Content className={styles.mainWrapper}>
             <Card className={styles.cardBenefits}>
             С CleverFit ты сможешь:
             <ul>
