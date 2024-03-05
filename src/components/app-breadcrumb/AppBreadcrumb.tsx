@@ -1,12 +1,12 @@
 import { Breadcrumb } from 'antd'
 import { NavLink, useLocation} from 'react-router-dom';
 
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 
 const breadcrumbNameMap: Record<string, string> = {
-    [ROUTER_PATHS.MAIN]: 'Главная',
-    [ROUTER_PATHS.FEEDBACKS]: 'Отзывы пользователей',
+    [Path.MAIN]: 'Главная',
+    [Path.FEEDBACKS]: 'Отзывы пользователей',
   };
 
 export const AppBreadcrumb = () => {
@@ -16,7 +16,7 @@ export const AppBreadcrumb = () => {
 
     return (
         <Breadcrumb>
-          <Breadcrumb.Item><NavLink to={ROUTER_PATHS.MAIN}>Главная</NavLink></Breadcrumb.Item>
+          <Breadcrumb.Item><NavLink to={Path.MAIN}>Главная</NavLink></Breadcrumb.Item>
           <Breadcrumb.Item>{breadcrumbNameMap[path]}</Breadcrumb.Item>
         </Breadcrumb>
   );

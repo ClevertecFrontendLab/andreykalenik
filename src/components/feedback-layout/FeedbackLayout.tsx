@@ -1,12 +1,13 @@
 import React, { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useGetFeedbacksQuery } from "@redux/reducers/feedbackApi";
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { toggleModalServerError } from '@redux/reducers/feedbackModalSlice';
+import { useAddReviewMutation, useGetFeedbacksQuery } from "../../services/feedbackApi";
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { toggleModalServerError, toggleModalErrorTransfer, toggleModalSuccessTransfer  } from '@redux/reducers/uiSlice';
+import { setAccessToken } from '@redux/reducers/userSlice';
+import { selectModalSuccessTransfer } from '@utils/selectors/selectors';
 
 import { FirstReview, ModalReview, ModalServerError, ModalSuccessTransfer, ModalErrorTransfer, AllReviews } from '@components/feedback-components';
-import { ROUTER_PATHS, TOKEN_ID } from '@utils/constants';
-
+import { Path, TOKEN_ID } from '@utils/constants';
 
 
 
@@ -14,13 +15,21 @@ import { ROUTER_PATHS, TOKEN_ID } from '@utils/constants';
 export const FeedbackLayout:React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
-    const { data, error, isError } = useGetFeedbacksQuery()
+    const addReview = useAppSelector(selectModalSuccessTransfer)
+ 
+    const { data, error, isError, refetch } = useGetFeedbacksQuery()
     
+
+    useEffect(() => {
+        refetch();
+    }, [addReview]);
+
     useEffect(()=>{
         if(error){
             if('status' in error && error.status == 403){
+                dispatch(setAccessToken(''))
                 localStorage.removeItem(TOKEN_ID)
-                navigate(ROUTER_PATHS.AUTH)
+                navigate(Path.AUTH)
             }
         }
     }, [error])
@@ -28,6 +37,8 @@ export const FeedbackLayout:React.FC = () => {
     useEffect(()=>{
         dispatch(toggleModalServerError())
     }, [isError]) 
+
+
 
 
 return(

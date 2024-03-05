@@ -1,7 +1,7 @@
 import { Card, Typography, Button, Grid, Layout} from 'antd';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
-import { toggleModalReview } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalReview } from '@redux/reducers/uiSlice';
 import styles from './FirstReview.module.scss'
 
 const { Title, Paragraph } = Typography

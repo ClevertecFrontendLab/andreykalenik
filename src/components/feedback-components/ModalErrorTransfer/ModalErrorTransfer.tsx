@@ -1,20 +1,17 @@
 import { Button, Modal, Grid, Result } from 'antd';
 import { selectModalErrorTransfer } from '@utils/selectors/selectors';
-import { toggleModalErrorTransfer, toggleModalReview } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalErrorTransfer} from '@redux/reducers/uiSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATHS } from '@utils/constants';
+
 
 const { useBreakpoint } = Grid;
 
 export const ModalErrorTransfer = () =>{
     const { sm } = useBreakpoint()
-    const navigate = useNavigate()
+
     const dispatch = useAppDispatch();
     const handleClick = () => {
-            dispatch(toggleModalErrorTransfer())
-            dispatch(toggleModalReview())
-            // navigate(ROUTER_PATHS.FEEDBACKS)
+        dispatch(toggleModalErrorTransfer())  
     }
     return(
         <Modal

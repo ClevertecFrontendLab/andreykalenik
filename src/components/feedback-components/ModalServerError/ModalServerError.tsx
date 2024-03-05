@@ -1,10 +1,10 @@
 import { Button, Modal, Grid, Result } from 'antd';
 
 import { selectModalServerError } from '@utils/selectors/selectors';
-import { toggleModalServerError } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalServerError } from '@redux/reducers/uiSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 const { useBreakpoint } = Grid;
 
@@ -13,7 +13,7 @@ export const ModalServerError = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const handleClick = () => {
-            navigate(ROUTER_PATHS.MAIN)
+            navigate(Path.MAIN)
             dispatch(toggleModalServerError())
     }
 

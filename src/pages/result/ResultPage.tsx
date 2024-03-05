@@ -6,7 +6,7 @@ import {
 
 import { ServiceBackground } from '@components/service-background'
 import { ResultContent, ResultContent500 } from '@components/result-content';
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 
 
@@ -25,7 +25,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль.'
                         buttonText='Войти'
                         testID='registration-enter-button'
-                        redirectPath ={ROUTER_PATHS.AUTH}
+                        redirectPath ={Path.AUTH}
                         icon={<CheckCircleFilled style={{fontSize:70, color:'#52C41A', display:'block', padding:5}}/>}
                         style='default'
                         />
@@ -35,7 +35,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.'
                         buttonText='Назад к регистрации'
                         testID='registration-retry-button'
-                        redirectPath ={ROUTER_PATHS.REGISTRATION}
+                        redirectPath ={Path.REGISTRATION}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='default'
                         />
@@ -45,7 +45,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.'
                         buttonText='Повторить'
                         testID='registration-back-button'
-                        redirectPath ={ROUTER_PATHS.REGISTRATION}
+                        redirectPath ={Path.REGISTRATION}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='default'
                         />
@@ -55,7 +55,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Что-то пошло не так. Попробуйте еще раз'
                         buttonText='Повторить'
                         testID='login-retry-button'
-                        redirectPath ={ROUTER_PATHS.AUTH}
+                        redirectPath ={Path.AUTH}
                         icon={<WarningFilled  style={{fontSize:70, color:'#FAAD14', display:'block', padding:5}}/>}
                         style='default'
                         />
@@ -65,7 +65,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail.'
                         buttonText='Попробовать снова'
                         testID='check-retry-button'
-                        redirectPath ={ROUTER_PATHS.AUTH}
+                        redirectPath ={Path.AUTH}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='slim'
                         /> 
@@ -77,7 +77,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Что-то пошло не так. Попробуйте ещё раз'
                         buttonText='Повторить'
                         testID='change-retry-button'
-                        redirectPath ={ROUTER_PATHS.CHANGE_PASSWORD}
+                        redirectPath ={Path.CHANGE_PASSWORD}
                         icon={<CloseCircleFilled  style={{fontSize:70, color:'#FF4D4F', display:'block', padding:5}}/>}
                         style='default'
                         />  
@@ -87,7 +87,7 @@ export const ResultPage: React.FC<ResultPageProps> = ({result}) =>{
                         subtitle='Теперь можно войти в аккаунт, используя свой логин и новый пароль'
                         buttonText='Вход'
                         testID='change-entry-button'
-                        redirectPath ={ROUTER_PATHS.AUTH}
+                        redirectPath ={Path.AUTH}
                         icon={<CheckCircleFilled style={{fontSize:70, color:'#52C41A', display:'block', padding:5}}/>}
                         style='default'
                         />  

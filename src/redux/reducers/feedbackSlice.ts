@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { NewFeedback } from './feedbackApi';
+import type { NewFeedback } from '../../services/feedbackApi';
 
 
 const initialState:NewFeedback = {

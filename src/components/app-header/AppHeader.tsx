@@ -3,7 +3,7 @@ import { Typography, Button, Grid } from 'antd'
 import { AppBreadcrumb } from '@components/app-breadcrumb';
 import styles from './AppHeader.module.scss';
 import { useLocation } from 'react-router-dom';
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 
 
@@ -13,7 +13,7 @@ const { useBreakpoint } = Grid;
 export const AppHeader:React.FC = () =>{
 
     const {lg, md, xs} = useBreakpoint()
-    const isMainPage = useLocation().pathname === ROUTER_PATHS.MAIN
+    const isMainPage = useLocation().pathname === Path.MAIN
     return(
     <header className={ isMainPage ? styles.header : styles.headerAlternative} >
         {

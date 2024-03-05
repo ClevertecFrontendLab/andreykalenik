@@ -1,12 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
-import userReducer from './reducers/userSlice'
-import { authApi } from './reducers/authApi';
-import { feedbackAPI } from './reducers/feedbackApi';
-import feedbackModalSlice from './reducers/feedbackModalSlice'
-import feedbackSlice from './reducers/feedbackSlice'
 
+import { api } from '../services';
+import userReducer from './reducers/userSlice'
+import uiReducer from './reducers/uiSlice'
+import feedbackReducer from './reducers/feedbackSlice'
 
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
@@ -18,14 +17,13 @@ export const store = configureStore({
         reducer: combineReducers({
             user : userReducer,
             router: routerReducer,
-            [authApi.reducerPath]: authApi.reducer,
-            [feedbackAPI.reducerPath]: feedbackAPI.reducer,
-            feedbackModal: feedbackModalSlice,
-            feedback: feedbackSlice,
+            ui: uiReducer,
+            feedback: feedbackReducer,
+            [api.reducerPath]: api.reducer
         }),
 
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(routerMiddleware, authApi.middleware,  feedbackAPI.middleware),
+            getDefaultMiddleware().concat(routerMiddleware, api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

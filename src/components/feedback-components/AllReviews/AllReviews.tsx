@@ -1,18 +1,16 @@
 import { Button, Layout, List, Avatar, Card} from 'antd';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useState } from 'react'
-import { toggleModalReview } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalReview } from '@redux/reducers/uiSlice';
 import { UserOutlined } from '@ant-design/icons';
 
 
 import styles from './AllReviews.module.scss'
-import { useGetFeedbacksQuery } from '@redux/reducers/feedbackApi';
+import { useGetFeedbacksQuery } from '../../../services/feedbackApi';
 import Rating from '@components/rating/rating';
-import type { Feedback } from '@redux/reducers/feedbackApi'
+import type { Feedback } from '../../../services/feedbackApi'
 
 const { Content } = Layout;
-
-
 
 
 export const AllReviews = () => {

@@ -1,10 +1,12 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { api } from './api';
+import { ApiEndpoint } from '@utils/constants';
+
 
 
 type Request ={
     email: string;
     password: string;
-    confirmPassword: string
+    passwordConfirmed: string
     message: string;
     code: string;
 }
@@ -16,59 +18,50 @@ type Response = {
 }
 
 
-const headers = {
-    'accept': 'application/json',
-    'Content-Type': 'application/json',
-};
-
-
-export const authApi = createApi({
-    reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://marathon-api.clevertec.ru/',
-        credentials: 'include',
-    }),
-    tagTypes: ['Auth'],
+export const authApi = api.injectEndpoints({
     endpoints: (build) => ({
         login: build.mutation<Pick<Response, 'accessToken'>, Pick<Request,'email'|'password' >>({
-            query: ({email, password}) => ({
-                url: '/auth/login',
+            query: (body) => ({
+                url: ApiEndpoint.LOGIN,
                 method: 'POST',
-                body: {email, password},
+                body,
             }),
         }),
         registration: build.mutation<object, Pick<Request,'email'|'password' >>({
             query: (body) => ({
-                url: '/auth/registration',
+                url: ApiEndpoint.REGISTRATION,
                 method: 'POST',
                 body,
-                headers: headers,
             }),
         }),
         checkEmail: build.mutation<Pick<Response, 'email'|'message'>, Pick<Request,'email' >>({
-            query: (email) => ({
-                url: '/auth/check-email',
+            query: (body) => ({
+                url: ApiEndpoint.CHECK_EMAIL,
                 method: 'POST',
-                body: email,
-                headers: headers,
+                body
+
             }),
         }),
         confirmEmail: build.mutation<Pick<Response, 'email'|'message'>, Pick<Request,'email'|'code' >>({
             query: (body) => ({
-                url: '/auth/confirm-email',
+                url: ApiEndpoint.CONFIRM_EMAIL,
                 method: 'POST',
                 body,
-                headers: headers,
             }),
         }),
-        changePassord: build.mutation<Pick<Response, 'message'>, Pick<Request,'password'| 'confirmPassword' >>({
+        changePassord: build.mutation<Pick<Response, 'message'>, Pick<Request,'password'| 'passwordConfirmed' >>({
             query: (body) => ({
-                url: '/auth/change-password',
+                url: ApiEndpoint.CHANGE_PASSWORD,
                 method: 'POST',
                 body,
-                headers: headers,
+            }), 
+        }),
+        GoogleAuth: build.query<{ accessToken: string }, null>({
+            query: () => ({
+                url: ApiEndpoint.GOOGLE_AUTH,
             }),
         }),
+        
     }),
 });
 

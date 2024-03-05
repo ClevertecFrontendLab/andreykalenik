@@ -3,11 +3,11 @@ import { Button, Modal, Grid } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Rating from '@components/rating/rating';
 import { selectModalReview, selectFeedbackRating, selectFeedbackMessage } from '@utils/selectors/selectors';
-import { toggleModalReview, toggleModalErrorTransfer, toggleModalSuccessTransfer } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalReview, toggleModalErrorTransfer, toggleModalSuccessTransfer } from '@redux/reducers/uiSlice';
 
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setRating, setMessage } from '@redux/reducers/feedbackSlice';
-import { useCreateReviewMutation } from '@redux/reducers/feedbackApi';
+import { useAddReviewMutation } from '../../../services/feedbackApi';
 
 
 const { useBreakpoint } = Grid;
@@ -16,7 +16,7 @@ export const ModalReview = () => {
     const dispatch = useAppDispatch();
     const [isBtnDisable, setIsBtnDisable] = useState(true);
     const { sm } = useBreakpoint()
-    const [createReview, {isError, isSuccess} ] = useCreateReviewMutation();
+    const [createReview, {isError:isTransferError, isSuccess:isTransferSuccess} ] = useAddReviewMutation();
 
     const message = useAppSelector(selectFeedbackMessage)
     const rating =  useAppSelector(selectFeedbackRating)
@@ -25,14 +25,15 @@ export const ModalReview = () => {
         createReview({ message, rating})
         dispatch(toggleModalReview())
     }
-  
+
     useEffect(()=>{
         dispatch(toggleModalErrorTransfer())
-    }, [isError])
+    }, [isTransferError]) 
 
     useEffect(()=>{
         dispatch(toggleModalSuccessTransfer())
-    }, [isSuccess])
+    }, [isTransferSuccess]) 
+ 
 
     return (
         <Modal
@@ -62,7 +63,7 @@ export const ModalReview = () => {
             width={539}
         >
             <Rating 
-                rating={0}
+                rating={rating}
                 fontSize={22}
                 isDisable={false}
                 onChange={(value) => {
@@ -75,6 +76,7 @@ export const ModalReview = () => {
                 onChange={(e) => {
                     dispatch(setMessage(e.currentTarget.value));
                 }}
+                value={message}
                 className='textarea_modal'
                 autoSize={{ minRows: 2, maxRows: 20 }}
                 placeholder='Расскажите, почему Вам понравилось наше приложение'

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
     CalendarTwoTone,
     HeartFilled,
@@ -6,30 +6,33 @@ import {
     IdcardOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-  } from '@ant-design/icons';
-  import type { MenuProps } from 'antd';
-  import {Layout, Menu, Button, Grid} from 'antd';
+  } from '@ant-design/icons'
+import type { MenuProps } from 'antd'
+import {Layout, Menu, Button, Grid} from 'antd'
 
-  import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
+import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons'
 
-  import styles from './AppSider.module.scss';
+import styles from './AppSider.module.scss'
 
+
+type MenuItem = Required<MenuProps>['items'][number]
   
-  type MenuItem = Required<MenuProps>['items'][number];
-  
-  function getItem(
+function getItem(
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
     children?: MenuItem[],
+    onClick?: void,
   ): MenuItem {
     return {
       key,
       icon,
       children,
       label,
+      onClick
     } as MenuItem;
   }
+
 
 
   const items: MenuItem[] = [
@@ -40,7 +43,7 @@ import {
   ];
 
   const footer: MenuItem[] = [
-    getItem('Выход', 'logout', <ExitIcon/>),
+    getItem('Выход', 'logout', <ExitIcon/> ),
   ];
 
 
@@ -48,16 +51,16 @@ import {
 
 export const AppSider:React.FC = () =>{
     const {Sider} = Layout
-    const [collapsed, setCollapsed] = useState(false)
     const { useBreakpoint } = Grid;
     const {sm} = useBreakpoint()
+    const [collapsed, setCollapsed] = useState(true)
 
     return(
         <Sider 
         style={!sm ? {zIndex:5, position:'fixed', height:'100%'} : {}}
         className={styles.sider}
         collapsible
-        collapsed={collapsed }
+        collapsed={collapsed}
         width={sm ? 204 : 106}
         collapsedWidth={sm ? 64 : 1}
         trigger={null}

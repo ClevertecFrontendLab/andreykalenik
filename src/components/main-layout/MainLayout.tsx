@@ -8,7 +8,7 @@ import {
     AndroidFilled,
   } from '@ant-design/icons';
 
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 import styles from './MainLayout.module.scss';
 
 
@@ -61,7 +61,7 @@ export const MainLayout:React.FC = () => {
             data-test-id='see-reviews'
             onClick={() => {
                 navigate(".", { replace: true }), 
-                navigate(ROUTER_PATHS.FEEDBACKS, {state: location.pathname})
+                navigate(Path.FEEDBACKS, {state: location.pathname})
             }}
             >
                 Смотреть отзывы

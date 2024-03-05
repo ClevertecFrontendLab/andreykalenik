@@ -4,10 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input, Typography, Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 
-import { useLoginMutation, useCheckEmailMutation } from '@redux/reducers/authApi';
-import { setUserData } from '@redux/reducers/userSlice';
+import { useLoginMutation, useCheckEmailMutation } from '../../services/authApi';
+import { setUserData, setAccessToken } from '@redux/reducers/userSlice';
 import { AppLoader } from '@components/app-loader';
-import { ROUTER_PATHS, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL} from '@utils/constants';
+import { Path, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL} from '@utils/constants';
 import { selectUserData } from '@utils/selectors';
 
 import styles from './LoginForm.module.scss'
@@ -35,12 +35,13 @@ export const LoginForm:React.FC = () =>{
   const onFinish = (values: LoginFormData) => {
     loginUser({ email: values.email, password: values.password })
         .unwrap()
-        .then((res) => {
-            values.remember ? localStorage.setItem(TOKEN_ID, res.accessToken) : '';
-            dispatch(setUserData({ email: values.email, password: values.password }));
-            navigate(ROUTER_PATHS.MAIN);
+        .then((data) => {
+            values.remember ? localStorage.setItem(TOKEN_ID, data.accessToken) : '';
+            dispatch(setUserData({ email: values.email, password: values.password,  passwordConfirmed: '' }));
+            dispatch(setAccessToken(data.accessToken));
+            navigate(Path.MAIN);
         })
-        .catch(() => navigate(ROUTER_PATHS.RESULT_ERROR_LOGIN, { state: ROUTER_PATHS.AUTH}));
+        .catch(() => navigate(Path.RESULT_ERROR_LOGIN, { state: Path.AUTH}));
     };
 
   const checkUserEmail = useCallback(
@@ -48,23 +49,23 @@ export const LoginForm:React.FC = () =>{
         checkEmail({ email })
             .unwrap()
             .then(() => {
-                navigate(ROUTER_PATHS.CONFIRM_EMAIL, { state: ROUTER_PATHS.AUTH });
+                navigate(Path.CONFIRM_EMAIL, { state: Path.AUTH });
             })
             .catch((error) => {
                 if (error.status === 404 && error.data.message === 'Email не найден') {
-                    navigate(ROUTER_PATHS.RESULT_ERROR_EMAIL_NO_EXIST, { state: ROUTER_PATHS.AUTH });
+                    navigate(Path.RESULT_ERROR_EMAIL_NO_EXIST, { state: Path.AUTH });
                 } else {
-                    dispatch(setUserData({ email, password: '' }));
-                    navigate(ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL, { state: ROUTER_PATHS.AUTH });
+                    dispatch(setUserData({ email, password: '',  passwordConfirmed: '' }));
+                    navigate(Path.RESULT_ERROR_CHECK_EMAIL, { state: Path.AUTH });
                 }
             });
     },[checkEmail, dispatch, navigate],);
     
     useEffect(() => {
         if (localStorage.getItem(TOKEN_ID)) {
-            navigate(ROUTER_PATHS.MAIN);
+            navigate(Path.MAIN);
         }
-        if (location.state === ROUTER_PATHS.RESULT_ERROR_CHECK_EMAIL) {
+        if (location.state === Path.RESULT_ERROR_CHECK_EMAIL) {
           checkUserEmail(userData.email);
       }
     }, [checkUserEmail, location.state, navigate, userData.email]);  
@@ -76,7 +77,7 @@ export const LoginForm:React.FC = () =>{
           form={form}
           name="LoginForm"
           size='large'
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           autoComplete="off"
           onFinish={onFinish}
           className={styles.loginForm}
@@ -90,7 +91,7 @@ export const LoginForm:React.FC = () =>{
               {
                 validator: (_, value) => {
                     if (REGEXP_EMAIL.test(value)) {
-                      dispatch(setUserData({ email: value, password: '' }))
+                      dispatch(setUserData({ email: value, password: '' , passwordConfirmed: ''}))
                         return Promise.resolve(setForgotDisabled(false));
                     } else {
                         return Promise.reject(setForgotDisabled(true));

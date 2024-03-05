@@ -1,9 +1,9 @@
 import { Button, Modal, Grid, Result } from 'antd';
 import { selectModalSuccessTransfer } from '@utils/selectors/selectors';
-import { toggleModalSuccessTransfer } from '@redux/reducers/feedbackModalSlice';
+import { toggleModalSuccessTransfer } from '@redux/reducers/uiSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 const { useBreakpoint } = Grid;
 
@@ -12,7 +12,7 @@ export const ModalSuccessTransfer = () =>{
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const handleClick = () => {
-            navigate(ROUTER_PATHS.FEEDBACKS)
+            navigate(Path.FEEDBACKS)
             dispatch(toggleModalSuccessTransfer())
     }
     return(

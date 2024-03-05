@@ -4,10 +4,10 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 
-import { useRegistrationMutation } from '@redux/reducers/authApi';
+import { useRegistrationMutation } from '../../services/authApi';
 import { AppLoader } from '@components/app-loader';
 import { setUserData } from '@redux/reducers/userSlice';
-import { ROUTER_PATHS, REGEXP_PASSWORD, VALIDATE_MESSAGE} from '@utils/constants';
+import { Path, REGEXP_PASSWORD, Validate_Message} from '@utils/constants';
 import { selectUserData } from '@utils/selectors';
 
 import styles from './RegForm.module.scss'
@@ -46,14 +46,14 @@ const onFinish = useCallback(
       reg({ email: values.email, password: values.password })
           .unwrap()
           .then(() => {
-              navigate(ROUTER_PATHS.RESULT_SUCCESS, { state: ROUTER_PATHS.REGISTRATION });
+              navigate(Path.RESULT_SUCCESS, { state: Path.REGISTRATION });
           })
           .catch((error) => {
               if (error.status === 409) {
-                  navigate(ROUTER_PATHS.RESULT_ERROR_USER_EXIST, {state: ROUTER_PATHS.REGISTRATION,});
+                  navigate(Path.RESULT_ERROR_USER_EXIST, {state: Path.REGISTRATION,});
               } else {
-                  navigate(ROUTER_PATHS.RESULT_ERROR, { state: ROUTER_PATHS.REGISTRATION });
-                  dispatch(setUserData(values));
+                  navigate(Path.RESULT_ERROR, { state: Path.REGISTRATION });
+                  dispatch(setUserData({ email: values.email, password: values.password,  passwordConfirmed: '' }))
               }
           });
   },
@@ -62,7 +62,7 @@ const onFinish = useCallback(
 
     useEffect(() => {
       forceUpdate({});
-      if (location.state === ROUTER_PATHS.RESULT_ERROR) {
+      if (location.state === Path.RESULT_ERROR) {
           onFinish(userData);
          
       }
@@ -95,7 +95,7 @@ const onFinish = useCallback(
           <Form.Item
             label=""
             name="password"
-            help={VALIDATE_MESSAGE.PasswordInfo}
+            help={Validate_Message.PasswordInfo}
             rules={[
               {required: false, message: '' },
               {pattern: REGEXP_PASSWORD, message: ""}
@@ -109,13 +109,13 @@ const onFinish = useCallback(
             name="confirm-password"
             dependencies={['password']}
             rules={[
-              {required: false, message: VALIDATE_MESSAGE.RepeatPassword },
+              {required: false, message: Validate_Message.RepeatPassword },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error(VALIDATE_MESSAGE.RepeatPassword));
+                  return Promise.reject(new Error(Validate_Message.RepeatPassword));
                 },
               }),
           ]}

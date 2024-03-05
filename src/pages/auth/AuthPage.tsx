@@ -6,7 +6,7 @@ import { LogoIcon } from '@components/project-icons'
 import { ServiceBackground } from '@components/service-background'
 import { LoginForm } from '@components/login-form'; 
 import { RegForm } from '@components/reg-form';
-import { ROUTER_PATHS } from '@utils/constants/router';
+import { Path } from '@utils/constants';
 
 import styles from './AuthPage.module.scss'
 
@@ -39,7 +39,7 @@ export const AuthPage:React.FC = () =>{
     ]
 
     useEffect(() => {
-        location.pathname === ROUTER_PATHS.AUTH ? setKey('1') : setKey('2');
+        location.pathname === Path.AUTH ? setKey('1') : setKey('2');
     }, [location.pathname]);
 
     return(
@@ -60,7 +60,7 @@ export const AuthPage:React.FC = () =>{
                             activeKey={key}
                             onChange={(k: string) => {
                                 setKey(k);
-                                key === '1' ? navigate(ROUTER_PATHS.REGISTRATION) : navigate(ROUTER_PATHS.AUTH);
+                                key === '1' ? navigate(Path.REGISTRATION) : navigate(Path.AUTH);
                             }}
                         />
             </Card>

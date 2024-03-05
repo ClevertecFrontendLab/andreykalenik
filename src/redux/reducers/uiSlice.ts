@@ -18,8 +18,8 @@ const initialState:feedbackModal = {
 
 };
 
-const feedbackModalSlice = createSlice({
-    name: 'feedbackModal',
+const uiSlice = createSlice({
+    name: 'ui',
     initialState,
     reducers: {
       toggleModalReview: ( state ) => {
@@ -38,5 +38,5 @@ const feedbackModalSlice = createSlice({
     
   });
 
-export const {toggleModalReview, toggleModalSuccessTransfer, toggleModalErrorTransfer, toggleModalServerError } = feedbackModalSlice.actions;
-export default feedbackModalSlice.reducer;
+export const {toggleModalReview, toggleModalSuccessTransfer, toggleModalErrorTransfer, toggleModalServerError } = uiSlice.actions;
+export default uiSlice.reducer;

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, Button, Grid, Result  } from 'antd';
 import { CardAuth } from '@components/card-auth';
 
-import { ROUTER_PATHS } from '@utils/constants';
+import { Path } from '@utils/constants';
 
 import styles from './ResultContent.module.scss'
 
@@ -12,7 +12,7 @@ type ResultContentProps={
     subtitle: string,
     buttonText: string,
     testID: string,
-    redirectPath: ROUTER_PATHS,
+    redirectPath: Path,
     icon: React.ReactNode,
     style: 'default' | 'slim',
 }
@@ -29,7 +29,7 @@ export const ResultContent:React.FC<ResultContentProps> = ({title, subtitle, but
     const styleSlimMobile:React.CSSProperties = { width: 328, borderRadius: 2 , paddingBlockStart:64,paddingBlockEnd:56, paddingInline:32, border:'none', display:'flex', flexDirection:'column', justifyItems:'center', alignItems:'center'}
 
     useEffect(() => {
-        !location.state ? navigate(ROUTER_PATHS.AUTH) : '';
+        !location.state ? navigate(Path.AUTH) : '';
     },[location.state, navigate])
     
     return(
@@ -73,7 +73,7 @@ export const ResultContent500:React.FC = () =>{
                         data-test-id='check-back-button'
                         onClick={() => {
                             navigate(".", { replace: true }), 
-                            navigate(ROUTER_PATHS.AUTH, {state: location.pathname})
+                            navigate(Path.AUTH, {state: location.pathname})
                         }} 
                         style={{height:40}}
                         >
