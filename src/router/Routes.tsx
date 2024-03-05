@@ -47,7 +47,7 @@ export const routes = (
                     <Route path={Path.FEEDBACKS} element={<FeedbackLayout />} />
                 </Route>
             </Route>
-            <Route path={Path.ROOT} element={<Navigate to={Path.AUTH} />} />
+            <Route path={Path.ROOT} element={<Navigate to={Path.AUTH} replace />} />
         </Route>
     </Routes>
 );

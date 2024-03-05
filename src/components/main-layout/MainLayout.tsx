@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Card, Typography, Layout, Button } from 'antd';
+import { Card, Typography, Layout } from 'antd';
 import {
     CalendarTwoTone,
     IdcardOutlined,
@@ -71,8 +71,7 @@ export const MainLayout: React.FC = () => {
                 className={styles.linkReviews}
                 data-test-id='see-reviews'
                 onClick={() => {
-                    navigate('.', { replace: true }),
-                        navigate(Path.FEEDBACKS, { state: location.pathname });
+                    navigate(Path.FEEDBACKS, { state: location.pathname, replace: true });
                 }}
             >
                 Смотреть отзывы

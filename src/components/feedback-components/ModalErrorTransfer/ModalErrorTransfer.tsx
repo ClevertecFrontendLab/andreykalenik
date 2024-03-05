@@ -1,16 +1,19 @@
 import { Button, Modal, Grid, Result } from 'antd';
 import { selectModalErrorTransfer } from '@utils/selectors/selectors';
-import { toggleModalErrorTransfer } from '@redux/reducers/uiSlice';
+import { toggleModalErrorTransfer, toggleModalReview } from '@redux/reducers/uiSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAddReviewMutation } from '../../../services/feedbackApi';
 
 const { useBreakpoint } = Grid;
 
 export const ModalErrorTransfer = () => {
     const { sm } = useBreakpoint();
+    const [createReview, { reset }] = useAddReviewMutation();
 
     const dispatch = useAppDispatch();
     const handleClick = () => {
-        dispatch(toggleModalErrorTransfer());
+        reset();
+        dispatch(toggleModalReview());
     };
     return (
         <Modal

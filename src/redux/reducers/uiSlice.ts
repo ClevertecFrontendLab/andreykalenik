@@ -20,6 +20,9 @@ const uiSlice = createSlice({
     reducers: {
         toggleModalReview: (state) => {
             state.modalReview = !state.modalReview;
+            if (state.modalErrorTransfer == true) {
+                state.modalErrorTransfer = false;
+            }
         },
         toggleModalSuccessTransfer: (state) => {
             state.modalSuccessTransfer = !state.modalSuccessTransfer;
@@ -30,6 +33,12 @@ const uiSlice = createSlice({
         toggleModalServerError: (state) => {
             state.modalServerError = !state.modalServerError;
         },
+        hideAllModal: (state) => {
+            state.modalReview = false;
+            state.modalServerError = false;
+            state.modalSuccessTransfer = false;
+            state.modalErrorTransfer = false;
+        },
     },
 });
 
@@ -38,5 +47,6 @@ export const {
     toggleModalSuccessTransfer,
     toggleModalErrorTransfer,
     toggleModalServerError,
+    hideAllModal,
 } = uiSlice.actions;
 export default uiSlice.reducer;

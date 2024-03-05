@@ -23,7 +23,7 @@ export const ModalReview = () => {
     const dispatch = useAppDispatch();
     const [isBtnDisable, setIsBtnDisable] = useState(true);
     const { sm } = useBreakpoint();
-    const [createReview, { isError: isTransferError, isSuccess: isTransferSuccess }] =
+    const [createReview, { isError: isTransferError, isSuccess: isTransferSuccess, reset }] =
         useAddReviewMutation();
 
     const message = useAppSelector(selectFeedbackMessage);
@@ -31,14 +31,15 @@ export const ModalReview = () => {
 
     const handleSubmitReview = () => {
         createReview({ message, rating });
-        dispatch(toggleModalReview());
     };
 
     useEffect(() => {
+        dispatch(toggleModalReview());
         dispatch(toggleModalErrorTransfer());
     }, [isTransferError]);
 
     useEffect(() => {
+        dispatch(toggleModalReview());
         dispatch(toggleModalSuccessTransfer());
     }, [isTransferSuccess]);
 
@@ -63,7 +64,7 @@ export const ModalReview = () => {
                     Опубликовать
                 </Button>
             }
-            onOk={() => dispatch(toggleModalReview())}
+            onOk={() => handleSubmitReview()}
             onCancel={() => dispatch(toggleModalReview())}
             mask={true}
             maskClosable={true}

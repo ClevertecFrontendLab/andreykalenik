@@ -6,5 +6,5 @@ import { selectAccessToken } from '@utils/selectors/selectors';
 export const PrivateRoute = () => {
     const accessToken = useAppSelector(selectAccessToken);
     const isAuth = !!localStorage.getItem(TOKEN_ID) || accessToken;
-    return isAuth ? <Outlet /> : <Navigate to={Path.AUTH} />;
+    return isAuth ? <Outlet /> : <Navigate to={Path.AUTH} replace />;
 };

@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAddReviewMutation, useGetFeedbacksQuery } from '../../services/feedbackApi';
+import { useGetFeedbacksQuery } from '../../services/feedbackApi';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import {
-    toggleModalServerError,
-    toggleModalErrorTransfer,
-    toggleModalSuccessTransfer,
-} from '@redux/reducers/uiSlice';
+import { toggleModalServerError } from '@redux/reducers/uiSlice';
 import { setAccessToken } from '@redux/reducers/userSlice';
 import { selectModalSuccessTransfer } from '@utils/selectors/selectors';
 
