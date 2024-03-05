@@ -4,13 +4,13 @@ import { api } from '.';
 import { ApiEndpoint } from '@utils/constants';
 
 export type Feedback = {
-    id?: string;
     fullName: string | null;
     imageSrc: string | null;
     message: string | null;
     rating: number;
     createdAt: string;
     key?: string;
+    id?: string;
 };
 
 export type NewFeedback = {
