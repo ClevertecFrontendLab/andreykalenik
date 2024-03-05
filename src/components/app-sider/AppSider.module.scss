@@ -1,30 +1,30 @@
-.sider{
-    :global{
-        .ant-layout-sider-children{
+.sider {
+    :global {
+        .ant-layout-sider-children {
             background-color: #fff;
             position: relative;
             height: 100%;
-       }
-        .ant-btn-text.ant-btn.ant-btn-icon-only{
-            height: 66px ;
-            width: 20px ;
-            border-radius: 0 ;
-            border:  none;
-            background-color:  #FFF ;
-            clip-path: path("M0 -1.52588e-05L20 7.99998V58L0 66V-1.52588e-05Z");
-            position:  absolute ;
-            top:  480px;
-            right:  -20px ;
+        }
+        .ant-btn-text.ant-btn.ant-btn-icon-only {
+            height: 66px;
+            width: 20px;
+            border-radius: 0;
+            border: none;
+            background-color: #fff;
+            clip-path: path('M0 -1.52588e-05L20 7.99998V58L0 66V-1.52588e-05Z');
+            position: absolute;
+            top: 480px;
+            right: -20px;
 
             &:active,
-            &hover{
-                background-color:  #FFF;
-            }    
-        }  
-    }    
+            &hover {
+                background-color: #fff;
+            }
+        }
+    }
 }
 
-.siderLogo{
+.siderLogo {
     height: 144px;
     padding-bottom: 14px;
     display: grid;
@@ -32,95 +32,89 @@
     justify-items: center;
 }
 
-.siderMenuWrapper{
+.siderMenuWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 152px);
 }
 
-
-.siderFooter{
+.siderFooter {
     margin-top: auto;
     max-height: 40px;
     border-top: 1px solid #f0f0f0;
 }
 
-aside{
-    :global{
-        .ant-layout-sider-children{
+aside {
+    :global {
+        .ant-layout-sider-children {
             background-color: #fff;
         }
-
-
     }
 }
 
-
 @media only screen and (max-width: 576px) {
-    aside{
-        :global{
-            .ant-menu .ant-menu-item{
+    aside {
+        :global {
+            .ant-menu .ant-menu-item {
                 padding: 0;
             }
-           .ant-menu-item.ant-menu-item-only-child{
+            .ant-menu-item.ant-menu-item-only-child {
                 padding: 0;
                 margin: 0 6px;
             }
-           .ant-menu .ant-menu-item .ant-menu-item-icon{
+            .ant-menu .ant-menu-item .ant-menu-item-icon {
                 display: none;
             }
-            .ant-menu .ant-menu-item .ant-menu-item-icon + span{
+            .ant-menu .ant-menu-item .ant-menu-item-icon + span {
                 margin: 0;
             }
             .ant-menu-item span {
                 margin: 0;
             }
-            .siderFooter .ant-menu-item span{
+            .siderFooter .ant-menu-item span {
                 text-align: center;
             }
         }
     }
-    .sider{
-        :global{
-            .ant-btn-text.ant-btn.ant-btn-icon-only{
-                height: 48px ;
-                width: 32px ;
-                border-radius: 0 ;
-                border:  none;
+    .sider {
+        :global {
+            .ant-btn-text.ant-btn.ant-btn-icon-only {
+                height: 48px;
+                width: 32px;
+                border-radius: 0;
+                border: none;
                 outline-color: transparent;
                 outline-width: 0;
                 outline-style: none;
 
-                background-color:  #FFF ;
-                clip-path: path("M0 0L32 5.81818V42.1818L0 48V0Z");
-                position:  absolute ;
-                top:  20px;
-                right:  -32px ;
+                background-color: #fff;
+                clip-path: path('M0 0L32 5.81818V42.1818L0 48V0Z');
+                position: absolute;
+                top: 20px;
+                right: -32px;
                 z-index: 5;
-    
+
                 &:active,
                 &hover,
                 &:focus,
-                &:focus-visible
-                {
+                &:focus-visible {
                     outline-color: transparent;
                     -webkit-focus-ring-color-outline: none;
-
-                }    
-            }  
-        }    
+                }
+            }
+        }
     }
-    .siderNav{
-        :global{
-            .ant-menu-item{
+    .siderNav {
+        :global {
+            .ant-menu-item {
                 margin: 14px 4px 14px 8px;
             }
         }
     }
-    .siderFooter{
-        :global{
-            .ant-menu-item{
+    .siderFooter {
+        :global {
+            .ant-menu-item {
                 text-align: center;
             }
         }

@@ -1,4 +1,1 @@
-export { FeedbackLayout } from "./FeedbackLayout";
-
-
-
+export { FeedbackLayout } from './FeedbackLayout';

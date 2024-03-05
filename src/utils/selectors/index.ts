@@ -1,1 +1,1 @@
-export { selectUserData } from './selectors'
+export { selectUserData } from './selectors';

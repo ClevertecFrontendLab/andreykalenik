@@ -1,39 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { Button, Modal, Grid } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Rating from '@components/rating/rating';
-import { selectModalReview, selectFeedbackRating, selectFeedbackMessage } from '@utils/selectors/selectors';
-import { toggleModalReview, toggleModalErrorTransfer, toggleModalSuccessTransfer } from '@redux/reducers/uiSlice';
+import {
+    selectModalReview,
+    selectFeedbackRating,
+    selectFeedbackMessage,
+} from '@utils/selectors/selectors';
+import {
+    toggleModalReview,
+    toggleModalErrorTransfer,
+    toggleModalSuccessTransfer,
+} from '@redux/reducers/uiSlice';
 
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setRating, setMessage } from '@redux/reducers/feedbackSlice';
 import { useAddReviewMutation } from '../../../services/feedbackApi';
-
 
 const { useBreakpoint } = Grid;
 
 export const ModalReview = () => {
     const dispatch = useAppDispatch();
     const [isBtnDisable, setIsBtnDisable] = useState(true);
-    const { sm } = useBreakpoint()
-    const [createReview, {isError:isTransferError, isSuccess:isTransferSuccess} ] = useAddReviewMutation();
+    const { sm } = useBreakpoint();
+    const [createReview, { isError: isTransferError, isSuccess: isTransferSuccess }] =
+        useAddReviewMutation();
 
-    const message = useAppSelector(selectFeedbackMessage)
-    const rating =  useAppSelector(selectFeedbackRating)
+    const message = useAppSelector(selectFeedbackMessage);
+    const rating = useAppSelector(selectFeedbackRating);
 
-    const handleSubmitReview =  () => {
-        createReview({ message, rating})
-        dispatch(toggleModalReview())
-    }
+    const handleSubmitReview = () => {
+        createReview({ message, rating });
+        dispatch(toggleModalReview());
+    };
 
-    useEffect(()=>{
-        dispatch(toggleModalErrorTransfer())
-    }, [isTransferError]) 
+    useEffect(() => {
+        dispatch(toggleModalErrorTransfer());
+    }, [isTransferError]);
 
-    useEffect(()=>{
-        dispatch(toggleModalSuccessTransfer())
-    }, [isTransferSuccess]) 
- 
+    useEffect(() => {
+        dispatch(toggleModalSuccessTransfer());
+    }, [isTransferSuccess]);
 
     return (
         <Modal
@@ -46,33 +53,34 @@ export const ModalReview = () => {
                     type='primary'
                     size='large'
                     onClick={handleSubmitReview}
-                    data-test-id= 'new-review-submit-button'
-                    style={sm ? 
-                        {width: 130, fontSize: 14}:
-                        {width: '100%', marginBlock: 20, fontSize: 14}
+                    data-test-id='new-review-submit-button'
+                    style={
+                        sm
+                            ? { width: 130, fontSize: 14 }
+                            : { width: '100%', marginBlock: 20, fontSize: 14 }
                     }
                 >
                     Опубликовать
                 </Button>
             }
-            onOk={()=>dispatch(toggleModalReview())}
-            onCancel={()=>dispatch(toggleModalReview())}
+            onOk={() => dispatch(toggleModalReview())}
+            onCancel={() => dispatch(toggleModalReview())}
             mask={true}
             maskClosable={true}
-            maskStyle={{backdropFilter:'blur(5px)', background:'#799cd480'}}
+            maskStyle={{ backdropFilter: 'blur(5px)', background: '#799cd480' }}
             width={539}
         >
-            <Rating 
+            <Rating
                 rating={rating}
                 fontSize={22}
                 isDisable={false}
                 onChange={(value) => {
-                    setIsBtnDisable(false)
-                    dispatch(setRating(value))
+                    setIsBtnDisable(false);
+                    dispatch(setRating(value));
                 }}
-                 />
+            />
             <TextArea
-            style={{marginTop:12, borderRadius:2}}
+                style={{ marginTop: 12, borderRadius: 2 }}
                 onChange={(e) => {
                     dispatch(setMessage(e.currentTarget.value));
                 }}

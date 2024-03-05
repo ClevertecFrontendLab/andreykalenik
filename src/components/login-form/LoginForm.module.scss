@@ -1,54 +1,53 @@
-.loginForm{
-    .buttonGroup{
+.loginForm {
+    .buttonGroup {
         padding-bottom: 64px;
     }
-    :global{
-        .ant-form-item{
+    :global {
+        .ant-form-item {
             margin-bottom: 32px;
         }
-        .ant-form-item + .ant-form-item{
+        .ant-form-item + .ant-form-item {
             margin-bottom: 46px;
         }
-        .ant-input-group-addon{
+        .ant-input-group-addon {
             width: 71px;
             padding: 0 9px;
             font-size: 14px;
         }
     }
-    .additionalActions{
+    .additionalActions {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        :global{
-            .ant-form-item{
+        :global {
+            .ant-form-item {
                 margin-bottom: 16px;
             }
-            .ant-typography{
+            .ant-typography {
                 font-size: 16px !important ;
             }
-
         }
     }
 }
 
 @media only screen and (max-width: 576px) {
-    .loginForm{
-        :global{
-            .ant-form-item{
+    .loginForm {
+        :global {
+            .ant-form-item {
                 margin-bottom: 32px;
             }
-            .ant-form-item + .ant-form-item{
+            .ant-form-item + .ant-form-item {
                 margin-bottom: 44px;
             }
         }
-        .additionalActions{
-            :global{
-                .ant-form-item{
+        .additionalActions {
+            :global {
+                .ant-form-item {
                     margin-bottom: 12px;
                 }
             }
         }
-        .buttonGroup{
+        .buttonGroup {
             padding-bottom: 48px;
         }
     }

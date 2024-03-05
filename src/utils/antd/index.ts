@@ -1,1 +1,1 @@
-export { AntTheme } from './AntTheme'
+export { AntTheme } from './AntTheme';

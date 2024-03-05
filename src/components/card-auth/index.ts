@@ -1,1 +1,1 @@
-export { CardAuth } from "./CardAuth";
+export { CardAuth } from './CardAuth';

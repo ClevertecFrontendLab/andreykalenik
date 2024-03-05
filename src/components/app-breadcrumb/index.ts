@@ -1,1 +1,1 @@
-export {AppBreadcrumb} from './AppBreadcrumb'
+export { AppBreadcrumb } from './AppBreadcrumb';

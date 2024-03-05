@@ -7,15 +7,15 @@ import { Path } from '@utils/constants';
 
 const { useBreakpoint } = Grid;
 
-export const ModalSuccessTransfer = () =>{
-    const { sm } = useBreakpoint()
-    const navigate = useNavigate()
+export const ModalSuccessTransfer = () => {
+    const { sm } = useBreakpoint();
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const handleClick = () => {
-            navigate(Path.FEEDBACKS)
-            dispatch(toggleModalSuccessTransfer())
-    }
-    return(
+        navigate(Path.FEEDBACKS);
+        dispatch(toggleModalSuccessTransfer());
+    };
+    return (
         <Modal
             closable={false}
             centered
@@ -23,26 +23,23 @@ export const ModalSuccessTransfer = () =>{
             footer={null}
             mask={true}
             maskClosable={true}
-            maskStyle={{backdropFilter:'blur(5px)', background:'#799cd480'}}
+            maskStyle={{ backdropFilter: 'blur(5px)', background: '#799cd480' }}
             width={sm ? 539 : 328}
         >
-        <Result
-            status='success'
-            title='Отзыв успешно опубликован'
-            extra={
+            <Result
+                status='success'
+                title='Отзыв успешно опубликован'
+                extra={
                     <Button
                         type='primary'
                         size='large'
-                        onClick={handleClick}  
-                        style={sm ?
-                            {width: 368, fontSize: 14} :
-                            {width: '100%', fontSize: 14}
-                        }                          
+                        onClick={handleClick}
+                        style={sm ? { width: 368, fontSize: 14 } : { width: '100%', fontSize: 14 }}
                     >
                         Отлично
                     </Button>
-            }
-        />
-    </Modal>
-    )
-}
+                }
+            />
+        </Modal>
+    );
+};

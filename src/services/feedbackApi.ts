@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 import { api } from '.';
 import { ApiEndpoint } from '@utils/constants';
 
-
 export type Feedback = {
     id?: string;
     fullName: string | null;
@@ -11,15 +10,13 @@ export type Feedback = {
     message: string | null;
     rating: number;
     createdAt: string;
-    key?: string
-}
-
+    key?: string;
+};
 
 export type NewFeedback = {
     message: string;
-    rating: 0|1|2|3|4|5;
+    rating: 0 | 1 | 2 | 3 | 4 | 5;
 };
-
 
 export const feedbackAPI = api.injectEndpoints({
     endpoints: (build) => ({
@@ -33,18 +30,18 @@ export const feedbackAPI = api.injectEndpoints({
                 );
 
                 return baseQueryReturnValue.map((item) => {
-                    item.createdAt = format(item.createdAt, 'dd.MM.yyyy')
+                    item.createdAt = format(item.createdAt, 'dd.MM.yyyy');
                     return item;
                 });
             },
         }),
         addReview: build.mutation({
             query: (body) => ({
-                url:  ApiEndpoint.FEEDBACK,
+                url: ApiEndpoint.FEEDBACK,
                 method: 'POST',
                 body,
             }),
-        })
+        }),
     }),
 });
 

@@ -1,3 +1,1 @@
-export { AppLoader } from "./AppLoader";
-
-
+export { AppLoader } from './AppLoader';
