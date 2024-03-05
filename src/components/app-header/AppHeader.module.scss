@@ -8,6 +8,10 @@
     min-height: clamp(132px, 168px, 194px);
     background-color: #f0f5ff;
     padding: 16px 24px;
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 
 .h1 {
@@ -31,7 +35,8 @@
     grid-row: 2/3;
     grid-column: 3/4;
     align-self: start;
-    padding-right: 16px;
+    padding-right: 18px;
+    padding-top: 2px;
 }
 
 .headerAlternative {

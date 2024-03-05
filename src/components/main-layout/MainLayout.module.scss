@@ -105,7 +105,7 @@
     flex-basis: 240px;
     :global {
         .ant-card-head {
-            padding: 12px;
+            padding: 10px 12px 12px;
             font-weight: 400;
             font-size: 16px;
             line-height: 21px;
@@ -113,7 +113,7 @@
             white-space: wrap;
         }
         .ant-card-body {
-            padding: 16px;
+            padding: 20px 16px 16px;
             display: flex;
             justify-content: center;
         }

@@ -15,7 +15,7 @@ export const AppHeader: React.FC = () => {
         <header className={isMainPage ? styles.header : styles.headerAlternative}>
             {isMainPage ? (
                 <>
-                    <p>Главная</p>
+                    <p className={styles.headerTitle}>Главная</p>
                     <h1 className={styles.h1}>
                         Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться
                         своей мечты!
