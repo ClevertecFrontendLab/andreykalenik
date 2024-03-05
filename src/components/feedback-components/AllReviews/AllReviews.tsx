@@ -6,8 +6,9 @@ import { UserOutlined } from '@ant-design/icons';
 
 import styles from './AllReviews.module.scss';
 import { useGetFeedbacksQuery } from '../../../services/feedbackApi';
-import Rating from '@components/rating/rating';
+
 import type { Feedback } from '../../../services/feedbackApi';
+import { Rating } from '@components/rating/rating';
 
 const { Content } = Layout;
 

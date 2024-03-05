@@ -8,7 +8,7 @@ type FeedbackProps = {
     onChange?: (value: 0 | 1 | 2 | 3 | 4 | 5) => void;
 };
 
-const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: FeedbackProps) => {
+export const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: FeedbackProps) => {
     return (
         <Rate
             disabled={isDisable}
@@ -31,5 +31,3 @@ const Rating = ({ rating, isDisable = false, fontSize = 14, onChange }: Feedback
         />
     );
 };
-
-export default Rating;

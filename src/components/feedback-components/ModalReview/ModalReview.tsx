@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Modal, Grid } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import Rating from '@components/rating/rating';
 import {
     selectModalReview,
     selectFeedbackRating,
@@ -16,6 +15,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { setRating, setMessage } from '@redux/reducers/feedbackSlice';
 import { useAddReviewMutation } from '../../../services/feedbackApi';
+import { Rating } from '@components/rating/rating';
 
 const { useBreakpoint } = Grid;
 
@@ -95,5 +95,3 @@ export const ModalReview = () => {
         </Modal>
     );
 };
-
-export default ModalReview;
