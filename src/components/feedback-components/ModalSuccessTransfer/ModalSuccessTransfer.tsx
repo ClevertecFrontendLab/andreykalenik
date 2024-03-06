@@ -4,7 +4,6 @@ import { toggleModalSuccessTransfer } from '@redux/reducers/uiSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '@utils/constants';
-import { replace } from 'redux-first-history';
 
 const { useBreakpoint } = Grid;
 
