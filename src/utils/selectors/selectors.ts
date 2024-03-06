@@ -10,4 +10,3 @@ export const selectModalServerError = (state: RootState) => state.ui.modalServer
 
 export const selectFeedbackRating = (state: RootState) => state.feedback.rating;
 export const selectFeedbackMessage = (state: RootState) => state.feedback.message;
-export const prevLocationsSelector = (state: RootState) => state.router?.previousLocations;

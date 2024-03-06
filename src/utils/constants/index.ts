@@ -17,15 +17,15 @@ export const enum Path {
     REGISTRATION = '/auth/registration',
     CONFIRM_EMAIL = '/auth/confirm-email',
     CHANGE_PASSWORD = '/auth/change-password',
-    RESULT = '/result',
-    RESULT_ERROR_LOGIN = 'error-login',
-    RESULT_ERROR_USER_EXIST = 'error-user-exist',
-    RESULT_ERROR = 'error',
-    RESULT_SUCCESS = 'success',
-    RESULT_ERROR_EMAIL_NO_EXIST = 'error-check-email-no-exist',
-    RESULT_ERROR_CHECK_EMAIL = 'error-check-email',
-    RESULT_ERROR_CHANGE_PASSWORD = 'error-change-password',
-    RESULT_SUCCESS_CHANGE_PASSWORD = 'success-change-password',
+
+    RESULT_ERROR_LOGIN = '/result/error-login',
+    RESULT_ERROR_USER_EXIST = '/result/error-user-exist',
+    RESULT_ERROR = '/result/error',
+    RESULT_SUCCESS = '/result/success',
+    RESULT_ERROR_EMAIL_NO_EXIST = '/result/error-check-email-no-exist',
+    RESULT_ERROR_CHECK_EMAIL = '/result/error-check-email',
+    RESULT_ERROR_CHANGE_PASSWORD = '/result/error-change-password',
+    RESULT_SUCCESS_CHANGE_PASSWORD = '/result/success-change-password',
 }
 
 export enum ApiEndpoint {
