@@ -1,1 +1,1 @@
-export {ServiceBackground} from './ServiceBackground'
+export { ServiceBackground } from './ServiceBackground';

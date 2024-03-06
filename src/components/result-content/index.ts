@@ -1,1 +1,1 @@
-export {ResultContent, ResultContent500} from './ResultContent'
+export { ResultContent, ResultContent500 } from './ResultContent';
