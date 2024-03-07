@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 type feedbackModal = {
     modalReview: boolean;
@@ -15,7 +15,7 @@ const initialState: feedbackModal = {
 };
 
 const uiSlice = createSlice({
-    name: 'ui',
+    name: "ui",
     initialState,
     reducers: {
         toggleModalReview: (state) => {
