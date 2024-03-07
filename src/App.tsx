@@ -7,7 +7,7 @@ import { AntTheme } from './utils/antd/AntTheme';
 import { routes } from './router';
 
 export const App: React.FC = () => (
-    <ConfigProvider theme={AntTheme}>
+    <ConfigProvider >
         <Provider store={store}>
             <Router history={history}>{routes}</Router>
         </Provider>
