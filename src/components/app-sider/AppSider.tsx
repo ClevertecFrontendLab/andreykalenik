@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-    CalendarTwoTone,
     HeartFilled,
     TrophyFilled,
     IdcardOutlined,
@@ -10,58 +9,57 @@ import {
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Button, Grid } from 'antd';
 
-import { ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
+import { CalendarIcon, ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
+import { Colors } from '@utils/colors';
 
 import styles from './AppSider.module.scss';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Path } from '@utils/constants';
 
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    onClick?: void,
-): MenuItem {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        onClick,
-    } as MenuItem;
-}
-
-const items: MenuItem[] = [
-    getItem(
-        'Календарь',
-        'calendar',
-        <CalendarTwoTone twoToneColor='#061178' style={{ width: '16px', height: '16px' }} />,
-    ),
-    getItem(
-        'Тренировки',
-        'workouts',
-        <HeartFilled color='#061178' style={{ color: '#061178', width: '16px', height: '16px' }} />,
-    ),
-    getItem(
-        'Достижения',
-        'records',
-        <TrophyFilled style={{ color: '#061178', width: '16px', height: '16px' }} />,
-    ),
-    getItem(
-        'Профиль',
-        'profile',
-        <IdcardOutlined style={{ color: '#061178', width: '16px', height: '16px' }} />,
-    ),
+const menuItems: MenuProps['items'] = [
+    {
+        label: 'Календарь',
+        key: Path.CALENDARE,
+        icon: <CalendarIcon style={{ color: `${Colors.primary_light_9}` }} />,
+    },
+    {
+        label: 'Тренировки',
+        key: Path.WORKOUTS,
+        icon: <HeartFilled style={{ color: `${Colors.primary_light_9}` }} />,
+    },
+    {
+        label: 'Достижения',
+        key: Path.ACHIEVEMENTS,
+        icon: <TrophyFilled style={{ color: `${Colors.primary_light_9}` }} />,
+    },
+    {
+        label: 'Профиль',
+        key: Path.PROFILE,
+        icon: <IdcardOutlined style={{ color: `${Colors.primary_light_9}` }} />,
+    },
+    {
+        label: 'Выход',
+        key: 'logout',
+        icon: <ExitIcon />,
+    },
 ];
-
-const footer: MenuItem[] = [getItem('Выход', 'logout', <ExitIcon />)];
 
 export const AppSider: React.FC = () => {
     const { Sider } = Layout;
     const { useBreakpoint } = Grid;
     const { sm } = useBreakpoint();
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const onClickMenuHandler: MenuProps['onClick'] = (e) => {
+        if (e.key === 'logout') {
+            console.log(e.key);
+            // sessionStorage.removeItem("token");
+            // localStorage.removeItem("token");
+            // navigate('/auth')
+        } else navigate(e.key);
+    };
 
     return (
         <Sider
@@ -72,23 +70,26 @@ export const AppSider: React.FC = () => {
             width={sm ? 204 : 106}
             collapsedWidth={sm ? 64 : 1}
             trigger={null}
-            onCollapse={(value) => setCollapsed(value)}
         >
             <div className={styles.siderLogo}>
                 {sm ? (
                     collapsed ? (
                         <LogoSmallIcon />
                     ) : (
-                        <LogoIcon style={{ width: 133, height: 33 }} />
+                        <LogoIcon style={{ width: 132, height: 33 }} />
                     )
                 ) : collapsed ? null : (
                     <LogoIcon style={{ width: 72, height: 18 }} />
                 )}
             </div>
-            <div className={styles.siderMenuWrapper}>
-                <Menu className={styles.siderNav} mode='vertical' items={items} />
-                <Menu className={styles.siderFooter} mode='vertical' items={footer} />
-            </div>
+
+            <Menu
+                className={styles.siderMenuWrapper}
+                onClick={onClickMenuHandler}
+                defaultSelectedKeys={[location.pathname.slice(1)]}
+                mode='vertical'
+                items={menuItems}
+            />
             <Button
                 type='text'
                 onClick={() => setCollapsed(!collapsed)}

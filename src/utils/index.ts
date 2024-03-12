@@ -1,4 +1,4 @@
-export { TOKEN_ID, REGEXP_EMAIL, REGEXP_PASSWORD, Path, Validate_Message } from "./constants";
+export { TOKEN_ID, REGEXP_EMAIL, REGEXP_PASSWORD, Path, Validate_Message } from './constants';
 export {
     selectUserData,
     selectAccessToken,
@@ -10,4 +10,6 @@ export {
     selectFeedbackMessage,
     selectLoadingMutation,
     selectLoadingQuery,
-} from "./selectors";
+} from './selectors';
+
+export { Colors } from './colors';

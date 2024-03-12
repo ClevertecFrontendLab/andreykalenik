@@ -1,6 +1,21 @@
 import Icon from '@ant-design/icons';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 
+const CalendarSvg = () => (
+    <svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M10.125 1.87512H12.75C13.0266 1.87512 13.25 2.09856 13.25 2.37512V12.7501C13.25 13.0267 13.0266 13.2501 12.75 13.2501H1.25C0.973437 13.2501 0.75 13.0267 0.75 12.7501V2.37512C0.75 2.09856 0.973437 1.87512 1.25 1.87512H3.875V0.875122C3.875 0.806372 3.93125 0.750122 4 0.750122H4.875C4.94375 0.750122 5 0.806372 5 0.875122V1.87512H9V0.875122C9 0.806372 9.05625 0.750122 9.125 0.750122H10C10.0688 0.750122 10.125 0.806372 10.125 0.875122V1.87512ZM1.875 12.1251H12.125V6.18762H1.875V12.1251Z'
+            fill='currentColor'
+        />
+    </svg>
+);
+
+const CalendarIcon = (props: Partial<CustomIconComponentProps>) => (
+    <Icon component={CalendarSvg} {...props} />
+);
+
 const ExitSvg = () => (
     <svg width='1em' height='1em' viewBox='0 0 15 16'>
         <path
@@ -22,8 +37,8 @@ const ExitIcon = (props: Partial<CustomIconComponentProps>) => (
 
 const LogoSvg = () => (
     <svg
-        width='426'
-        height='107'
+        width='100%'
+        height='100%'
         viewBox='0 0 426 107'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -94,4 +109,4 @@ const LogoSmallIcon = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={LogoSmallSvg} {...props} />
 );
 
-export { ExitIcon, LogoIcon, LogoSmallIcon };
+export { ExitIcon, LogoIcon, LogoSmallIcon, CalendarIcon };

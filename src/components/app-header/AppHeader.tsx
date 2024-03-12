@@ -9,7 +9,8 @@ const { Link } = Typography;
 const { useBreakpoint } = Grid;
 
 export const AppHeader: React.FC = () => {
-    const { lg, md, xs } = useBreakpoint();
+    const { lg, xs } = useBreakpoint();
+
     const isMainPage = useLocation().pathname === Path.MAIN;
     return (
         <header className={isMainPage ? styles.header : styles.headerAlternative}>
@@ -26,18 +27,20 @@ export const AppHeader: React.FC = () => {
                                 <SettingOutlined />
                                 Настройки
                             </Link>
-                        ) : xs && md ? (
-                            <Link style={{ color: '#262626' }}>Настройки</Link>
-                        ) : (
+                        ) : xs ? (
                             <Button
                                 style={{
+                                    fontSize: 14,
                                     borderRadius: '50%',
                                     border: '1px solid #D9D9D9',
                                     background: '#fff',
+                                    padding: 9,
                                 }}
                                 type='text'
                                 icon={<SettingOutlined />}
                             />
+                        ) : (
+                            <Link style={{ color: '#262626' }}>Настройки</Link>
                         )}
                     </div>
                 </>

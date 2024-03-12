@@ -12,6 +12,10 @@ export const enum Path {
     ROOT = '/',
     MAIN = '/main',
     FEEDBACKS = '/feedbacks',
+    CALENDARE = '/calendare',
+    WORKOUTS = '/workouts',
+    PROFILE = '/profile',
+    ACHIEVEMENTS = '/achievements',
 
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',

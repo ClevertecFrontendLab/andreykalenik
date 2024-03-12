@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate, Outlet } from 'react-router-dom';
 
-import { MainPage, AuthPage, ResultPage } from '../pages';
-import { MainLayout } from '@components/main-layout';
+import { MainPage, AuthPage, ResultPage, AppLayout } from '../pages';
+
 import { FeedbackLayout } from '@components/feedback-layout';
 import { PrivateRoute } from './PrivateRoute';
 import { ConfirmEmail } from '@components/confirm-email';
@@ -10,7 +10,11 @@ import { Path } from '../utils/constants';
 
 export const routes = (
     <Routes>
-        <Route path={Path.ROOT} element={<Outlet />}>
+        <Route path={Path.ROOT} element={<Navigate to={Path.MAIN} />} />
+        <Route path={Path.MAIN} element={<AppLayout />}>
+            <Route index element={<MainPage />}></Route>
+        </Route>
+        {/* <Route path={Path.ROOT} element={<Outlet />}>
             <Route path={Path.AUTH} element={<AuthPage />} />
             <Route path={Path.REGISTRATION} element={<AuthPage />} />
             <Route element={<PrivateRoute />}>
@@ -43,11 +47,11 @@ export const routes = (
                     element={<ResultPage result='error-check-email' />}
                 />
                 <Route element={<MainPage />}>
-                    <Route path={Path.MAIN} element={<MainLayout />} />
+                    <Route path={Path.MAIN} element={<MainPage />} />
                     <Route path={Path.FEEDBACKS} element={<FeedbackLayout />} />
                 </Route>
             </Route>
             <Route path={Path.ROOT} element={<Navigate to={Path.AUTH} replace />} />
-        </Route>
+        </Route> */}
     </Routes>
 );

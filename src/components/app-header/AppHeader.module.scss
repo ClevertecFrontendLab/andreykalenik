@@ -1,3 +1,5 @@
+@import '../../assets/styles/variabless.module';
+
 .header {
     display: grid;
     grid-template-columns: min-content 1fr max-content;
@@ -5,8 +7,7 @@
     gap: 14px;
     align-items: center;
     position: relative;
-    min-height: clamp(132px, 168px, 194px);
-    background-color: #f0f5ff;
+    background-color: #{getColorVarValue("primary_light_1")};
     padding: 16px 24px;
     p {
         margin-top: 0;
@@ -17,26 +18,33 @@
 .h1 {
     font-size: 38px;
     font-weight: 700;
-    line-height: 1.3;
+    
     margin: 0;
     grid-row: 2/3;
     grid-column: 1/3;
     text-wrap: balance;
+    margin-bottom: 6px;
 }
 
 .headerTitle {
-    line-height: 18px;
+    font-size: $ui_fontSize;;
+    line-height: 17px;
     margin: 0;
     grid-row: 1/2;
     grid-column: 1/2;
 }
 
 .headerActionsWrapper {
+    font-size: $ui_fontSize;;
     grid-row: 2/3;
     grid-column: 3/4;
     align-self: start;
     padding-right: 18px;
+    height: 32px;
     padding-top: 2px;
+    svg{
+        margin-top: 2px;
+    }
 }
 
 .headerAlternative {
@@ -47,8 +55,18 @@
     align-items: center;
     position: relative;
     min-height: 50px;
-    background-color: #f0f5ff;
+    background-color: #{getColorVarValue("primary_light_1")};
     padding: 16px 24px;
+}
+@media only screen and (max-width: 992px) {
+    .h1 {
+        font-size: 24px;
+        font-weight: 500;
+        // padding-top: 16px;
+    }
+    .headerActionsWrapper {
+        width: 105px;
+    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -58,12 +76,16 @@
     }
     .headerActionsWrapper {
         width: 105px;
+        text-align: right;
+        padding-right: 16px;
     }
 }
 
 @media only screen and (max-width: 576px) {
     .h1 {
         font-size: 20px;
+        line-height: 26px;
+        margin-top: -16px;
     }
     .headerActionsWrapper {
         width: 32px;
