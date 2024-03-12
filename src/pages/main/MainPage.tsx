@@ -70,7 +70,7 @@ export const MainPage: React.FC = () => {
                 откладывай на завтра — начни тренироваться уже&nbsp;сегодня!
             </Card>
 
-            <div className={styles.cardsFlexWrapper}>
+            <div className={styles.cardsListWrapper}>
                 {cardList.map((card) => (
                     <Card
                         title={card.title}

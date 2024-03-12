@@ -4,6 +4,7 @@ import { AppBreadcrumb } from '@components/app-breadcrumb';
 import styles from './AppHeader.module.scss';
 import { useLocation } from 'react-router-dom';
 import { Path } from '@utils/constants';
+import { Colors } from '@utils/colors';
 
 const { Link } = Typography;
 const { useBreakpoint } = Grid;
@@ -23,7 +24,13 @@ export const AppHeader: React.FC = () => {
                     </h1>
                     <div className={styles.headerActionsWrapper}>
                         {lg ? (
-                            <Link style={{ display: 'flex', gap: '10px', color: '#262626' }}>
+                            <Link
+                                style={{
+                                    display: 'flex',
+                                    gap: '10px',
+                                    color: `${Colors.character_light_title_85}`,
+                                }}
+                            >
                                 <SettingOutlined />
                                 Настройки
                             </Link>
@@ -31,16 +38,20 @@ export const AppHeader: React.FC = () => {
                             <Button
                                 style={{
                                     fontSize: 14,
+                                    width: 32,
+                                    height: 32,
                                     borderRadius: '50%',
-                                    border: '1px solid #D9D9D9',
-                                    background: '#fff',
-                                    padding: 9,
+                                    border: `1px solid ${Colors.character_light_border}`,
+                                    background: `${Colors.character_light_sider_background}`,
+                                    padding: '7px 8px',
                                 }}
                                 type='text'
                                 icon={<SettingOutlined />}
                             />
                         ) : (
-                            <Link style={{ color: '#262626' }}>Настройки</Link>
+                            <Link style={{ color: `${Colors.character_light_title_85}` }}>
+                                Настройки
+                            </Link>
                         )}
                     </div>
                 </>
