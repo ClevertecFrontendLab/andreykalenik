@@ -35,11 +35,9 @@
 }
 
 .card{
-    padding: 24px;
-    background-color: #{getColorVarValue("character_light_sider_background")};
     box-shadow: $ui_boxSwodow;
     border-radius: $ui_borderRadius;
-
+    border: none;
 }
 
 .cardBenefits {
@@ -59,7 +57,7 @@
     grid-row: 2/3;
     font-weight: 500;
     font-size: 20px;
-    
+    line-height: 1.3;
 }
 
 .cardsListWrapper {
@@ -76,9 +74,9 @@
     grid-column: 1/2;
     grid-row: 5/6;
     align-self: self-end;
+    justify-self: start;
+    font-size: 16px;
     padding: 7px, 15px;
-    margin-left: 16px;
-    margin-bottom: 10px;
 }
 
 .cardLink{
@@ -109,10 +107,10 @@
             }
         }
         .ant-card-body {
-            padding: 0 16px 6px;
+            padding: 0;
             display: flex;
             gap:16px;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             .ant-typography {
                 cursor: pointer;
@@ -141,7 +139,6 @@
     
     :global {
         .ant-card-head {
-            padding: 12px;
             font-weight: 400;
             font-size: 16px;
             display: flex;
@@ -150,8 +147,11 @@
             white-space: wrap;
             border-bottom: $ui_border;
         }
+        .ant-card-head-title{
+            padding: 0;
+        }
         .ant-card-body {
-            padding: 19px 16px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             font-size: $ui_fontSize;
@@ -178,7 +178,7 @@
 
 @media only screen and (max-width: 1200px) {
     .mainWrapper {
-        grid-template-columns: repeat(2, 300px);
+        grid-template-columns: repeat(2, 355px);
     }
     .cardMobileApp {
         grid-column: 2/3;

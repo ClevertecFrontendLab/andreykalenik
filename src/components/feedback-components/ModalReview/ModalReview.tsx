@@ -23,7 +23,7 @@ export const ModalReview = () => {
     const dispatch = useAppDispatch();
     const [isBtnDisable, setIsBtnDisable] = useState(true);
     const { sm } = useBreakpoint();
-    const [createReview, { isError: isTransferError, isSuccess: isTransferSuccess, reset }] =
+    const [createReview, { isError: isTransferError, isSuccess: isTransferSuccess }] =
         useAddReviewMutation();
 
     const message = useAppSelector(selectFeedbackMessage);

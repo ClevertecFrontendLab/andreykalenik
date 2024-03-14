@@ -3,11 +3,10 @@ import { Button, Form, Input } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 
-import { useChangePassordMutation } from '../../services/authApi';
+import { useChangePasswordMutation } from '../../../services/authApi';
 import { setUserData } from '@redux/reducers/userSlice';
-import { AppLoader } from '@components/app-loader';
-import { CardAuth } from '@components/card-auth';
-import { ServiceBackground } from '@components/service-background';
+import { CardResult } from '@components/result-components';
+import { ServiceBackground } from '@components/result-components';
 import { Path, REGEXP_PASSWORD, Validate_Message } from '@utils/constants';
 import { selectUserData } from '@utils/selectors';
 
@@ -24,7 +23,7 @@ export const ChangePassword: React.FC = () => {
     const userData = useAppSelector(selectUserData);
     const dispatch = useAppDispatch();
     const [formValid, setFormValid] = useState(false);
-    const [change, { isLoading }] = useChangePassordMutation();
+    const [change] = useChangePasswordMutation();
     const [form] = Form.useForm();
 
     const onChange = () => {
@@ -77,8 +76,7 @@ export const ChangePassword: React.FC = () => {
 
     return (
         <ServiceBackground>
-            {isLoading && <AppLoader />}
-            <CardAuth>
+            <CardResult>
                 <Form
                     name='normal_registration'
                     className={styles.form}
@@ -150,7 +148,7 @@ export const ChangePassword: React.FC = () => {
                         )}
                     </Form.Item>
                 </Form>
-            </CardAuth>
+            </CardResult>
         </ServiceBackground>
     );
 };

@@ -18,10 +18,7 @@ export const AppHeader: React.FC = () => {
             {isMainPage ? (
                 <>
                     <p className={styles.headerTitle}>Главная</p>
-                    <h1 className={styles.h1}>
-                        Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться
-                        своей мечты!
-                    </h1>
+                    <h1 className={styles.h1}>Приветствуем тебя <br/>в CleverFit — <br/>приложении, <br/>которое поможет тебе <br/>добиться своей <br/>мечты!</h1>
                     <div className={styles.headerActionsWrapper}>
                         {lg ? (
                             <Link

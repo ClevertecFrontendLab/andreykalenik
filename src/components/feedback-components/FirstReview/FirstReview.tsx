@@ -3,6 +3,7 @@ import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 import { toggleModalReview } from '@redux/reducers/uiSlice';
 import styles from './FirstReview.module.scss';
+import { Colors } from '@utils/colors';
 
 const { Title, Paragraph } = Typography;
 const { Content } = Layout;
@@ -19,7 +20,7 @@ export const FirstReview = () => {
                     <Title
                         level={3}
                         style={{
-                            color: '#061178',
+                            color: `${Colors.primary_light_9}`,
                             fontWeight: 500,
                             fontSize: 24,
                             textAlign: 'center',
@@ -30,7 +31,7 @@ export const FirstReview = () => {
                     </Title>
                     <Paragraph
                         style={{
-                            color: '#8C8C8C',
+                            color: `${Colors.character_light_secondary_45}`,
                             fontSize: 14,
                             lineHeight: 1.3,
                             maxWidth: 521,
@@ -53,6 +54,7 @@ export const FirstReview = () => {
                                   marginBlock: 20,
                                   marginInline: 'calc(50% - calc(142px / 2))',
                                   fontSize: 14,
+                                  height:40,
                               }
                             : { width: '100%', marginBlock: 20, fontSize: 14 }
                     }

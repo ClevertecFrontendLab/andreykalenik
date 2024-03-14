@@ -68,16 +68,17 @@ export const AppSider: React.FC = () => {
             className={styles.sider}
             collapsible
             collapsed={collapsed}
-            width={sm ? 204 : 106}
+            width={sm ? 208 : 106}
             collapsedWidth={sm ? 64 : 1}
             trigger={null}
+            theme='light'
         >
             <div className={styles.siderLogo}>
                 {sm ? (
                     collapsed ? (
                         <LogoSmallIcon />
                     ) : (
-                        <LogoIcon style={{ width: 132, height: 33 }} />
+                        <LogoIcon style={{ width: 135, height: 33, margin:'10px 45px 24px 24px' }} />
                     )
                 ) : collapsed ? null : (
                     <LogoIcon style={{ width: 72, height: 18 }} />

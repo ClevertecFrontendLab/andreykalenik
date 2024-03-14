@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import 'normalize.css';
+import 'antd/dist/antd.css';
 import './index.scss';
 import { App } from './App';
 App;

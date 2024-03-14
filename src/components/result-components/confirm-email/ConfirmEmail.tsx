@@ -4,10 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
-import { useConfirmEmailMutation } from '../../services/authApi';
-import { AppLoader } from '@components/app-loader';
-import { ServiceBackground } from '@components/service-background';
-import { CardAuth } from '@components/card-auth';
+import { useConfirmEmailMutation } from '../../../services/authApi';
+import { ServiceBackground } from '@components/result-components';
+import { CardResult } from '@components/result-components';
 import { Path } from '@utils/constants';
 import { selectUserData } from '@utils/selectors';
 
@@ -18,7 +17,7 @@ export const ConfirmEmail: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const userData = useAppSelector(selectUserData);
-    const [confirm, { isLoading }] = useConfirmEmailMutation();
+    const [confirm] = useConfirmEmailMutation();
     const [borderStyle, setBorderStyle] = useState<string>('character');
     const [value, setValue] = useState<string>('');
 
@@ -39,8 +38,7 @@ export const ConfirmEmail: React.FC = () => {
 
     return (
         <ServiceBackground>
-            {isLoading && <AppLoader />}
-            <CardAuth>
+            <CardResult>
                 <ExclamationCircleFilled
                     style={{ fontSize: 70, color: '#2F54EB', display: 'block', padding: 5 }}
                 />
@@ -66,7 +64,7 @@ export const ConfirmEmail: React.FC = () => {
                     onComplete={onComplete}
                 />
                 <p className={styles.footer}>Не пришло письмо? Проверьте папку Спам.</p>
-            </CardAuth>
+            </CardResult>
         </ServiceBackground>
     );
 };

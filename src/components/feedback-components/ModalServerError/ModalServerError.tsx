@@ -36,6 +36,7 @@ export const ModalServerError = () => {
                     <Button
                         type='primary'
                         onClick={handleClick}
+                        size='large'
                         style={
                             sm
                                 ? {

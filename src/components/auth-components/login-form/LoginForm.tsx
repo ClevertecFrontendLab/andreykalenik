@@ -4,9 +4,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Form, Input, Typography, Grid } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 
-import { useLoginMutation, useCheckEmailMutation } from '../../services/authApi';
-import { setUserData, setAccessToken } from '@redux/reducers/userSlice';
-import { AppLoader } from '@components/app-loader';
+import { useLoginMutation, useCheckEmailMutation } from '../../../services/authApi';
+import {
+    setUserData,
+    setAccessTokenToLocalStorage,
+    setAccessTokenToSessionlStorage,
+} from '@redux/reducers/userSlice';
 import { Path, TOKEN_ID, REGEXP_PASSWORD, REGEXP_EMAIL } from '@utils/constants';
 import { selectUserData } from '@utils/selectors';
 
@@ -24,26 +27,29 @@ export const LoginForm: React.FC = () => {
     const { useBreakpoint } = Grid;
     const { sm } = useBreakpoint();
     const [form] = Form.useForm();
-    const [loginUser, { isLoading: isLoadingLogin }] = useLoginMutation();
-    const [checkEmail, { isLoading: isLoadingEmail }] = useCheckEmailMutation();
+    const [loginUser] = useLoginMutation();
+    const [checkEmail] = useCheckEmailMutation();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
     const userData = useAppSelector(selectUserData);
+    
+
 
     const onFinish = (values: LoginFormData) => {
         loginUser({ email: values.email, password: values.password })
             .unwrap()
             .then((data) => {
-                values.remember ? localStorage.setItem(TOKEN_ID, data.accessToken) : '';
+                values.remember
+                    ? dispatch(setAccessTokenToLocalStorage(data.accessToken))
+                    : dispatch(setAccessTokenToSessionlStorage(data.accessToken));
                 dispatch(
                     setUserData({
                         email: values.email,
                         password: values.password,
-                        passwordConfirmed: '',
+                        confirmPassword: '',
                     }),
                 );
-                dispatch(setAccessToken(data.accessToken));
                 navigate(Path.MAIN);
             })
             .catch(() => navigate(Path.RESULT_ERROR_LOGIN, { state: Path.AUTH }));
@@ -60,13 +66,19 @@ export const LoginForm: React.FC = () => {
                     if (error.status === 404 && error.data.message === 'Email не найден') {
                         navigate(Path.RESULT_ERROR_EMAIL_NO_EXIST, { state: Path.AUTH });
                     } else {
-                        dispatch(setUserData({ email, password: '', passwordConfirmed: '' }));
+                        dispatch(setUserData({ email, password: '', confirmPassword: '' }));
                         navigate(Path.RESULT_ERROR_CHECK_EMAIL, { state: Path.AUTH });
                     }
                 });
         },
         [checkEmail, dispatch, navigate],
     );
+
+    const onGoogleAuthClick = () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
+
+
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_ID)) {
@@ -77,9 +89,9 @@ export const LoginForm: React.FC = () => {
         }
     }, [checkUserEmail, location.state, navigate, userData.email]);
 
+
     return (
         <>
-            {(isLoadingLogin || isLoadingEmail) && <AppLoader />}
             <Form
                 form={form}
                 name='LoginForm'
@@ -102,7 +114,7 @@ export const LoginForm: React.FC = () => {
                                         setUserData({
                                             email: value,
                                             password: '',
-                                            passwordConfirmed: '',
+                                            confirmPassword: '',
                                         }),
                                     );
                                     return Promise.resolve(setForgotDisabled(false));
@@ -135,9 +147,10 @@ export const LoginForm: React.FC = () => {
                     <Link
                         data-test-id='login-forgot-button'
                         onClick={() => !forgotDisabled && checkUserEmail(userData.email)}
+                        disabled={forgotDisabled}
                         style={
                             sm
-                                ? { fontSize: 17, fontOpticalSizing: 'auto' }
+                                ? { fontSize: 16, fontOpticalSizing: 'auto' }
                                 : { fontSize: 14, fontOpticalSizing: 'auto', marginRight: 8 }
                         }
                     >
@@ -158,6 +171,8 @@ export const LoginForm: React.FC = () => {
                 <Form.Item className={styles.buttonGroup}>
                     <Button
                         htmlType='submit'
+                        data-test-id="google-submit-button"
+                        onClick={onGoogleAuthClick}
                         style={
                             sm
                                 ? { width: '100%', borderRadius: 2, fontSize: 16 }

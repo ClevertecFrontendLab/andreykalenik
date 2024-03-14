@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, Button, Grid, Result } from 'antd';
-import { CardAuth } from '@components/card-auth';
+import { CardResult } from '@components/result-components';
 
 import { Path } from '@utils/constants';
 
@@ -119,7 +119,7 @@ export const ResultContent500: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     return (
-        <CardAuth>
+        <CardResult>
             <Result
                 status='500'
                 title='Что-то пошло не так'
@@ -138,6 +138,6 @@ export const ResultContent500: React.FC = () => {
                     </Button>
                 }
             />
-        </CardAuth>
+        </CardResult>
     );
 };

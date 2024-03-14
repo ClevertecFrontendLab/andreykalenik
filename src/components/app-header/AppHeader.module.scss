@@ -1,6 +1,8 @@
 @import '../../assets/styles/variabless.module';
 
 .header {
+    container-name: header;
+    container-type: inline-size;
     display: grid;
     grid-template-columns: min-content 1fr max-content;
     grid-template-rows: min-content min-content;
@@ -8,22 +10,49 @@
     align-items: center;
     position: relative;
     background-color: #{getColorVarValue("primary_light_1")};
-    padding: 16px 24px;
+    padding: 15px 23px;
     p {
         margin-top: 0;
         margin-bottom: 0;
     }
 }
 
+@container header (inline-size > 700px) {
+    .h1 {
+        br{
+            display: none;
+        }
+    }
+  }
+
+@container header (inline-size > 570px) {
+    .h1 {
+        br:first-of-type,
+        br:nth-of-type(4){
+            display: none;
+        }
+    }
+  }
+  @container header (inline-size <= 570px) {
+    .h1 {
+        br:nth-of-type(2),
+        br:nth-of-type(5){
+            display: none;
+        }
+    }
+  }
+
+
 .h1 {
     font-size: 38px;
     font-weight: 700;
-    
+    line-height: 1.3;
     margin: 0;
     grid-row: 2/3;
     grid-column: 1/3;
     text-wrap: balance;
-    margin-bottom: 6px;
+    word-wrap: break-word;
+    margin-bottom: 8px;
 }
 
 .headerTitle {
@@ -41,10 +70,6 @@
     align-self: start;
     padding-right: 18px;
     height: 32px;
-    padding-top: 2px;
-    svg{
-        margin-top: 2px;
-    }
 }
 
 .headerAlternative {
@@ -62,7 +87,6 @@
     .h1 {
         font-size: 24px;
         font-weight: 500;
-        // padding-top: 16px;
     }
     .headerActionsWrapper {
         width: 105px;
@@ -70,6 +94,9 @@
 }
 
 @media only screen and (max-width: 992px) {
+    .header{
+        column-gap: 0;
+    }
     .h1 {
         font-size: 24px;
         font-weight: 500;
@@ -80,6 +107,7 @@
         padding-right: 16px;
     }
 }
+
 
 @media only screen and (max-width: 576px) {
     .h1 {

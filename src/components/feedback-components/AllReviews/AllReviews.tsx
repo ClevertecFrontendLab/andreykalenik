@@ -1,6 +1,6 @@
 import { Button, Layout, List } from 'antd';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 import { toggleModalReview } from '@redux/reducers/uiSlice';
 
 import styles from './AllReviews.module.scss';
@@ -13,6 +13,7 @@ export const AllReviews = () => {
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
     const { data } = useGetFeedbacksQuery();
     const feedbacks = isAllFeedbacks ? data : data?.slice(0, 4);
+    const deferredFeedbacks = useDeferredValue(feedbacks);
     const dispatch = useAppDispatch();
     const handleClick = () => dispatch(toggleModalReview());
     const handleShowAllFeedbacks = () => {
@@ -23,7 +24,7 @@ export const AllReviews = () => {
             <>
                 <div className={styles.listWrapper}>
                     <List
-                        dataSource={feedbacks}
+                        dataSource={deferredFeedbacks}
                         renderItem={(item) => <SingleReview data={item} />}
                     />
                 </div>
@@ -49,3 +50,4 @@ export const AllReviews = () => {
         </Content>
     );
 };
+

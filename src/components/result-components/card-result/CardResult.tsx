@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Card, Grid } from 'antd';
 
-export const CardAuth: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CardResult: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { useBreakpoint } = Grid;
     const { sm } = useBreakpoint();
     const styleDestop: React.CSSProperties = {

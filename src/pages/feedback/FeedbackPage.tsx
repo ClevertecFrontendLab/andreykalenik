@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetFeedbacksQuery, useAddReviewMutation } from '../../services/feedbackApi';
+import { useGetFeedbacksQuery } from '../../services/feedbackApi';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { toggleModalServerError } from '@redux/reducers/uiSlice';
 import { logout } from '@redux/reducers/userSlice';
@@ -15,15 +15,14 @@ import {
     AllReviews,
 } from '@components/feedback-components';
 import { Path, TOKEN_ID } from '@utils/constants';
-import { AppLoader } from '@components/app-loader';
 
-export const FeedbackLayout: React.FC = () => {
+
+export const FeedbackPage: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const addReview = useAppSelector(selectModalSuccessTransfer);
 
-    const { data, error, isError, refetch, isLoading: isLoadingAll } = useGetFeedbacksQuery();
-    const [, { isLoading: isLoadingOne }] = useAddReviewMutation();
+    const { data, error, isError, refetch} = useGetFeedbacksQuery();
 
     useEffect(() => {
         refetch();
@@ -32,8 +31,8 @@ export const FeedbackLayout: React.FC = () => {
     useEffect(() => {
         if (error) {
             if ('status' in error && error.status == 403) {
+
                 dispatch(logout());
-                localStorage.removeItem(TOKEN_ID);
                 navigate(Path.AUTH);
             }
         }
@@ -45,27 +44,12 @@ export const FeedbackLayout: React.FC = () => {
 
     return (
         <>
-            <>
-                {' '}
-                {(isLoadingAll || isLoadingOne) && <AppLoader />}
                 {data?.length === 0 ? <FirstReview /> : <AllReviews />}
-            </>
-            <>
-                {(isLoadingAll || isLoadingOne) && <AppLoader />}
                 <ModalReview />
-            </>
-            <>
-                {(isLoadingAll || isLoadingOne) && <AppLoader />}
                 <ModalServerError />
-            </>
-            <>
-                {(isLoadingAll || isLoadingOne) && <AppLoader />}
                 <ModalSuccessTransfer />
-            </>
-            <>
-                {(isLoadingAll || isLoadingOne) && <AppLoader />}
                 <ModalErrorTransfer />
-            </>
+
         </>
     );
 };

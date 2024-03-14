@@ -4,7 +4,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 
-import { useRegistrationMutation } from '../../services/authApi';
+import { useRegistrationMutation } from '../../../services/authApi';
 import { AppLoader } from '@components/app-loader';
 import { setUserData } from '@redux/reducers/userSlice';
 import { Path, REGEXP_PASSWORD, Validate_Message } from '@utils/constants';
@@ -56,7 +56,7 @@ export const RegForm: React.FC = () => {
                             setUserData({
                                 email: values.email,
                                 password: values.password,
-                                passwordConfirmed: '',
+                                confirmPassword: '',
                             }),
                         );
                     }
@@ -91,7 +91,11 @@ export const RegForm: React.FC = () => {
                     className={styles.emailInput}
                     rules={[{ required: true, message: '', type: 'email', min: 0 }]}
                 >
-                    <Input data-test-id='registration-email' addonBefore='e-mail:' />
+                    <Input
+                        data-test-id='registration-email'
+                        addonBefore='e-mail:'
+                        style={sm ? { fontSize: 16 } : { fontSize: 14 }}
+                    />
                 </Form.Item>
 
                 <Form.Item
@@ -103,7 +107,11 @@ export const RegForm: React.FC = () => {
                         { pattern: REGEXP_PASSWORD, message: '' },
                     ]}
                 >
-                    <Input.Password placeholder='Пароль' data-test-id='registration-password' />
+                    <Input.Password
+                        placeholder='Пароль'
+                        data-test-id='registration-password'
+                        style={sm ? { fontSize: 16 } : { fontSize: 14 }}
+                    />
                 </Form.Item>
 
                 <Form.Item
@@ -125,6 +133,7 @@ export const RegForm: React.FC = () => {
                     <Input.Password
                         placeholder='Повторите пароль'
                         data-test-id='registration-confirm-password'
+                        style={sm ? { fontSize: 16 } : { fontSize: 14 }}
                     />
                 </Form.Item>
 
