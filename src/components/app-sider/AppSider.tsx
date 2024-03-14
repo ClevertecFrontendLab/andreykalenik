@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Button, Grid } from 'antd';
+import { logout} from '@redux/reducers/userSlice';
 
 import { CalendarIcon, ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
 import { Colors } from '@utils/colors';
@@ -15,6 +16,7 @@ import { Colors } from '@utils/colors';
 import styles from './AppSider.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '@utils/constants';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 const menuItems: MenuProps['items'] = [
     {
@@ -51,13 +53,12 @@ export const AppSider: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useAppDispatch();
 
     const onClickMenuHandler: MenuProps['onClick'] = (e) => {
         if (e.key === 'logout') {
-            console.log(e.key);
-            // sessionStorage.removeItem("token");
-            // localStorage.removeItem("token");
-            // navigate('/auth')
+            dispatch(logout());
+            navigate(Path.AUTH);
         } else navigate(e.key);
     };
 

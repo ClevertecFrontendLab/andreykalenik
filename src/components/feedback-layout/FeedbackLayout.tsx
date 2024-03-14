@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGetFeedbacksQuery, useAddReviewMutation } from '../../services/feedbackApi';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { toggleModalServerError } from '@redux/reducers/uiSlice';
-import { setAccessToken } from '@redux/reducers/userSlice';
+import { logout } from '@redux/reducers/userSlice';
 import { selectModalSuccessTransfer } from '@utils/selectors/selectors';
 
 import {
@@ -32,7 +32,7 @@ export const FeedbackLayout: React.FC = () => {
     useEffect(() => {
         if (error) {
             if ('status' in error && error.status == 403) {
-                dispatch(setAccessToken(''));
+                dispatch(logout());
                 localStorage.removeItem(TOKEN_ID);
                 navigate(Path.AUTH);
             }
