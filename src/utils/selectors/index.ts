@@ -9,4 +9,4 @@ export {
     selectFeedbackMessage,
     selectLoadingMutation,
     selectLoadingQuery,
-} from "./selectors";
+} from './selectors';

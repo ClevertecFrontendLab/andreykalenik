@@ -14,7 +14,6 @@
     background-size: cover;
     min-height: calc(100% - 234px);
 
-
     :global {
         .ant-card-head {
             text-align: center;
@@ -22,19 +21,19 @@
 
         .ant-typography {
             font-size: 16px;
-            a{
+            a {
                 cursor: pointer;
-                color: #{getColorVarValue("primary_light_6")};
+                color: #{getColorVarValue('primary_light_6')};
                 &:hover,
-                &:active{
-                    color: #{getColorVarValue("primary_light_7")}
+                &:active {
+                    color: #{getColorVarValue('primary_light_7')};
                 }
             }
         }
     }
 }
 
-.card{
+.card {
     box-shadow: $ui_boxSwodow;
     border-radius: $ui_borderRadius;
     border: none;
@@ -45,11 +44,10 @@
     grid-column: 1/2;
     grid-row: 1/2;
     margin-bottom: 8px;
-    color:  #{getColorVarValue("primary_light_9")};
+    color: #{getColorVarValue('primary_light_9')};
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
-
 }
 .cardAbout {
     border-radius: 0;
@@ -69,7 +67,6 @@
     column-gap: 16px;
 }
 
-
 .linkReviews {
     grid-column: 1/2;
     grid-row: 5/6;
@@ -79,8 +76,8 @@
     padding: 7px, 15px;
 }
 
-.cardLink{
-    color: #{getColorVarValue("character-light-title-85")};
+.cardLink {
+    color: #{getColorVarValue('character-light-title-85')};
 }
 
 .cardMobileApp {
@@ -89,7 +86,7 @@
     grid-row: 5/6;
     :global {
         .ant-card-head {
-            color: #{getColorVarValue("primary_light_6")};
+            color: #{getColorVarValue('primary_light_6')};
             font-weight: 400;
             font-size: 16px;
             line-height: 21px;
@@ -100,7 +97,7 @@
                 text-align: left;
             }
             p + p {
-                color: #{getColorVarValue("neutral_gray_7")};
+                color: #{getColorVarValue('neutral_gray_7')};
                 font-size: $ui_fontSize;
                 line-height: 18px;
                 margin-top: 8px;
@@ -109,14 +106,14 @@
         .ant-card-body {
             padding: 0;
             display: flex;
-            gap:16px;
+            gap: 16px;
             justify-content: center;
             align-items: center;
             .ant-typography {
                 cursor: pointer;
-                color: #{getColorVarValue("neutral_gray_10")};
+                color: #{getColorVarValue('neutral_gray_10')};
                 font-size: $ui_fontSize;
-                margin: 16px 0 ;
+                margin: 16px 0;
                 span {
                     margin-right: 8px;
                     height: 14px;
@@ -124,7 +121,6 @@
                 }
             }
         }
-       
     }
 }
 
@@ -133,21 +129,21 @@
     grid-template-columns: 1fr;
     grid-template-rows: subgrid;
     grid-row: span 2;
-    gap:0;
+    gap: 0;
     padding: 0;
     border-radius: 2px;
-    
+
     :global {
         .ant-card-head {
             font-weight: 400;
             font-size: 16px;
             display: flex;
             justify-content: center;
-            color:#{getColorVarValue("character-light-title-85")};;
+            color: #{getColorVarValue('character-light-title-85')};
             white-space: wrap;
             border-bottom: $ui_border;
         }
-        .ant-card-head-title{
+        .ant-card-head-title {
             padding: 0;
         }
         .ant-card-body {
@@ -216,7 +212,7 @@
 @media only screen and (max-width: 700px) {
     .cardsListWrapper {
         grid-template-columns: 1fr;
-        gap:8px;
+        gap: 8px;
         :global {
             .ant-card-head {
                 .ant-card-head-title {
@@ -252,7 +248,7 @@
     .cardMobileApp {
         grid-row: 4/5;
         justify-self: stretch;
-        :global{
+        :global {
             .ant-card-body {
                 padding: 0 24px 6px;
             }

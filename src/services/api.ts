@@ -10,8 +10,8 @@ export const api = createApi({
         baseUrl,
         prepareHeaders: (headers, { getState }) => {
             const accessToken = (getState() as RootState).user.accessToken;
-            const accessTokenSessionStorage = sessionStorage.getItem(TOKEN_ID)
-            const accessTokenLocalStorage = localStorage.getItem(TOKEN_ID)
+            const accessTokenSessionStorage = sessionStorage.getItem(TOKEN_ID);
+            const accessTokenLocalStorage = localStorage.getItem(TOKEN_ID);
             if (accessToken) {
                 headers.set('authorization', `Bearer ${accessToken}`);
             }

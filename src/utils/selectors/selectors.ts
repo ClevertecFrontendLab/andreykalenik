@@ -1,4 +1,4 @@
-import type { RootState } from "@redux/configure-store";
+import type { RootState } from '@redux/configure-store';
 
 export const selectUserData = (state: RootState) => state.user;
 export const selectAccessToken = (state: RootState) => state.user.accessToken;
@@ -12,7 +12,7 @@ export const selectFeedbackRating = (state: RootState) => state.feedback.rating;
 export const selectFeedbackMessage = (state: RootState) => state.feedback.message;
 
 export const selectLoadingMutation = (state: RootState) =>
-    Object.values(state.api.mutations).some((query) => query?.status === "pending");
+    Object.values(state.api.mutations).some((query) => query?.status === 'pending');
 
 export const selectLoadingQuery = (state: RootState) =>
-    Object.values(state.api.queries).some((query) => query?.status === "pending");
+    Object.values(state.api.queries).some((query) => query?.status === 'pending');

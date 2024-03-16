@@ -54,7 +54,7 @@ export const FirstReview = () => {
                                   marginBlock: 20,
                                   marginInline: 'calc(50% - calc(142px / 2))',
                                   fontSize: 14,
-                                  height:40,
+                                  height: 40,
                               }
                             : { width: '100%', marginBlock: 20, fontSize: 14 }
                     }

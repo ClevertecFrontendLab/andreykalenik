@@ -1,28 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import '../src/assets/styles/variabless.module';
 
 :root {
-    
-    font-family: "Inter", sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
     font-synthesis: none;
-    line-height: 1.3!important;
+    line-height: 1.3 !important;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-a, a:visited {
+a,
+a:visited {
     font-weight: 500;
-    color: #{getColorVarValue("primary_light_6")};
+    color: #{getColorVarValue('primary_light_6')};
     text-decoration: inherit;
 }
 a:hover {
-    color: #{getColorVarValue("primary_light_7")};
+    color: #{getColorVarValue('primary_light_7')};
 }
 
 body {
-    font-family: "Inter", sans-serif !important;
-    line-height: 1.3!important;
+    font-family: 'Inter', sans-serif !important;
+    line-height: 1.3 !important;
     margin: 0;
     place-items: center;
     min-width: 320px;

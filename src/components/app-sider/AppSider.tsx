@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Button, Grid } from 'antd';
-import { logout} from '@redux/reducers/userSlice';
+import { logout } from '@redux/reducers/userSlice';
 
 import { CalendarIcon, ExitIcon, LogoIcon, LogoSmallIcon } from '@components/project-icons';
 import { Colors } from '@utils/colors';
@@ -78,7 +78,9 @@ export const AppSider: React.FC = () => {
                     collapsed ? (
                         <LogoSmallIcon />
                     ) : (
-                        <LogoIcon style={{ width: 135, height: 33, margin:'10px 45px 24px 24px' }} />
+                        <LogoIcon
+                            style={{ width: 135, height: 33, margin: '10px 45px 24px 24px' }}
+                        />
                     )
                 ) : collapsed ? null : (
                     <LogoIcon style={{ width: 72, height: 18 }} />

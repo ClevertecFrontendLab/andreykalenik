@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { NewFeedback } from "../../services/feedbackApi";
+import type { NewFeedback } from '../../services/feedbackApi';
 
 const initialState: NewFeedback = {
     rating: 0,
-    message: "",
+    message: '',
 };
 
 const feedbackSlice = createSlice({
-    name: "feedback",
+    name: 'feedback',
     initialState,
     reducers: {
         setRating: (state, action: PayloadAction<0 | 1 | 2 | 3 | 4 | 5>) => {

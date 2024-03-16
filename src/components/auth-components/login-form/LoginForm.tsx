@@ -33,8 +33,6 @@ export const LoginForm: React.FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const userData = useAppSelector(selectUserData);
-    
-
 
     const onFinish = (values: LoginFormData) => {
         loginUser({ email: values.email, password: values.password })
@@ -78,8 +76,6 @@ export const LoginForm: React.FC = () => {
         window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
     };
 
-
-
     useEffect(() => {
         if (localStorage.getItem(TOKEN_ID)) {
             navigate(Path.MAIN);
@@ -88,7 +84,6 @@ export const LoginForm: React.FC = () => {
             checkUserEmail(userData.email);
         }
     }, [checkUserEmail, location.state, navigate, userData.email]);
-
 
     return (
         <>
@@ -171,7 +166,7 @@ export const LoginForm: React.FC = () => {
                 <Form.Item className={styles.buttonGroup}>
                     <Button
                         htmlType='submit'
-                        data-test-id="google-submit-button"
+                        data-test-id='google-submit-button'
                         onClick={onGoogleAuthClick}
                         style={
                             sm

@@ -1,11 +1,11 @@
-import { Breadcrumb } from "antd";
-import { NavLink, useLocation } from "react-router-dom";
+import { Breadcrumb } from 'antd';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import { Path } from "@utils/constants";
+import { Path } from '@utils/constants';
 
 const breadcrumbNameMap: Record<string, string> = {
-    [Path.MAIN]: "Главная",
-    [Path.FEEDBACKS]: "Отзывы пользователей",
+    [Path.MAIN]: 'Главная',
+    [Path.FEEDBACKS]: 'Отзывы пользователей',
 };
 
 export const AppBreadcrumb = () => {

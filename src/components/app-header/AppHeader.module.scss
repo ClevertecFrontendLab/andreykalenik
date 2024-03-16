@@ -9,7 +9,7 @@
     gap: 14px;
     align-items: center;
     position: relative;
-    background-color: #{getColorVarValue("primary_light_1")};
+    background-color: #{getColorVarValue('primary_light_1')};
     padding: 15px 23px;
     p {
         margin-top: 0;
@@ -19,29 +19,28 @@
 
 @container header (inline-size > 700px) {
     .h1 {
-        br{
+        br {
             display: none;
         }
     }
-  }
+}
 
 @container header (inline-size > 570px) {
     .h1 {
         br:first-of-type,
-        br:nth-of-type(4){
+        br:nth-of-type(4) {
             display: none;
         }
     }
-  }
-  @container header (inline-size <= 570px) {
+}
+@container header (inline-size <= 570px) {
     .h1 {
         br:nth-of-type(2),
-        br:nth-of-type(5){
+        br:nth-of-type(5) {
             display: none;
         }
     }
-  }
-
+}
 
 .h1 {
     font-size: 38px;
@@ -56,7 +55,7 @@
 }
 
 .headerTitle {
-    font-size: $ui_fontSize;;
+    font-size: $ui_fontSize;
     line-height: 17px;
     margin: 0;
     grid-row: 1/2;
@@ -64,7 +63,7 @@
 }
 
 .headerActionsWrapper {
-    font-size: $ui_fontSize;;
+    font-size: $ui_fontSize;
     grid-row: 2/3;
     grid-column: 3/4;
     align-self: start;
@@ -80,7 +79,7 @@
     align-items: center;
     position: relative;
     min-height: 50px;
-    background-color: #{getColorVarValue("primary_light_1")};
+    background-color: #{getColorVarValue('primary_light_1')};
     padding: 16px 24px;
 }
 @media only screen and (max-width: 992px) {
@@ -94,7 +93,7 @@
 }
 
 @media only screen and (max-width: 992px) {
-    .header{
+    .header {
         column-gap: 0;
     }
     .h1 {
@@ -107,7 +106,6 @@
         padding-right: 16px;
     }
 }
-
 
 @media only screen and (max-width: 576px) {
     .h1 {

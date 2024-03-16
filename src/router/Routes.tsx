@@ -41,8 +41,8 @@ export const routes = (
         <Route element={<PrivateRoute />}>
             <Route path={Path.ROOT} element={<AppLayout />}>
                 <Route index element={<Navigate to={Path.MAIN} />} />
-                <Route  path={Path.MAIN} element={<MainPage />} />
-                <Route  path={Path.FEEDBACKS} element={<FeedbackPage />} />
+                <Route path={Path.MAIN} element={<MainPage />} />
+                <Route path={Path.FEEDBACKS} element={<FeedbackPage />} />
             </Route>
         </Route>
     </Routes>

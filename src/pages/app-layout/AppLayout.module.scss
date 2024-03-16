@@ -1,15 +1,13 @@
 .appLayout {
-    display:flex;
+    display: flex;
     align-items: stretch;
     min-height: 100vh;
     max-width: 1440px;
     margin: 0 auto;
 }
 
-.appContainer{
+.appContainer {
     flex-basis: 100%;
     display: grid;
     grid-template-rows: min-content 1fr;
-    
 }
-

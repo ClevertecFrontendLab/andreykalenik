@@ -16,13 +16,12 @@ import {
 } from '@components/feedback-components';
 import { Path, TOKEN_ID } from '@utils/constants';
 
-
 export const FeedbackPage: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const addReview = useAppSelector(selectModalSuccessTransfer);
 
-    const { data, error, isError, refetch} = useGetFeedbacksQuery();
+    const { data, error, isError, refetch } = useGetFeedbacksQuery();
 
     useEffect(() => {
         refetch();
@@ -31,7 +30,6 @@ export const FeedbackPage: React.FC = () => {
     useEffect(() => {
         if (error) {
             if ('status' in error && error.status == 403) {
-
                 dispatch(logout());
                 navigate(Path.AUTH);
             }
@@ -44,12 +42,11 @@ export const FeedbackPage: React.FC = () => {
 
     return (
         <>
-                {data?.length === 0 ? <FirstReview /> : <AllReviews />}
-                <ModalReview />
-                <ModalServerError />
-                <ModalSuccessTransfer />
-                <ModalErrorTransfer />
-
+            {data?.length === 0 ? <FirstReview /> : <AllReviews />}
+            <ModalReview />
+            <ModalServerError />
+            <ModalSuccessTransfer />
+            <ModalErrorTransfer />
         </>
     );
 };

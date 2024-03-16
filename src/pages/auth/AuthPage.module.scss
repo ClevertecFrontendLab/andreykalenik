@@ -1,7 +1,7 @@
 @import '../src/assets/styles/variabless.module';
 .tabs {
     :global {
-        .ant-layout{
+        .ant-layout {
             display: none;
         }
         .ant-tabs-nav-list {
@@ -23,10 +23,10 @@
             padding: 20px 0 11px;
         }
         .ant-input-group-wrapper-status-error .ant-input-group-addon {
-            border-right-color: #{getColorVarValue("character_light_border")};
+            border-right-color: #{getColorVarValue('character_light_border')};
         }
         .ant-input-group-wrapper-status-error .ant-input-status-error {
-            border-left-color: #{getColorVarValue("character_light_border")};
+            border-left-color: #{getColorVarValue('character_light_border')};
         }
     }
 }
@@ -34,7 +34,7 @@
 @media only screen and (max-width: 576px) {
     .tabs {
         :global {
-            .ant-tabs-nav-list{
+            .ant-tabs-nav-list {
                 margin-top: 28px;
             }
             .ant-tabs-tab {
