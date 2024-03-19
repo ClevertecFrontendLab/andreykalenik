@@ -15,8 +15,9 @@ import {
 } from '@redux/reducers/trainingSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { TrainingResponse } from '../../../../../services/trainingApi';
+import { FC } from 'react';
 
-export const Content = ({ date }: { date: Moment }) => {
+export const Contentt: FC<{ date: Moment }> = ({ date }) => {
     const userTrainingListData = useAppSelector(userTrainingListSelector);
     const dispatch = useAppDispatch();
 
