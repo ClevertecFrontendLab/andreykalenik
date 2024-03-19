@@ -2,11 +2,12 @@ import { format } from 'date-fns';
 
 import { api } from '.';
 import { ApiEndpoint } from '@utils/constants';
+import { Nullebel } from '@types/commonTypes';
 
 export type Feedback = {
-    fullName: string | null;
-    imageSrc: string | null;
-    message: string | null;
+    fullName: Nullebel<string>;
+    imageSrc: Nullebel<string>;
+    message: Nullebel<string>;
     rating: number;
     createdAt: string;
     key?: string;

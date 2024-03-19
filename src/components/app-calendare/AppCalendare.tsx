@@ -14,6 +14,8 @@ import { resetState, setModalVisible } from '@redux/reducers/trainingSlice';
 import styles from './AppCalendare.module.scss';
 import { TrainingResponse } from '../../services/trainingApi';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { SelectedCellInfo } from '@types/calendareTypes';
+import { Nullebel } from '@types/commonTypes';
 
 moment.updateLocale('ru', {
     week: {
@@ -21,19 +23,15 @@ moment.updateLocale('ru', {
     },
 });
 
-type CalendarCustomProps = {
+export type CalendarCustomProps = {
     refetchUserTrainingList: () => void;
-};
-export type SelectedCellInfo = {
-    cellHTMLElement: HTMLTableCellElement | HTMLDivElement;
-    cellContent: TrainingResponse[];
 };
 
 const { useBreakpoint } = Grid;
 
 export const AppCalendare = ({ refetchUserTrainingList }: CalendarCustomProps) => {
     const [selectedDate, setSelectedDate] = useState(moment());
-    const [selectedCellInfo, setSelectedCellInfo] = useState<SelectedCellInfo | null>(null);
+    const [selectedCellInfo, setSelectedCellInfo] = useState<Nullebel<SelectedCellInfo>>(null);
 
     const userTrainingListData = useAppSelector(userTrainingListSelector);
     const isModalVisible = useAppSelector(isModalVisibleSelector);

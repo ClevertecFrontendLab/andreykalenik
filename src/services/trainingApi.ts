@@ -2,6 +2,7 @@ import type { Moment } from 'moment';
 import { CurrentTraining } from '@redux/reducers/trainingSlice';
 
 import { api } from '.';
+import { Nullebel } from '@types/commonTypes';
 
 export type ErrorTypes = {
     status: number;
@@ -39,9 +40,9 @@ export type TrainingResponse = ErrorTypes & {
 };
 
 export type TrainingEditData = {
-    name: string | null;
+    name: Nullebel<string>;
     date: Moment;
-    exercises: CurrentTraining[] | null;
+    exercises: Nullebel<CurrentTraining[]>;
     isImplementation?: boolean;
 };
 
@@ -53,9 +54,9 @@ export const trainingApi = api.injectEndpoints({
         addUserTraining: build.mutation<
             TrainingResponse,
             {
-                name: string | null;
+                name: Nullebel<string>;
                 date: Moment;
-                exercises: CurrentTraining[] | null;
+                exercises: Nullebel<CurrentTraining[]>;
             }
         >({
             query: (body) => ({

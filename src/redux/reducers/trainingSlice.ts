@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { TrainingResponse } from '../../services/trainingApi';
+import { Nullebel } from '@types/commonTypes';
 
 type EditTrainingType = 'future-training' | 'past-training';
 
@@ -18,13 +19,13 @@ export type CurrentTraining = {
 
 type InitialState = {
     userTrainingList: TrainingResponse[];
-    userTrainingListError: string | null;
+    userTrainingListError: Nullebel<string>;
     isModalVisible: boolean;
     isEditMode: boolean;
     editTraining: EditTrainingInfo;
     isDrawerVisible: boolean;
-    typeTraining: string | null;
-    currentTraining: CurrentTraining[] | null;
+    typeTraining: Nullebel<string>;
+    currentTraining: Nullebel<CurrentTraining[]>;
 };
 
 const initialState: InitialState = {
