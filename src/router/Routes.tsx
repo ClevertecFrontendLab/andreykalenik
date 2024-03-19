@@ -7,6 +7,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { ConfirmEmail } from '@components/result-components';
 import { ChangePassword } from '@components/result-components';
 import { Path } from '../utils/constants';
+import { CalendarPage } from '@pages/calendare/CalendarePage';
 
 export const routes = (
     <Routes>
@@ -43,6 +44,7 @@ export const routes = (
                 <Route index element={<Navigate to={Path.MAIN} />} />
                 <Route path={Path.MAIN} element={<MainPage />} />
                 <Route path={Path.FEEDBACKS} element={<FeedbackPage />} />
+                <Route path={Path.CALENDARE} element={<CalendarPage />} />
             </Route>
         </Route>
     </Routes>

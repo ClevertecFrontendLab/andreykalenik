@@ -50,7 +50,7 @@ export const AppSider: React.FC = () => {
     const { Sider } = Layout;
     const { useBreakpoint } = Grid;
     const { sm } = useBreakpoint();
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();

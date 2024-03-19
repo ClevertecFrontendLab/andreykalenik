@@ -1,0 +1,23 @@
+@import '../../../../../assets/styles/_variabless.module.scss';
+
+[class*='ant-empty'].empty {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 30px;
+    margin: 0;
+
+    :global {
+        .ant-empty-image {
+            margin: 0 auto;
+        }
+
+        .ant-empty-image img {
+            width: 100%;
+        }
+
+        .ant-empty-description {
+            color: #{getColorVarValue('neutral_gray_7')};
+            text-align: left;
+        }
+    }
+}

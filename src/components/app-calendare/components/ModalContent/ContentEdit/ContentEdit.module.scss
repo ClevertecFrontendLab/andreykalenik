@@ -1,0 +1,17 @@
+@import '../../../../../assets/styles/_variabless.module.scss';
+
+.list-edit {
+    :global {
+        .ant-list-item {
+            padding: 0;
+        }
+
+        .ant-typography {
+            color: #{getColorVarValue('neutral_gray_7')}
+        }
+
+        .ant-btn-icon-only {
+            font-size: 16px;
+        }
+    }
+}

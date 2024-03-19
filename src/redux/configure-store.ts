@@ -6,6 +6,8 @@ import { api } from '../services';
 import userReducer from './reducers/userSlice';
 import uiReducer from './reducers/uiSlice';
 import feedbackReducer from './reducers/feedbackSlice';
+import reducerTraining from './reducers/trainingSlice';
+import reducerCatalogs from './reducers/catalogsSlice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -16,6 +18,8 @@ export const store = configureStore({
         user: userReducer,
         router: routerReducer,
         ui: uiReducer,
+        trainingSlice: reducerTraining,
+        catalogSlice: reducerCatalogs,
         feedback: feedbackReducer,
         [api.reducerPath]: api.reducer,
     }),

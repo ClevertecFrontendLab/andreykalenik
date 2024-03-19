@@ -5,6 +5,7 @@ type feedbackModal = {
     modalSuccessTransfer: boolean;
     modalErrorTransfer: boolean;
     modalServerError: boolean;
+    modalCalendareServerError: boolean;
 };
 
 const initialState: feedbackModal = {
@@ -12,6 +13,7 @@ const initialState: feedbackModal = {
     modalSuccessTransfer: false,
     modalErrorTransfer: false,
     modalServerError: false,
+    modalCalendareServerError: false,
 };
 
 const uiSlice = createSlice({
@@ -33,11 +35,18 @@ const uiSlice = createSlice({
         toggleModalServerError: (state) => {
             state.modalServerError = !state.modalServerError;
         },
+        openModalCalendareServerError: (state) => {
+            state.modalCalendareServerError = true;
+        },
+        closeModalCalendareServerError: (state) => {
+            state.modalCalendareServerError = false;
+        },
         hideAllModal: (state) => {
             state.modalReview = false;
             state.modalServerError = false;
             state.modalSuccessTransfer = false;
             state.modalErrorTransfer = false;
+            state.modalCalendareServerError = false;
         },
     },
 });
@@ -47,6 +56,8 @@ export const {
     toggleModalSuccessTransfer,
     toggleModalErrorTransfer,
     toggleModalServerError,
+    openModalCalendareServerError,
+    closeModalCalendareServerError,
     hideAllModal,
 } = uiSlice.actions;
 export default uiSlice.reducer;

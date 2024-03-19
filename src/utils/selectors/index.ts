@@ -9,4 +9,13 @@ export {
     selectFeedbackMessage,
     selectLoadingMutation,
     selectLoadingQuery,
+    userTrainingListSelector,
+    userTrainingListErrorSelector,
+    isModalVisibleSelector,
+    isEditModeSelector,
+    editTrainingSelector,
+    isDrawerVisibleSelector,
+    typeTrainingSelector,
+    currentTrainingSelector,
+    catalogTrainingListSelector,
 } from './selectors';
