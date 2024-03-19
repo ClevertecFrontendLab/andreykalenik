@@ -14,6 +14,7 @@ export const AppHeader: React.FC = () => {
 
     const isMainPage = useLocation().pathname === Path.MAIN;
     const isFeedbackPage = useLocation().pathname === Path.FEEDBACKS;
+    const isCalendarePage = useLocation().pathname === Path.CALENDARE;
 
     return (
         <header className={isMainPage || isFeedbackPage ? styles.header : styles.headerAlternative}>
@@ -44,19 +45,32 @@ export const AppHeader: React.FC = () => {
                         Настройки
                     </Link>
                 ) : xs ? (
-                    <Button
-                        style={{
-                            fontSize: 14,
-                            width: 32,
-                            height: 32,
-                            borderRadius: '50%',
-                            border: `1px solid ${Colors.character_light_border}`,
-                            background: `${Colors.character_light_sider_background}`,
-                            padding: '7px 8px',
-                        }}
-                        type='text'
-                        icon={<SettingOutlined />}
-                    />
+                    isCalendarePage ? (
+                        <Button
+                            style={{
+                                fontSize: 14,
+                                width: 32,
+                                height: 32,
+                                padding: '7px 8px',
+                            }}
+                            type='text'
+                            icon={<SettingOutlined />}
+                        />
+                    ) : (
+                        <Button
+                            style={{
+                                fontSize: 14,
+                                width: 32,
+                                height: 32,
+                                borderRadius: '50%',
+                                border: `1px solid ${Colors.character_light_border}`,
+                                background: `${Colors.character_light_sider_background}`,
+                                padding: '7px 8px',
+                            }}
+                            type='text'
+                            icon={<SettingOutlined />}
+                        />
+                    )
                 ) : (
                     <Link style={{ color: `${Colors.character_light_title_85}` }}>Настройки</Link>
                 )}

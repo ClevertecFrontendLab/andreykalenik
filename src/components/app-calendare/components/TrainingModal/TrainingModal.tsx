@@ -75,7 +75,8 @@ export const TrainingModal = ({
                 mask={false}
                 closable={false}
                 getContainer={cellHTMLElement}
-                width={xs ? '100%' : 264}
+                width={xs ? 'calc(100% + 12px)' : 264}
+                style={xs ? { top: 170, left: -6 } : {}}
                 wrapClassName={modalStyles}
                 destroyOnClose
                 title={<ModalTitle date={date} cellContent={cellContent} closeModal={closeModal} />}

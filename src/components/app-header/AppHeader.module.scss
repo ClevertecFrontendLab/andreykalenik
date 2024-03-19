@@ -108,6 +108,10 @@
 }
 
 @media only screen and (max-width: 576px) {
+    .headerAlternative {
+        padding: 14px 24px 12px;
+        gap: 0px
+    }
     .h1 {
         font-size: 20px;
         line-height: 26px;
