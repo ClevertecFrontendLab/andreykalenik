@@ -2,7 +2,10 @@
 
 .calendarWrapper {
     padding-bottom: 50px;
-
+    background-image: url(../../assets/img/backgraund_main_page_light.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     :global {
         .ant-page-header-heading {
             justify-content: flex-end;
