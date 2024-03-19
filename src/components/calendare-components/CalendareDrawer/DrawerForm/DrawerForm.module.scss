@@ -44,9 +44,9 @@
 
         .ant-form-item-label > label {
             height: 24px;
-            font-size: 12px;
+            font-size: $ui_fontSizeSmall;
             background-color: #{getColorVarValue('neutral_gray_4')};
-            border-radius: 2px;
+            border-radius: $ui_borderRadius;
             padding-left: 8px;
             width: 100%;
         }

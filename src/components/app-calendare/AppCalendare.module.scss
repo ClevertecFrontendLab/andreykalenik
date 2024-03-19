@@ -17,7 +17,7 @@
         }
 
         .ant-badge-status-text {
-            font-size: 12px;
+            font-size: $ui_fontSizeSmall;
         }
 
         .ant-list-item:not(.list-item-disabled):hover {
@@ -43,7 +43,7 @@
         .ant-picker-cell-today:before,
         .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner:before {
             border: 1px solid #{getColorVarValue('primary_light_6')};
-            border-radius: 2px;
+            border-radius: $ui_borderRadius;
         }
 
         .ant-picker-cell-inner {

@@ -14,10 +14,10 @@ ConfigProvider.config({
     },
 });
 
-export const App = () => {
-        <ConfigProvider>
-            <Provider store={store}>
-                <Router history={history}>{routes}</Router>
-            </Provider>
-        </ConfigProvider>
-};
+export const App: React.FC = () => (
+    <ConfigProvider>
+        <Provider store={store}>
+            <Router history={history}>{routes}</Router>
+        </Provider>
+    </ConfigProvider>
+);

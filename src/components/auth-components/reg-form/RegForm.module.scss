@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variabless.module';
+
 .regForm {
     padding-top: 8px;
     :global {
@@ -7,7 +9,7 @@
             font-size: 14px;
         }
         #basic_password_extra {
-            font-size: 12px;
+            font-size: $ui_fontSizeSmall;
         }
         .ant-form-item {
             margin-bottom: 32px;
@@ -15,8 +17,7 @@
         .ant-form-item-explain,
         .ant-form-item-explain-success,
         .ant-form-item-explain-error {
-            font-size: 12px;
-            // padding-top: 2px;
+            font-size: $ui_fontSizeSmall;
         }
 
         .ant-form-item + .ant-form-item {
@@ -36,12 +37,12 @@
         padding-top: 2px;
         :global {
             #basic_password_help {
-                font-size: 12px;
+                font-size: $ui_fontSizeSmall;
                 height: 46px;
             }
             .ant-form-item-explain-success,
             .ant-form-item-explain-error {
-                font-size: 12px;
+                font-size: $ui_fontSizeSmall;
                 height: 48px;
                 line-height: 1.3;
                 margin-inline: -2px;
