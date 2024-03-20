@@ -4,7 +4,7 @@ import { ApiEndpoint } from '@utils/constants';
 type Request = {
     email: string;
     password: string;
-    passwordConfirmed: string;
+    confirmPassword: string;
     message: string;
     code: string;
 };
@@ -48,19 +48,14 @@ export const authApi = api.injectEndpoints({
                 body,
             }),
         }),
-        changePassord: build.mutation<
+        changePassword: build.mutation<
             Pick<Response, 'message'>,
-            Pick<Request, 'password' | 'passwordConfirmed'>
+            Pick<Request, 'password' | 'confirmPassword'>
         >({
             query: (body) => ({
                 url: ApiEndpoint.CHANGE_PASSWORD,
                 method: 'POST',
                 body,
-            }),
-        }),
-        GoogleAuth: build.query<{ accessToken: string }, null>({
-            query: () => ({
-                url: ApiEndpoint.GOOGLE_AUTH,
             }),
         }),
     }),
@@ -71,5 +66,5 @@ export const {
     useRegistrationMutation,
     useCheckEmailMutation,
     useConfirmEmailMutation,
-    useChangePassordMutation,
+    useChangePasswordMutation,
 } = authApi;

@@ -1,0 +1,31 @@
+@import '../../../assets/styles/variabless.module';
+
+.container {
+    margin: 24px auto;
+    height: 40px;
+
+    .character {
+        line-height: 38px;
+        border: $ui_border;
+        border-radius: $ui_borderRadius;
+        color: #{getColorVarValue('character_light_title_85')};
+    }
+}
+.character-error {
+    border: 1px solid #{getColorVarValue('character_light_error')};
+    border-radius: $ui_borderRadius;
+    line-height: 38px;
+}
+.character__inactive {
+    background: none;
+}
+.character__filled {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 576px) {
+    .container {
+        padding-inline: 10px;
+    }
+}

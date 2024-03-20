@@ -1,7 +1,7 @@
 import { CheckCircleFilled, WarningFilled, CloseCircleFilled } from '@ant-design/icons';
 
-import { ServiceBackground } from '@components/service-background';
-import { ResultContent, ResultContent500 } from '@components/result-content';
+import { ServiceBackground } from '@components/result-components';
+import { ResultContent, ResultContent500 } from '@components/result-components/result-content';
 import { Path } from '@utils/constants';
 
 type ResultPageProps = {

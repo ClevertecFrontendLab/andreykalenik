@@ -1,85 +1,102 @@
+@import '../../assets/styles/variabless.module';
+
 .sider {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    z-index: 5;
     :global {
+        .ant-menu {
+            display: flex;
+            gap: 6px;
+            flex-direction: column;
+            min-height: calc(100% - 134px);
+            align-content: center;
+            font-size: $ui_fontSize;
+        }
+        .ant-menu-item {
+            cursor: pointer;
+            padding: 0 16px;
+        }
+
+        .ant-menu-item:last-of-type {
+            padding-top: 6px;
+            margin-top: auto;
+            border-top: 1px solid #{getColorVarValue('character_light_dividers')};
+            :global {
+                .ant-menu-title-content {
+                    margin-left: 25px;
+                }
+            }
+        }
+        .ant-menu-title-content {
+            margin-left: 12px;
+        }
         .ant-layout-sider-children {
-            background-color: #fff;
             position: relative;
             height: 100%;
         }
+        .ant-menu-inline-collapsed {
+            align-items: center;
+            .ant-menu-item {
+                span:last-of-type {
+                    display: none;
+                }
+            }
+        }
+
         .ant-btn-text.ant-btn.ant-btn-icon-only {
             height: 66px;
             width: 20px;
             border-radius: 0;
-            border: none;
-            background-color: #fff;
+            border: 1px solid #{getColorVarValue('character_light_primary_inverse')};
+            background-color: #{getColorVarValue('character_light_sider_background')};
             clip-path: path('M0 -1.52588e-05L20 7.99998V58L0 66V-1.52588e-05Z');
             position: absolute;
             top: 480px;
-            right: -20px;
-
+            right: -18px;
+            z-index: 5;
             &:active,
             &hover {
-                background-color: #fff;
+                background-color: #{getColorVarValue('character_light_sider_background')};
+            }
+            span {
+                position: relative;
+                font-size: $ui_fontSize;
             }
         }
     }
 }
 
 .siderLogo {
-    height: 144px;
-    padding-bottom: 20px;
-    padding-right: 20px;
+    height: 134px;
     display: grid;
     align-items: center;
     justify-items: center;
 }
 
-.siderMenuWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: calc(100% - 152px);
-}
-
-.siderFooter {
-    margin-top: auto;
-    max-height: 40px;
-    border-top: 1px solid #f0f0f0;
-}
-
-aside {
-    :global {
-        .ant-layout-sider-children {
-            background-color: #fff;
-        }
-    }
-}
-
 @media only screen and (max-width: 576px) {
-    aside {
-        :global {
-            .ant-menu .ant-menu-item {
-                padding: 0;
-            }
-            .ant-menu-item.ant-menu-item-only-child {
-                padding: 0;
-                margin: 0 6px;
-            }
-            .ant-menu .ant-menu-item .ant-menu-item-icon {
-                display: none;
-            }
-            .ant-menu .ant-menu-item .ant-menu-item-icon + span {
-                margin: 0;
-            }
-            .ant-menu-item span {
-                margin: 0;
-            }
-            .siderFooter .ant-menu-item span {
-                text-align: center;
-            }
-        }
-    }
     .sider {
+        background-color: #{getColorVarValue('character_light_primary_inverse')};
         :global {
+            .ant-menu {
+                min-height: calc(100% - 65px);
+                padding-top: 10px;
+                gap: 2px;
+            }
+            .ant-menu-item {
+                align-items: center;
+                margin: 0;
+                padding: 0 8px;
+                line-height: 1.3;
+                .ant-menu-item-icon {
+                    display: none;
+                }
+                .ant-menu-title-content {
+                    margin-left: 0;
+                }
+            }
+            .ant-menu-item:last-of-type {
+                padding-top: 10px;
+            }
             .ant-btn-text.ant-btn.ant-btn-icon-only {
                 height: 48px;
                 width: 32px;
@@ -89,13 +106,11 @@ aside {
                 outline-width: 0;
                 outline-style: none;
 
-                background-color: #fff;
+                background-color: #{getColorVarValue('character_light_primary_inverse')};
                 clip-path: path('M0 0L32 5.81818V42.1818L0 48V0Z');
                 position: absolute;
                 top: 20px;
                 right: -32px;
-                z-index: 5;
-
                 &:active,
                 &hover,
                 &:focus,
@@ -103,21 +118,20 @@ aside {
                     outline-color: transparent;
                     -webkit-focus-ring-color-outline: none;
                 }
+                span {
+                    font-size: $ui_fontSize;
+                    position: relative;
+                    left: 0px;
+                    top: 3px;
+                }
             }
         }
     }
-    .siderNav {
-        :global {
-            .ant-menu-item {
-                margin: 14px 4px 14px 8px;
-            }
-        }
-    }
-    .siderFooter {
-        :global {
-            .ant-menu-item {
-                text-align: center;
-            }
+    .siderLogo {
+        height: 65px;
+        padding-right: 0;
+        span {
+            margin-top: -16px;
         }
     }
 }

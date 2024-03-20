@@ -6,6 +6,7 @@ import { Path } from '@utils/constants';
 const breadcrumbNameMap: Record<string, string> = {
     [Path.MAIN]: 'Главная',
     [Path.FEEDBACKS]: 'Отзывы пользователей',
+    [Path.CALENDARE]: 'Календарь',
 };
 
 export const AppBreadcrumb = () => {

@@ -12,6 +12,10 @@ export const enum Path {
     ROOT = '/',
     MAIN = '/main',
     FEEDBACKS = '/feedbacks',
+    CALENDARE = '/calendare',
+    WORKOUTS = '/workouts',
+    PROFILE = '/profile',
+    ACHIEVEMENTS = '/achievements',
 
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',
@@ -36,6 +40,7 @@ export enum ApiEndpoint {
     CHANGE_PASSWORD = 'auth/change-password ',
     FEEDBACK = 'feedback',
     GOOGLE_AUTH = 'auth/google',
+    CATALOGS_TRANING_LIST = '/catalogs/training-list',
 }
 
 export enum StatusCode {
@@ -48,3 +53,6 @@ export enum StatusCode {
     METHOD_NOT_ALLOWED = 405,
     SERVER_ERROR = 500,
 }
+
+export const DATE_FORMAT = 'DD.MM.YYYY';
+export const DATE_FORMAT_DAY = 'DD';

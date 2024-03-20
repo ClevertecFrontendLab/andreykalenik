@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Card, Tabs, Grid } from 'antd';
+import { Card, Grid } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { Tabs } from 'antd';
 import { LogoIcon } from '@components/project-icons';
-import { ServiceBackground } from '@components/service-background';
-import { LoginForm } from '@components/login-form';
-import { RegForm } from '@components/reg-form';
+import { ServiceBackground } from '@components/result-components';
+import { LoginForm } from '@components/auth-components/login-form';
+import { RegForm } from '@components/auth-components/reg-form';
 import { Path } from '@utils/constants';
 
 import styles from './AuthPage.module.scss';
@@ -53,7 +54,14 @@ export const AuthPage: React.FC = () => {
                 <LogoIcon
                     style={
                         sm
-                            ? { width: 309, height: 76, position: 'relative', left: 29, bottom: 1 }
+                            ? {
+                                  width: 309,
+                                  height: 76,
+                                  position: 'relative',
+                                  left: 29,
+                                  bottom: 1,
+                                  marginBottom: 36,
+                              }
                             : { width: 203, height: 50, position: 'relative', left: 46 }
                     }
                 />
